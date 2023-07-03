@@ -20,7 +20,7 @@ module.exports = {
     social: {
       github: ``, // `https://parkblo.github.io/`,
       linkedIn: ``, // `https://www.linkedin.com/`,
-      email: ``, // `parkblo@gmail.com`,
+      email: ``, // `badmuxi@gmail.com`,
     },
   },
 
