@@ -1,5 +1,7 @@
 @use '../../styles/mixins'as *;
 
+@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+
 @keyframes blinking-cursor {
   0% {
     opacity: 0;
@@ -15,6 +17,7 @@
 }
 
 .bio {
+  font-family: 'Rock Salt', cursive;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
