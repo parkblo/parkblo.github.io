@@ -14,13 +14,13 @@ module.exports = {
     name: `parkblo`,
     bio: {
       role: `개발자`,
-      description: ['DEV', 'CS', 'Knowledge'],
+      description: ['DEV ', 'TECH ', 'THINKING '],
       thumbnail: 'sample.png', // Path to the image in the 'asset' folder
     },
     social: {
-      github: ``, // `https://parkblo.github.io/`,
+      github: `https://parkblo.github.io/`,
       linkedIn: ``, // `https://www.linkedin.com/`,
-      email: ``, // `badmuxi@gmail.com`,
+      email: `badmuxi@gmail.com`,
     },
   },
 
