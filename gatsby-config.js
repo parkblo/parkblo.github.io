@@ -1,11 +1,20 @@
 const { NODE_ENV, CONTEXT: NETLIFY_ENV = NODE_ENV } = process.env;
 
 const metaConfig = require('./gatsby-meta-config');
+const metaSecurity = require('./gatsby-meta-security-config');
 
 module.exports = {
   siteMetadata: metaConfig,
 
   plugins: [
+    {
+      resolve: `gatsby-plugin-gtag`, // google analytics
+      options: {
+        trackingId: metaSecurity.ga,
+        head: true,
+        anonymize: true,
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -39,14 +48,6 @@ module.exports = {
             host: null,
           },
         },
-      },
-    },
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: metaConfig.ga,
-        head: true,
-        anonymize: true,
       },
     },
     {
