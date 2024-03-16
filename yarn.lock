@@ -5863,7 +5863,7 @@ gatsby-parcel-config@0.16.0:
     "@parcel/transformer-js" "2.6.2"
     "@parcel/transformer-json" "2.6.2"
 
-gatsby-plugin-advanced-sitemap@^2.0.0:
+gatsby-plugin-advanced-sitemap@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/gatsby-plugin-advanced-sitemap/-/gatsby-plugin-advanced-sitemap-2.1.0.tgz"
   integrity sha512-h+IM+UWC18eWodH0TvAHdOM70UjA/4qWz8tD/q3aKTj0MrMxGY+x00PrrNL/oFD0XOcrVXZB3pBtA63yAHD1jg==
