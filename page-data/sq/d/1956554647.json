@@ -1,1 +1,1 @@
-{"data":{"allMarkdownRemark":{"edges":[{"node":{"frontmatter":{"title":"테스트 페이지입니다.","categories":"test"},"fields":{"slug":"/test-page/"}}}]}}}
+{"data":{"allMarkdownRemark":{"edges":[{"node":{"frontmatter":{"title":"샘플 페이지입니다.","categories":"test"},"fields":{"slug":"/example-page/"}}},{"node":{"frontmatter":{"title":"테스트 페이지입니다.","categories":"test"},"fields":{"slug":"/test-page/"}}}]}}}
