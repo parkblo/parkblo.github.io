@@ -11,7 +11,7 @@ function Bio({ author, language = 'ko' }) {
     <div className="bio">
         <div className="introduction korean">
           <p className="title">
-            THIS IS DEV BLOG
+            THIS IS DEV BLOG4:38
             {/* <ReactRotatingText items={bio.description} />
             <br />
             {bio.role} <strong>{name}</strong>입니다. */} {/* Rotating Example*/}
