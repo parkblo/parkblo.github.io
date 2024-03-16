@@ -6,7 +6,7 @@ module.exports = {
   ogImage: `/og-image.png`, // Path to your in the 'static' folder
   comments: {
     utterances: {
-      repo: ``, // `zoomkoding/zoomkoding-gatsby-blog`,
+      repo: `parkblo/parkblo.github.io`, // `zoomkoding/zoomkoding-gatsby-blog`,
     },
   },
   author: {
