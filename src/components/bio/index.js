@@ -9,19 +9,20 @@ function Bio({ author, language = 'ko' }) {
   const { bio, social, name } = author;
   return (
     <div className="bio">
-        <div className="introduction korean">
-          <p className="title">
-            THIS IS DEV BLOG4:38
-            {/* <ReactRotatingText items={bio.description} />
+      <div className="introduction korean">
+        <p className="title">
+          Welcome To My Blog!
+          {/* <ReactRotatingText items={bio.description} />
             <br />
-            {bio.role} <strong>{name}</strong>입니다. */} {/* Rotating Example*/}
-            <br />
-            <br />
-          </p>
-          <div className="social-links">
-            <IconButtonBar links={social} />
-          </div>
+            {bio.role} <strong>{name}</strong>입니다. */}{' '}
+          {/* Rotating Example*/}
+          <br />
+          <br />
+        </p>
+        <div className="social-links">
+          <IconButtonBar links={social} />
         </div>
+      </div>
       <div className="thumbnail-wrapper">
         {/* <Image style={{ width: 250, height: 250 }} src={bio.thumbnail} alt="thumbnail" /> */}
       </div>
