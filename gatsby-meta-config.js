@@ -1,5 +1,5 @@
 module.exports = {
-  title: `parkblo.github.io`,
+  title: `parkblog`,
   description: `parkblo dev blog`,
   language: `ko`, // `ko`, `en` => currently support versions for Korean and English
   siteUrl: `https://parkblo.github.io/`,
@@ -17,7 +17,7 @@ module.exports = {
       thumbnail: 'sample.png', // Path to the image in the 'asset' folder
     },
     social: {
-      github: `https://parkblo.github.io/`,
+      github: `https://github.com/parkblo/`,
       linkedIn: ``, // `https://www.linkedin.com/`,
       email: `badmuxi@gmail.com`,
     },
