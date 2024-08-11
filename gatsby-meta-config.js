@@ -1,6 +1,6 @@
 module.exports = {
   title: `parkblog`,
-  description: `parkblo dev blog`,
+  description: `parkblo's dev blog`,
   language: `ko`, // `ko`, `en` => currently support versions for Korean and English
   siteUrl: `https://parkblo.github.io/`,
   ogImage: `/og-image.png`, // Path to your in the 'static' folder

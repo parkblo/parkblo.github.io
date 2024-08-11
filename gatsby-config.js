@@ -32,22 +32,25 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        resolveEnv: () => NETLIFY_ENV,
-        env: {
-          production: {
-            policy: [{ userAgent: '*' }],
-          },
-          'branch-deploy': {
-            policy: [{ userAgent: '*', disallow: ['/'] }],
-            sitemap: null,
-            host: null,
-          },
-          'deploy-preview': {
-            policy: [{ userAgent: '*', disallow: ['/'] }],
-            sitemap: null,
-            host: null,
-          },
-        },
+        //resolveEnv: () => NETLIFY_ENV,
+        host: 'https://parkblo.github.io/',
+        sitemap: 'https://parkblo.github.io/sitemap.xml',
+        policy: [{ userAgent: '*', allow: '/' }],
+        // env: {
+        //   production: {
+        //     policy: [{ userAgent: '*' }],
+        //   },
+        //   'branch-deploy': {
+        //     policy: [{ userAgent: '*', disallow: ['/'] }],
+        //     sitemap: null,
+        //     host: null,
+        //   },
+        //   'deploy-preview': {
+        //     policy: [{ userAgent: '*', disallow: ['/'] }],
+        //     sitemap: null,
+        //     host: null,
+        //   },
+        // },
       },
     },
     {
@@ -122,7 +125,7 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-feed",
+      resolve: 'gatsby-plugin-feed',
       options: {
         query: `
           {
@@ -138,8 +141,8 @@ module.exports = {
         `,
         feeds: [
           {
-            title: "My Personal Blog RSS Feed",
-            output: "/rss.xml",
+            title: 'Parkblog RSS Feed',
+            output: '/rss.xml',
             query: `
             {
               allMarkdownRemark(sort: {fields: frontmatter___date, order: ASC}) {
@@ -157,16 +160,16 @@ module.exports = {
             }
             `,
             serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.nodes.map(node => {
+              return allMarkdownRemark.nodes.map((node) => {
                 return Object.assign({}, node.frontmatter, {
-                  url: `${site.siteMetadata.siteUrl}${node.slug}`,
-                  guid: `${site.siteMetadata.siteUrl}${node.slug}`,
-                })
-              })
+                  url: `${site.siteMetadata.siteUrl}${node.fields.slug}`,
+                  guid: `${site.siteMetadata.siteUrl}${node.fields.slug}`,
+                });
+              });
             },
-          }
-        ]
-      }
+          },
+        ],
+      },
     },
     `gatsby-theme-material-ui`,
     `gatsby-transformer-sharp`,
