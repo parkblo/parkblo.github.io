@@ -1,3 +1,4 @@
 User-agent: *
-Sitemap: https://parkblo.github.io/sitemap-index.xml
+Allow: /
+Sitemap: https://parkblo.github.io/sitemap.xml
 Host: https://parkblo.github.io
