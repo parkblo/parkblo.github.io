@@ -9,32 +9,31 @@ export function formatDate(date: Date) {
   return Intl.DateTimeFormat("en-US", {
     month: "short",
     day: "2-digit",
-    year: "numeric"
+    year: "numeric",
   }).format(date);
 }
 
 export function readingTime(html: string) {
   const textOnly = html.replace(/<[^>]+>/g, "");
   const wordCount = textOnly.split(/\s+/).length;
-  const readingTimeMinutes = ((wordCount / 200) + 1).toFixed();
+  const readingTimeMinutes = (wordCount / 200 + 1).toFixed();
   return `${readingTimeMinutes} min read`;
 }
 
 export function dateRange(startDate: Date, endDate?: Date | string): string {
-  const startMonth = startDate.toLocaleString("default", { month: "short" });
+  const startMonth = startDate.toLocaleString("ko-KR", { month: "short" });
   const startYear = startDate.getFullYear().toString();
   let endMonth;
   let endYear;
 
   if (endDate) {
     if (typeof endDate === "string") {
-      endMonth = "";
-      endYear = endDate;
+      return `${startYear}년 ${startMonth} - ${endDate}`;
     } else {
-      endMonth = endDate.toLocaleString("default", { month: "short" });
+      endMonth = endDate.toLocaleString("ko-KR", { month: "short" });
       endYear = endDate.getFullYear().toString();
     }
   }
 
-  return `${startMonth}${startYear} - ${endMonth}${endYear}`;
+  return `${startYear}년 ${startMonth} - ${endYear}년 ${endMonth}`;
 }

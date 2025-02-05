@@ -32,48 +32,32 @@ const work = await Promise.all(
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <h4 class="animate font-bold text-black dark:text-white">
-      Hi, I'm Nano <span class="text-xl">👋🏻</span> 
+    <h4 class="animate font-semibold text-black dark:text-white">
+      안녕하세요, 저는 박병주입니다! <span class="text-xl">👋🏻</span> 
     </h4>
-    <div class="space-y-16">
+    <div class="space-y-8">
       <section>
         <article class="space-y-4">
           <p class="animate">
-            로렘 입숨(lorem ipsum; 줄여서 립숨, lipsum)은 출판이나 그래픽 디자인 분야에서 
-            폰트, 타이포그래피, 레이아웃 같은 
-            그래픽 요소나 시각적 연출을 보여줄 때 사용하는 표준 채우기 텍스트로, 
-            최종 결과물에 들어가는 실제적인 문장 내용이 채워지기 전에 
-            시각 디자인 프로젝트 모형의 채움 글로도 이용된다. 
-            이런 용도로 사용할 때 로렘 입숨을 그리킹(greeking)이
-            <Link href="https://github.com/markhorn-dev/astro-sphere" aria-label="Astro Sphere on Github" external>
-              링크에 이런말
-            </Link>.
-            I have a lighthouse scores of 100 across the board for performance, 
-            accesibility, best practices and SEO.
+            현재 졸업을 앞둔 대학생으로, 웹 프론트엔드 기술로 풀 수 있는 문제들에 큰 관심을 가지고 있어요.
+            협업으로 만들어낼 수 있는 가치는 무한하다고 믿고, 함께 더 멀리 갈 수 있는 성숙한 개발자가 되고자 노력하고 있어요.
+            외에도 가장 이상적인 예술인 음악을 좋아해서 틈틈이 작곡하는 것을 즐기고 있어요. 
+            <br>
+            
           </p>
           <p class="animate">
-            I come packed with full type safety, a sitemap, an rss feed, markdown 
-            and mdx support (use components in your markdown) through astro integrations.
-            I am styled with tailwind and come preconfigured with light, dark and 
-            system/os theme preferences out of the box.
-          </p>
-          <p class="animate">
-            Visit
-            <Link href="https://github.com/markhorn-dev/astro-nano" aria-label="Astro Nano on Github" external>
-              Astro Nano on Github
-            </Link>
-            to fork the repository, read the docs or one-click deploy on Vercel or Netlify. 
+            이 블로그에 적힌 다양한 말들이 조금의 도움이 되면 좋겠어요. 방문해주셔서 감사합니다!
           </p>
         </article>
       </section>
 
-      <section class="animate space-y-6">
+      <section class="animate space-y-6 border border-gray-300 p-4 rounded-xl">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-bold text-black dark:text-white">
-            Latest posts
+          <h5 class="font-semibold text-black dark:text-white">
+            ✏️ 최근에 작성한 글
           </h5>
           <Link href="/blog">
-            See all posts
+            Posts
           </Link>
         </div>
         <ul class="flex flex-col gap-4">
@@ -85,13 +69,13 @@ const work = await Promise.all(
         </ul>
       </section>
 
-      <section class="animate space-y-6">
+      <section class="animate space-y-6 border border-gray-300 p-4 rounded-xl">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-bold text-black dark:text-white">
-            Work Experience
+          <h5 class="font-semibold text-black dark:text-white">
+            🌱 나의 경험
           </h5>
           <Link href="/work">
-            See all work
+            Experiences
           </Link>
         </div>
         <ul class="flex flex-col space-y-4">
@@ -100,7 +84,7 @@ const work = await Promise.all(
               <div class="text-sm opacity-75">
                 {dateRange(entry.data.dateStart, entry.data.dateEnd)}
               </div>
-              <div class="font-bold text-black dark:text-white">
+              <div class="font-semibold text-black dark:text-white">
                 {entry.data.company}
               </div>
               <div class="text-sm opacity-75">
@@ -114,13 +98,13 @@ const work = await Promise.all(
         </ul>
       </section>
 
-      <section class="animate space-y-6">
+      <section class="animate space-y-6 border border-gray-300 p-4 rounded-xl">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-bold text-black dark:text-white">
-            Recent projects
+          <h5 class="font-semibold text-black dark:text-white">
+            👩‍💻 진행한 프로젝트
           </h5>
           <Link href="/projects">
-            See all projects
+            Projects
           </Link>
         </div>
         <ul class="flex flex-col gap-4">
@@ -133,13 +117,14 @@ const work = await Promise.all(
       </section>
 
       <section class="animate space-y-4">
-        <h5 class="font-bold text-black dark:text-white">
-          Let's Connect
+        <h5 class="font-semibold text-black dark:text-white">
+          연락주세요!
         </h5>
         <article>
           <p>
-            If you want to get in touch with me about something or just to say hi,
-            reach out on social media or send me an email.
+            혹시 저에게 궁금한 점이나 이야기하고 싶으신 게 있다면 편하게 연락 주세요.
+            <br>
+            간단한 안부 인사도 언제든지 환영입니다! 
           </p>
         </article>
         <ul class="flex flex-wrap gap-2">

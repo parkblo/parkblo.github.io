@@ -1,15 +1,13 @@
 ---
 import "../styles/global.css";
-
 import "@fontsource/noto-sans-kr/korean-400.css";
-import "@fontsource/noto-sans-kr/korean-700.css";
+import "@fontsource/noto-sans-kr/korean-600.css";
 import "@fontsource/gowun-batang/korean-400.css";
 import "@fontsource/gowun-batang/korean-700.css";
-
+import notoSans400 from "@fontsource/noto-sans-kr/files/noto-sans-kr-korean-400-normal.woff2";
+import notoSans600 from "@fontsource/noto-sans-kr/files/noto-sans-kr-korean-600-normal.woff2";
 import gowunBatang400 from "@fontsource/gowun-batang/files/gowun-batang-korean-400-normal.woff2";
 import gowunBatang700 from "@fontsource/gowun-batang/files/gowun-batang-korean-700-normal.woff2";
-import notoSans400 from "@fontsource/noto-sans-kr/files/noto-sans-kr-korean-400-normal.woff2";
-import notoSans700 from "@fontsource/noto-sans-kr/files/noto-sans-kr-korean-700-normal.woff2";
 import { ViewTransitions } from "astro:transitions";
 
 interface Props {
@@ -35,7 +33,7 @@ const { title, description, image = "/nano.png" } = Astro.props;
 <link rel="preload" href={gowunBatang400} as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href={gowunBatang700} as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href={notoSans400} as="font" type="font/woff2" crossorigin/>
-<link rel="preload" href={notoSans700} as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href={notoSans600} as="font" type="font/woff2" crossorigin/>
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
