@@ -32,17 +32,21 @@ const work = await Promise.all(
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <h4 class="animate font-semibold text-black dark:text-white">
+    <h4 class="animate font-bold text-black dark:text-white">
       Hi, I'm Nano <span class="text-xl">👋🏻</span> 
     </h4>
     <div class="space-y-16">
       <section>
         <article class="space-y-4">
           <p class="animate">
-            I am a minimal, seo friendly, accessible portfolio and blog for developers. 
-            I am an even more lightweight version of my popular theme
+            로렘 입숨(lorem ipsum; 줄여서 립숨, lipsum)은 출판이나 그래픽 디자인 분야에서 
+            폰트, 타이포그래피, 레이아웃 같은 
+            그래픽 요소나 시각적 연출을 보여줄 때 사용하는 표준 채우기 텍스트로, 
+            최종 결과물에 들어가는 실제적인 문장 내용이 채워지기 전에 
+            시각 디자인 프로젝트 모형의 채움 글로도 이용된다. 
+            이런 용도로 사용할 때 로렘 입숨을 그리킹(greeking)이
             <Link href="https://github.com/markhorn-dev/astro-sphere" aria-label="Astro Sphere on Github" external>
-              Astro Sphere
+              링크에 이런말
             </Link>.
             I have a lighthouse scores of 100 across the board for performance, 
             accesibility, best practices and SEO.
@@ -65,7 +69,7 @@ const work = await Promise.all(
 
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
+          <h5 class="font-bold text-black dark:text-white">
             Latest posts
           </h5>
           <Link href="/blog">
@@ -83,7 +87,7 @@ const work = await Promise.all(
 
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
+          <h5 class="font-bold text-black dark:text-white">
             Work Experience
           </h5>
           <Link href="/work">
@@ -96,7 +100,7 @@ const work = await Promise.all(
               <div class="text-sm opacity-75">
                 {dateRange(entry.data.dateStart, entry.data.dateEnd)}
               </div>
-              <div class="font-semibold text-black dark:text-white">
+              <div class="font-bold text-black dark:text-white">
                 {entry.data.company}
               </div>
               <div class="text-sm opacity-75">
@@ -112,7 +116,7 @@ const work = await Promise.all(
 
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
+          <h5 class="font-bold text-black dark:text-white">
             Recent projects
           </h5>
           <Link href="/projects">
@@ -129,7 +133,7 @@ const work = await Promise.all(
       </section>
 
       <section class="animate space-y-4">
-        <h5 class="font-semibold text-black dark:text-white">
+        <h5 class="font-bold text-black dark:text-white">
           Let's Connect
         </h5>
         <article>

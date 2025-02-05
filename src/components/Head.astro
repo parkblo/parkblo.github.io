@@ -1,13 +1,15 @@
 ---
 import "../styles/global.css";
-import "@fontsource/inter/latin-400.css";
-import "@fontsource/inter/latin-600.css";
-import "@fontsource/lora/400.css";
-import "@fontsource/lora/600.css";
-import inter400 from "@fontsource/inter/files/inter-latin-400-normal.woff2";
-import inter600 from "@fontsource/inter/files/inter-latin-600-normal.woff2";
-import lora400 from "@fontsource/lora/files/lora-latin-400-normal.woff2";
-import lora600 from "@fontsource/lora/files/lora-latin-600-normal.woff2";
+
+import "@fontsource/noto-sans-kr/korean-400.css";
+import "@fontsource/noto-sans-kr/korean-700.css";
+import "@fontsource/gowun-batang/korean-400.css";
+import "@fontsource/gowun-batang/korean-700.css";
+
+import gowunBatang400 from "@fontsource/gowun-batang/files/gowun-batang-korean-400-normal.woff2";
+import gowunBatang700 from "@fontsource/gowun-batang/files/gowun-batang-korean-700-normal.woff2";
+import notoSans400 from "@fontsource/noto-sans-kr/files/noto-sans-kr-korean-400-normal.woff2";
+import notoSans700 from "@fontsource/noto-sans-kr/files/noto-sans-kr-korean-700-normal.woff2";
 import { ViewTransitions } from "astro:transitions";
 
 interface Props {
@@ -30,10 +32,10 @@ const { title, description, image = "/nano.png" } = Astro.props;
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
-<link rel="preload" href={inter400} as="font" type="font/woff2" crossorigin/>
-<link rel="preload" href={inter600} as="font" type="font/woff2" crossorigin/>
-<link rel="preload" href={lora400} as="font" type="font/woff2" crossorigin/>
-<link rel="preload" href={lora600} as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href={gowunBatang400} as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href={gowunBatang700} as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href={notoSans400} as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href={notoSans700} as="font" type="font/woff2" crossorigin/>
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
