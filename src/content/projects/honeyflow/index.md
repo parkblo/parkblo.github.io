@@ -1,5 +1,5 @@
 ---
-title: "Honeyflow"
+title: "HoneyFlow"
 description: "🍯 실시간 협업이 가능한 관계형 노트 저작도구"
 date: "Dec 11 2024"
 demoURL: "https://www.honeyflow.life/"
