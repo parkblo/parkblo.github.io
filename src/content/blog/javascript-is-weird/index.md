@@ -1,6 +1,6 @@
 ---
 title: "자바스크립트가 조금 이상한 것 같다"
-description: "🍌 "b" + "a" + + "a" + "a""
+description: "🍌 'b' + 'a' + + 'a' + 'a'"
 date: "Feb 07 2025"
 ---
 
