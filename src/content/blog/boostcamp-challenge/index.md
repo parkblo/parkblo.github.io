@@ -1,7 +1,7 @@
 ---
 title: "부스트캠프 웹・모바일 9기 챌린지 수료 후기"
 description: "🤯 맥북도, 머리도 뜨거웠던 여름날"
-date: "Mar 22 2024"
+date: "Aug 11 2024"
 ---
 
 ![](https://i.imgur.com/eSBHAD1.png)
