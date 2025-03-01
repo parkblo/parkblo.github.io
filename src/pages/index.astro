@@ -51,7 +51,7 @@ const experiences = await Promise.all(
         </article>
       </section>
 
-      <section class="animate space-y-6 border border-gray-300 p-4 rounded-xl">
+      <section class="animate space-y-6 bg-stone-200 bg-opacity-30 p-4 pb-6 rounded-xl">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
           <h5 class="font-semibold text-black dark:text-white">
             ✏️ 최근에 작성한 글
@@ -60,7 +60,7 @@ const experiences = await Promise.all(
             Posts
           </Link>
         </div>
-        <ul class="flex flex-col gap-4">
+        <ul class="flex flex-col space-y-4 px-4">
           {blog.map(post => (
             <li>
               <ArrowCard entry={post} />
@@ -69,7 +69,7 @@ const experiences = await Promise.all(
         </ul>
       </section>
 
-      <section class="animate space-y-6 border border-gray-300 p-4 rounded-xl">
+      <section class="animate space-y-6 bg-stone-200 bg-opacity-30 p-4 rounded-xl pb-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
           <h5 class="font-semibold text-black dark:text-white">
             🌱 나의 경험
@@ -98,7 +98,7 @@ const experiences = await Promise.all(
         </ul>
       </section>
 
-      <section class="animate space-y-6 border border-gray-300 p-4 rounded-xl">
+      <section class="animate space-y-6 bg-stone-200 bg-opacity-30 p-4 pb-6 rounded-xl">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
           <h5 class="font-semibold text-black dark:text-white">
             👩‍💻 진행한 프로젝트
@@ -107,7 +107,7 @@ const experiences = await Promise.all(
             Projects
           </Link>
         </div>
-        <ul class="flex flex-col gap-4">
+        <ul class="flex flex-col space-y-4 px-4">
           {projects.map(project => (
             <li>
               <ArrowCard entry={project} />
