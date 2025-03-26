@@ -195,7 +195,7 @@ _분산 시스템: 여러 개의 독립적인 기기(노드)가 네트워크를 
 - **삽입**: 연산 기반 CRDT, 각 삽입에는 clientID와 clock을 포함한 고유 ID를 가지고 있고, 이것을 통해서 규칙을 따라 순서를 결정합니다.
 - **삭제**: 상태 기반 CRDT, 해당 item에 '삭제됨'이라는 플래그를 설정하여 '논리적으로 삭제된 상태'로 만듭니다. 삭제됨 플래그가 설정된 경우 더 이상 보이지 않게 되며, 이후 GC가 동작하면 메모리에서 해제시킵니다.
 
-# 🏷️ References
+## 🏷️ References
 
 - [Yjs deep dive: How Yjs makes real-time collaboration easier and more efficient - part 2 | Tag1 Consulting](https://www.tag1consulting.com/blog/yjs-deep-dive-part-2)
 - [Introduction | Yjs Docs](https://docs.yjs.dev/)
