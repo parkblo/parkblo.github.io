@@ -4,6 +4,8 @@ description: "⚡ 충돌 없는 동시 편집, Yjs 사용과 내부 CRDT 동작 
 date: "Mar 26 2025"
 ---
 
+![img](./0.gif)
+
 Yjs 라이브러리와, 이 라이브러리의 주요 개념인 CRDT에 대해서 정리한 글입니다. Figma나 Google Docs와 같이 동시 편집 앱을 만들 시, 꼭 필요한 지식입니다.
 
 ## 1. Yjs는 무엇일까요?
