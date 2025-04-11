@@ -229,3 +229,6 @@ jekyll-archives:
 jekyll_admin:
   hidden_links:
   homepage: ""
+
+plugins:
+  - jekyll-target-blank
