@@ -1,8 +1,10 @@
 ---
 title: 부스트캠프 웹・모바일 9기 챌린지 수료 후기
+description: 🤯 맥북도, 머리도 뜨거웠던 여름날
 date: 2024-08-11 13:00:00 +0900
-categories: []
-tags: []     # TAG names should always be lowercase
+categories: [회고]
+tags: [boostcamp]     # TAG names should always be lowercase
+image: /assets/img/boostcamp-challenge/preview.png
 ---
 
 ![img](https://i.imgur.com/eSBHAD1.png)

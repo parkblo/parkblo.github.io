@@ -1,8 +1,10 @@
 ---
 title: 자바스크립트가 조금 이상한 것 같다
+description: 🍌 JS의 '관대함'에 대해서 다룹니다.
 date: 2025-02-07 13:00:00 +0900
-categories: []
-tags: []     # TAG names should always be lowercase
+categories: [JavaScript]
+tags: [quirks, typeof, null, NaN, type coercion, equality, history]
+image: /assets/img/javascript-is-weird/preview.png
 ---
 
 ## 들어가기 앞서서
