@@ -1,6 +1,6 @@
 ---
 title: 부스트캠프 웹・모바일 9기 챌린지 수료 후기
-description: 🤯 맥북도, 머리도 뜨거웠던 여름날
+description: 맥북도, 머리도 뜨거웠던 여름날
 date: 2024-08-11 13:00:00 +0900
 categories: [회고]
 tags: [boostcamp]     # TAG names should always be lowercase

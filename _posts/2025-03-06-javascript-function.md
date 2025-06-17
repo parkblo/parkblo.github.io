@@ -1,6 +1,6 @@
 ---
 title: 자바스크립트 함수(Function) 다시 바라보기
-description: 🧩 함수 관점에서 이해하는 자바스크립트
+description: 함수 관점에서 이해하는 자바스크립트
 date: 2025-03-06 13:00:00 +0900
 categories: [JavaScript]
 tags: [function, first-class function, closure, hoisting, arrow function, higher-order function, callback, currying, pure function, scope]     # TAG names should always be lowercase

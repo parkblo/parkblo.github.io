@@ -1,6 +1,6 @@
 ---
 title: 자바스크립트가 조금 이상한 것 같다
-description: 🍌 JS의 '관대함'에 대해서 다룹니다.
+description: JS의 관대함에 대해서 다룹니다.
 date: 2025-02-07 13:00:00 +0900
 categories: [JavaScript]
 tags: [quirks, typeof, null, NaN, type coercion, equality, history]
