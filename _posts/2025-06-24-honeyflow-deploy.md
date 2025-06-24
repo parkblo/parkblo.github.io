@@ -1,7 +1,7 @@
 ---
 title: t2.micro에 프로젝트 욱여넣기
 description: 다수의 Docker 컨테이너로 구성된 MSA 프로젝트를 t2.micro 인스턴스에 배포하며 겪은 과정을 공유합니다.
-date: 2024-06-24 19:54:00 +0900
+date: 2025-06-24 19:54:00 +0900
 categories: [DevOps]
 tags: [msa, docker, docker-compose, aws, ec2, nginx, cors, deployment, troubleshooting]
 image: /assets/img/honeyflow-deploy/preview.jpg
