@@ -25,7 +25,7 @@ image: /assets/img/honeyflow-deploy/preview.jpg
 * 기타 서비스 + DB: ~750MB
 * **📊 총 예상 메모리 사용량: 약 1.3GB**
 
-`t2.micro` 인스턴스의 RAM은 고작 **1GB**. 어려움을 직감했습니다.
+`t2.micro` 인스턴스의 RAM은 고작 **1GB**이기 때문에, 어려움을 직감했습니다.
 
 ## 2. 전략 세우기
 
@@ -64,23 +64,23 @@ curl -fsSL https://raw.githubusercontent.com/boostcampwm-2024/refactor-web29-hon
 
 이후 배포 시도에서 마주했던 문제들을 공유합니다.
 
-### **4-1. Frontend 빌드 실패: "JavaScript heap out of memory"**
+### 4-1. Frontend 빌드 실패: "JavaScript heap out of memory"
 * **문제 상황**: `pnpm build` 명령을 실행하자마자 프론트엔드 빌드가 멈추며 메모리 부족 오류를 뱉어냈습니다.
 * **원인 분석**: Vite로 프로젝트를 빌드하는 과정에서 Node.js의 기본 힙 메모리(약 500MB) 제한을 초과한 것이 원인이었습니다.
 * **해결 방법**: `package.json`의 빌드 스크립트에 `node --max-old-space-size=4096` 옵션을 추가해, Node.js가 빌드 시 더 많은 메모리를 사용하도록 허용해주었습니다.
 * 해당 방법 외에도, 배포 시마다 인스턴스를 재부팅하는 것이 더 확실하게 오류를 해결할 수 있었습니다. 근본적으로는 메모리 부족을 해소해야 합니다.
 
-### **4-2. Nginx: "Host not found in upstream"**
+### 4-2. Nginx: "Host not found in upstream"
 * **문제 상황**: 프론트엔드 컨테이너의 Nginx 로그에 `host not found`라는 익숙하지만 반갑지 않은 오류가 찍혔습니다.
 * **원인 분석**: 개발용 `nginx.conf`에는 `collaborative-room1`과 `room2` 서버가 하드코딩되어 있었지만, 배포용 설정에서는 `collaborative-server` 하나만 존재했기 때문이었죠. 설정 파일 간의 불일치가 문제였습니다.
 * **해결 방법**: `collaborative-server` 하나만 바라보도록 수정한 배포용 `nginx.deploy.conf` 파일을 만들어 환경별 설정을 완벽히 분리했습니다.
 
-### **4-3. WebSocket 연결 실패**
+### 4-3. WebSocket 연결 실패
 * **문제 상황**: 브라우저 콘솔에서 `WebSocket connection to 'ws://...' failed` 오류가 계속해서 발생했습니다.
 * **원인 분석**: 프론트엔드는 `/ws/room1-server/...` 같은 경로로 WebSocket 연결을 시도하는데, `nginx.deploy.conf`에는 이 경로를 처리할 `location` 블록이 누락되어 있었습니다.
 * **해결 방법**: `/ws/`로 시작하는 모든 요청을 `collaborative-server`로 프록시하도록 `nginx.deploy.conf`에 `location /ws/ { ... }` 블록을 추가하여 해결했습니다.
 
-### **4-4. CORS**
+### 4-4. CORS
 * **문제 상황**: API를 호출하는 모든 기능이 500 에러를 반환했지만, 브라우저 콘솔에는 명확한 원인이 나타나지 않았습니다.
 * **원인 분석**: API 서버 로그에서 `Not allowed by CORS` 오류를 확인했습니다. API 서버의 CORS 허용 목록에 배포된 프론트엔드의 출처(e.g., `http://<서버 IP>`)가 빠져있었습니다.
 * **해결 방법**: API 서버의 CORS 설정에 배포 환경의 출처를 명시적으로 추가하고 이미지를 다시 빌드하여 문제를 해결했습니다.
