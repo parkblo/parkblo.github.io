@@ -285,4 +285,4 @@ const fullName = getFullName(person);
 
 - [일급 함수 - 위키백과, 우리 모두의 백과사전](https://ko.wikipedia.org/wiki/%EC%9D%BC%EA%B8%89_%ED%95%A8%EC%88%98)
 - [Funarg 문제 - 위키피디아](https://en.wikipedia.org/wiki/Funarg_problem)
-- [IIFE - MDN Web Docs 용어 사전: 웹 용어 정의 | MDN](https://developer.mozilla.org/ko/docs/Glossary/IIFE)
+- [IIFE - MDN Web Docs 용어 사전: 웹 용어 정의 MDN](https://developer.mozilla.org/ko/docs/Glossary/IIFE)
