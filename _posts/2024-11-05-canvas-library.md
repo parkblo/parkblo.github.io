@@ -117,4 +117,4 @@ React 프로젝트에서 라이브러리를 통합하는 방식은 장기적인 
 * [fabricjs.com/docs](http://fabricjs.com/docs/)
 * https://konvajs.org/docs/react/Simple_Animations.html
 * https://konvajs.org/docs/react/Complex_Animations.html
-* http://fabricjs.com/animation-easing
+* https://fabricjs.com/demos/animation-easing/
