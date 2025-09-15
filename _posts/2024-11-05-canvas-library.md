@@ -1,9 +1,9 @@
 ---
-title: 프로젝트를 위한 Canvas 라이브러리 선택
+title: 프로젝트를 위한 Canvas 라이브러리 선택 - HoneyFlow 개발기 (1)
 description: Konva와 Fabric.js를 비교 분석하고 최종 선택 이유를 정리했습니다.
 date: 2024-11-05 23:11:10 +0900
 categories: [Front-End, Library/Framework]
-tags: [canvas, react, konva, fabricjs, react-konva, animation, performance, comparison]
+tags: [canvas, react, konva, fabricjs, react-konva, animation, performance, comparison, honeyflow]
 image: /assets/img/canvas-library/thumbnail.png
 ---
 
