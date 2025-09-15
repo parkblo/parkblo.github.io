@@ -114,7 +114,7 @@ React 프로젝트에서 라이브러리를 통합하는 방식은 장기적인 
 * [React: Comparison of JS Canvas Libraries (Konvajs vs Fabricjs) - DEV Community](https://dev.to/lico/react-comparison-of-js-canvas-libraries-konvajs-vs-fabricjs-1dan)
 * [Konva vs Fabric vs Canvas API 라이브러리 선택과정](https://devysi0827.tistory.com/101)
 * [Getting started with react and canvas via Konva | Konva - JavaScript 2d canvas library](https://konvajs.org/docs/react/index.html)
-* [fabricjs.com/docs](http://fabricjs.com/docs/)
+* [fabricjs.com/docs](https://fabricjs.com/docs/)
 * https://konvajs.org/docs/react/Simple_Animations.html
 * https://konvajs.org/docs/react/Complex_Animations.html
 * https://fabricjs.com/demos/animation-easing/
