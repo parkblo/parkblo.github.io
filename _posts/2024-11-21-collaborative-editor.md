@@ -4,7 +4,7 @@ description: Notion 같은 동시 편집 에디터는 어떻게 만들어야 할
 date: 2024-11-21 16:16:16 +0900
 categories: [Front-End, Library/Framework]
 tags: [yjs, milkdown, prosemirror, crdt, collaborative editing, websocket, react, flushsync, troubleshooting, honeyflow]
-image: /assets/img/collaborative-editor/image.png
+image: /assets/img/collaborative-editor/1.gif
 ---
 
 ## 1. 문제 정의: 협업을 위한 '살아있는' 문서 에디터
