@@ -2,7 +2,7 @@
 title: JavaScript와 CSS 없이 구현하는 SVG 모핑 - HoneyFlow 개발기 (3)
 description: Circle → Hexagon 모핑을 구현하며 원리, 제약, 해결 과정을 정리했습니다.
 date: 2024-12-01 15:25:25 +0900
-categories: [Front-End, Animation]
+categories: [Front-End, UX]
 tags: [svg, smil, morphing, animation, path, bezier, interpolation, web standards, honeyflow]
 image: /assets/img/svg-morphing/1.png
 ---
