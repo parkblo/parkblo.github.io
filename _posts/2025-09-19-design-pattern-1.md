@@ -1,6 +1,6 @@
 ---
 title: 소프트웨어 디자인 패턴(1) - 싱글톤, 팩토리, 전략
-description: 싱글톤 패턴, 팩토리 패턴, 전략 패턴에 대해서 정리했습니다.
+description: 싱글톤 패턴, 팩토리 패턴, 전략 패턴의 핵심을 정리했습니다
 date: 2025-09-19 16:50:30 +0900
 categories: [Computer Science, Design Pattern]
 tags: [design pattern, singleton, factory, strategy, gof]
