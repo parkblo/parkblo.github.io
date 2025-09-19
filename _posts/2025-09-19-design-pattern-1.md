@@ -1,13 +1,13 @@
 ---
 title: 소프트웨어 디자인 패턴(1) - 싱글톤, 팩토리, 전략
-description: GoF 디자인 패턴 중 널리 쓰이는 싱글톤, 팩토리, 전략 패턴에 대해 알아봅니다.
+description: 싱글톤 패턴, 팩토리 패턴, 전략 패턴에 대해서 정리하고 비교했습니다.
 date: 2025-09-19 16:50:30 +0900
 categories: [Computer Science, Design Pattern]
 tags: [design pattern, singleton, factory, strategy, gof]
 image: /assets/img/design-pattern-1/thumbnail.jpg
 ---
 
-## 1\. 싱글톤 패턴: 단 하나의 특별한 객체
+## 1\. 싱글톤 패턴: 단 하나의 인스턴스만 남기기
 
 ### **정의 (Definition)**
 
@@ -61,7 +61,7 @@ console.log(settings1 === settings2); // true
 
 -----
 
-## 2\. 팩토리 패턴: 객체 생성은 전문가에게 맡기기
+## 2\. 팩토리 패턴: 생성 로직을 분리하기
 
 ### **정의 (Definition)**
 
@@ -136,7 +136,7 @@ class UI {
 
 -----
 
-## 3\. 전략 패턴: 필요할 때마다 행동을 갈아 끼우는 유연함
+## 3\. 전략 패턴: 알고리즘을 분리하기
 
 ### **정의 (Definition)**
 
