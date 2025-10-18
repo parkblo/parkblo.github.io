@@ -1,7 +1,7 @@
 ---
 title: 자바스크립트는 왜 프로토타입을 선택했을까?
 description: 자바스크립트가 프로토타입 기반 언어가 된 역사적, 기술적 배경을 정리했습니다.
-date: 2025-10-18 20:55:00 +0900
+date: 2025-10-18 20:40:00 +0900
 categories: [Front-End, Fundamentals]
 tags: [javascript, prototype, brendan eich, es6, class]
 image: /assets/img/js-prototype/1.png
