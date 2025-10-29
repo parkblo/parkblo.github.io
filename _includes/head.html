@@ -127,4 +127,7 @@
   site.analytics[platform].id and site.analytics[platform].id != empty %} {%
   include analytics/{{ platform }}.html %} {% endif %} {% endfor %} {% endif %}
   {% include metadata-hook.html %}
+
+  <!-- MathJax -->
+  {% if page.use_math %} {% include mathjax_support.html %} {% endif %}
 </head>
