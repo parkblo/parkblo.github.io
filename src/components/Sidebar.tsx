@@ -14,7 +14,7 @@ export default function Sidebar({ categories }: SidebarProps) {
   return (
     <aside className="w-full md:w-48 shrink-0">
       <div className="sticky top-12">
-        <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 mb-6 px-2">
+        <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-6 px-2">
           Categories
         </h2>
         <nav className="flex flex-col gap-1">
@@ -31,7 +31,7 @@ export default function Sidebar({ categories }: SidebarProps) {
                   ${
                     isActive
                       ? "bg-white text-background font-bold"
-                      : "text-zinc-400 hover:text-white hover:bg-zinc-900"
+                      : "text-gray-400 hover:text-white hover:bg-gray-900"
                   }
                   relative group
                 `}

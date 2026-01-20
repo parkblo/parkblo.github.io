@@ -94,14 +94,14 @@ export default function Reactions({ postSlug }: ReactionsProps) {
             className={`flex items-center gap-2 px-3 py-1.5 border transition-all rounded-sm group ${
               isActive
                 ? "bg-accent/10 border-accent text-accent"
-                : "bg-zinc-900 border-zinc-800 hover:border-accent hover:bg-zinc-800 text-zinc-500"
+                : "bg-gray-900 border-gray-800 hover:border-accent hover:bg-gray-800 text-gray-500"
             }`}
           >
             <i
               className={`${reac.icon} text-lg group-hover:scale-110 transition-transform ${
                 isActive
                   ? "text-accent"
-                  : "text-zinc-400 group-hover:text-white"
+                  : "text-gray-400 group-hover:text-white"
               }`}
             />
             <span

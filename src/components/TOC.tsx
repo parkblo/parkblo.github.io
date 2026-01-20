@@ -80,10 +80,10 @@ export default function TOC({ content }: { content: string }) {
 
   return (
     <nav className="hidden xl:block fixed left-10 top-20 w-48 font-galmuri">
-      <h2 className="text-[10px] font-bold uppercase tracking-widest text-zinc-600 mb-6">
+      <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-600 mb-6">
         On This Page
       </h2>
-      <ul className="flex flex-col gap-3 font-mono">
+      <ul className="flex flex-col gap-3">
         {headings.slice(0, typedHeadings).map((h) => (
           <li
             key={h.id}
@@ -94,7 +94,7 @@ export default function TOC({ content }: { content: string }) {
               href={`#${h.id}`}
               className={`
                 text-[11px] block transition-colors duration-300
-                ${activeId === h.id ? "text-white" : "text-zinc-600 hover:text-zinc-400"}
+                ${activeId === h.id ? "text-white" : "text-gray-600 hover:text-gray-400"}
               `}
               onClick={(e) => {
                 e.preventDefault();

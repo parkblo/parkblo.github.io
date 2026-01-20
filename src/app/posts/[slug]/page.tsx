@@ -60,28 +60,28 @@ export default async function PostPage({
   const { meta, content } = post;
 
   return (
-    <div className="relative">
+    <div className="relative flex justify-center">
       <TOC content={content} />
 
       <article className="py-12 w-full max-w-[640px] mx-auto">
         <Link
           href="/"
-          className="text-[10px] font-bold text-zinc-500 hover:text-white mb-8 inline-block tracking-widest"
+          className="text-[10px] font-bold text-gray-500 hover:text-white mb-8 inline-block tracking-widest"
         >
           &lt; BACK TO HOME
         </Link>
 
         <header className="mb-12 text-center md:text-left">
-          <div className="flex items-center justify-center md:justify-start gap-3 text-[10px] text-zinc-500 uppercase tracking-[0.2em] mb-4">
+          <div className="flex items-center justify-center md:justify-start gap-3 text-[10px] text-gray-500 uppercase tracking-[0.2em] mb-4">
             <i className={meta.icon} />
             <span>{meta.category}</span>
-            <span className="w-1 h-1 bg-zinc-800 rounded-full" />
+            <span className="w-1 h-1 bg-gray-800 rounded-full" />
             <time>{meta.date}</time>
           </div>
           <h1 className="text-3xl font-bold text-white mb-4 leading-tight">
             {meta.title}
           </h1>
-          <p className="text-zinc-400 text-lg italic">{meta.description}</p>
+          <p className="text-gray-400 text-lg italic">{meta.description}</p>
         </header>
 
         <div className="prose prose-invert max-w-none">
@@ -101,7 +101,7 @@ export default async function PostPage({
           />
         </div>
 
-        <footer className="mt-20 pt-8 border-t border-zinc-900">
+        <footer className="mt-20 pt-8 border-t border-gray-900">
           <Reactions postSlug={slug} />
           <Comments />
         </footer>

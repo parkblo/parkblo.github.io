@@ -14,7 +14,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased bg-background text-foreground font-galmuri flex flex-col items-center">
-        <div className="w-full max-w-[840px] px-6 min-h-screen">{children}</div>
+        <div className="w-full max-w-[840px] px-6 min-h-screen pt-16">
+          {children}
+        </div>
       </body>
     </html>
   );
