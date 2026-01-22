@@ -1,0 +1,126 @@
+---
+title: CodeLog 개발기 (2) 보안과 신뢰성
+date: '2026-01-11'
+description: 'OAuth PKCE 인증, 데이터 정합성을 위한 Atomic 연산, 표준화된 에러 핸들링 전략을 다룹니다.'
+category: Front-End
+icon: "pixelart-icons-font-shield"
+---
+
+## 1. 들어가며: 빈틈없는 서비스를 위하여
+
+로그인과 로그아웃은 모든 서비스의 기본이지만 분산된 시스템, 비동기 환경 사이에서 발생하는 '틈'을 메우지 않으면 보안 사고나 치명적인 사용자 경험 저하로 이어집니다. CodeLog를 개발하며 인증부터 데이터 정합성, 그리고 예외 처리를 고려하여 신뢰성을 확보하기 위해 노력했습니다.
+
+## 2. 안전한 로그인의 시작: OAuth와 PKCE Flow
+
+### 2-1. 왜 PKCE인가?
+
+어플리케이션 개발 초기, GitHub 로그인이 자꾸 프로덕션 도메인으로 튕기는 현상은 단순 설정 오류가 아닌 **OAuth 2.0의 보안 원칙**과 맞닿아 있었습니다. Supabase와 같은 최근의 Auth 라이브러리는 **PKCE (Proof Key for Code Exchange)** Flow를 표준으로 강제합니다.
+
+이는 인증 코드를 탈취당해도, 짝이 맞는 '비밀키(Code Verifier)' 없이는 토큰을 발급받지 못하게 막는 기술입니다.
+
+### 2-2. 동작 흐름
+
+1. **로그인 요청**: `signInWithOAuth` 호출 시, 브라우저는 '비밀 검증값(Code Verifier)'을 생성해 임시 저장합니다.
+2. **인증 리다이렉트**: 사용자는 GitHub 로그인 페이지로 이동합니다.
+3. **코드 수신**: 인증 후 돌아온 URL(`/auth/callback`)에는 일회용 **'인증 코드'**가 담겨있습니다.
+4. **교환 및 세션 생성**: 서버는 이 '인증 코드'와 아까 저장해둔 '비밀 검증값'을 함께 Supabase에 보냅니다. 두 값이 일치해야만 비로소 진짜 액세스 토큰과 세션이 발급됩니다.
+
+![PKCE 인증 흐름](/assets/img/codelog-data-security/1.png)
+
+### 2-3. 인증 상태 관리와 Race Condition
+
+개발 중, 로그아웃 직후에도 화면에 프로필이 남아있는 문제가가 발생했습니다. 이는 `onAuthStateChange` 리스너의 **비동기성** 때문에 발생합니다. 저는 이를 해결하기 위해 `useRef`를 활용한 검증 로직을 도입했습니다.
+
+```tsx
+// 검증된 업데이트 패턴
+const activeUserId = useRef<string | null>(null);
+
+supabase.auth.onAuthStateChange((event, session) => {
+  const currentSessionId = session?.user?.id ?? null;
+  activeUserId.current = currentSessionId; // 스냅샷 기록
+
+  fetchUserProfile(currentSessionId).then((data) => {
+    // 데이터 도착 시점에 여전히 주인이 같은지 검증
+    if (activeUserId.current === currentSessionId) {
+      setUser(data);
+    }
+  });
+});
+```
+
+이 패턴은 React의 렌더링 사이클과 별개로 동기적인 상태 검증을 가능하게 하여, 네트워크 지연 상황에서도 정확한 UI를 보장합니다.
+
+## 3. 데이터 정합성: 동시성 문제 해결
+
+인증된 사용자가 활동을 시작하면, 이제는 **데이터의 무결성**이 중요해집니다. 특히 "좋아요"와 같은 카운트 데이터는 동시에 여러 요청이 몰릴 때 누락되는 **Lost Update** 문제가 빈번합니다.
+
+### 3-1. DB 레벨의 Atomic 연산
+
+애플리케이션 레벨에서 값을 읽고(`read`) 1을 더해 쓰는(`write`) 방식은 경쟁 상태에 취약합니다. 대신 DB에게 연산을 위임해야 합니다.
+
+```sql
+-- ✅ Good: DB의 현재 값을 기준으로 연산 (Atomic)
+UPDATE posts SET like_count = like_count + 1 WHERE id = 1;
+```
+
+![Atomic 연산 동시성 해결](/assets/img/codelog-data-security/2.png)
+
+### 3-2. 일관성 유지를 위한 Trigger
+
+`likes` 테이블에는 데이터가 있는데 `posts`의 카운트는 올라가지 않는 불일치를 막기 위해 Postgres **Trigger**를 사용합니다. `INSERT`, `DELETE` 이벤트 발생 시 DB가 자동으로 카운트를 동기화하여, 개발자의 실수가 발생할 수 있는 경우를 차단했습니다.
+
+### 3-3. Supabase RPC를 통한 트랜잭션
+
+게시글 생성과 태그 저장처럼, 반드시 **함께 성공하거나 함께 실패해야 하는 작업**은 Supabase RPC(Remote Procedure Call)로 묶어서 처리합니다. 네트워크 요청을 한 번(1 Round Trip)으로 줄이면서도 트랜잭션의 원자성(Atomicity)을 확실하게 보장할 수 있습니다.
+
+## 4. 에러 핸들링과 네트워크 전략
+
+개발을 이어가다 보니, 에러를 처리하는 로직이 제각각 다르다는 것을 깨달았습니다. 이에 따라서 일관된 방식으로 유저에게 피드백을 주는 흐름을 설계했습니다.
+
+### 4-1. 계층별 책임과 `handleAction`
+
+먼저, 에러 처리 파편화를 막기 위해 계층별 책임을 정의했습니다.
+
+- **Service**: `Error` 객체 반환
+- **Action**: 에러 메시지(string)로 가공
+- **Client**: `handleAction` 유틸리티로 UI 피드백
+
+```ts
+// src/utils/handle-action.ts
+export async function handleAction<T>(
+  promise: Promise<ActionResponse<T>>,
+  options?: { onSuccess?: ... }
+) {
+  try {
+    const result = await promise;
+    if (result.error) toast.error(result.error);
+    else {
+      if (result.message) toast.success(result.message);
+      options?.onSuccess?.(result.data);
+    }
+  } catch (e) {
+    toast.error("알 수 없는 에러가 발생했습니다.");
+  }
+}
+```
+
+이제 클라이언트 코드는 비즈니스 로직에만 집중할 수 있습니다.
+
+### 4-2. 서버 컴포넌트와 스트리밍 (Streaming)
+
+서버 컴포넌트에서의 에러는 페이지 전체를 멈추게 할 수 있습니다. Next.js의 파일 시스템 라우팅(`loading.tsx`, `error.tsx`)을 활용하여 이를 방어합니다.
+서버는 가장 먼저 `loading.tsx`의 껍데기를 즉시 전송하고, 백그라운드 데이터 패칭이 완료되면 내용을 채웁니다. 만약 실패하더라도 `error.tsx`가 해당 영역만 대체하여 보여주므로 앱 전체가 셧다운되는 것을 막습니다.
+
+![스트리밍과 에러 핸들링](/assets/img/codelog-data-security/3.png)
+
+## 5. 결론
+
+PKCE로 안전하게 사용자를 식별하고, 아토믹 연산과 RPC를 통해 사용자의 행동을 정확하게 기록하며, 표준화된 에러 핸들링으로 실패 상황까지 사용자 경험으로 포용하는 모든 과정은 유기적으로 연결되어있습니다. 이 보이지 않는 과정들이 모여 신뢰받을 수 있는 서비스를 만들어 나간다는 사실을 배웠습니다.
+
+---
+
+# 🏷️ References
+
+- [Supabase Auth Helpers Docs](https://supabase.com/docs/guides/auth/auth-helpers/nextjs)
+- [Postgres Triggers Documentation](https://www.postgresql.org/docs/current/triggers.html)
+- [Next.js Error Handling](https://nextjs.org/docs/app/building-your-application/routing/error-handling)

@@ -1,0 +1,124 @@
+---
+title: Windows 10에서 WSL2로 Linux 개발 환경 구축하기
+date: '2025-09-11'
+description: Windows 10에서 WSL2 설치부터 VS Code 연동까지 정리했습니다.
+category: DevOps
+icon: "pixelart-icons-font-monitor"
+---
+
+## **개요**
+
+이 문서는 Windows 10 운영체제에서 WSL2(Windows Subsystem for Linux 2)를 사용하여, 실제 서버와 거의 동일한 Linux 개발 환경을 구축하는 전체 과정을 안내합니다. 이 가이드를 끝까지 따라 하면, Windows 환경의 편리함은 유지하면서 Linux의 강력한 개발 도구와 생태계를 원활하게 사용할 수 있게 됩니다.
+
+**📖 이 문서를 통해 얻을 수 있는 것:**
+
+  * Windows에서 WSL을 통한 Linux 환경 구축
+  * VS Code, Cursor와 같은 개발 도구를 WSL2와 연동하여 실제 프로젝트를 진행하는 방법
+
+## **1단계: 사전 준비 - Windows 버전 확인**
+
+WSL2는 특정 버전 이상의 Windows 10에서만 작동합니다. 시작하기 전에 사용 중인 PC의 버전이 아래 요구사항을 충족하는지 확인하세요.
+
+  * **요구사항**: Windows 10 버전 1903 이상 (빌드 번호 18362 이상)
+  * **확인 방법**:
+    1.  `Windows 키 + R`을 눌러 '실행' 창을 엽니다.
+    2.  `winver`를 입력하고 Enter 키를 누릅니다.
+    3.  팝업 창에서 '버전'과 'OS 빌드' 번호를 확인합니다.
+
+> ⚠️ 버전이 요구사항보다 낮다면, `설정 > 업데이트 및 보안 > Windows 업데이트`를 통해 최신 버전으로 먼저 업데이트해야 합니다.
+
+## **2단계: WSL2 핵심 구성 요소 설치**
+
+PowerShell을 **관리자 권한**으로 실행한 후, 아래 명령어를 순서대로 입력하여 WSL2에 필요한 핵심 기능을 활성화합니다.
+
+### **1. WSL 기능 활성화**
+
+```powershell
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+```
+
+### **2. 가상 머신 플랫폼 기능 활성화**
+
+```powershell
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+
+완료 후 컴퓨터를 **재부팅**합니다.
+
+### **3. Linux 커널 업데이트 패키지 설치**
+
+![img](/assets/img/setup-wsl2/1.jpg)
+
+[이 링크](https://learn.microsoft.com/ko-kr/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package)에 접속하여 최신 Linux 커널 업데이트 패키지를 다운로드하고 설치합니다.
+
+### **4. WSL2를 기본 버전으로 설정**
+PowerShell에서 아래 명령어를 실행하여 새로 설치되는 모든 Linux 배포판이 WSL2를 사용하도록 설정합니다.
+
+```powershell
+wsl --set-default-version 2
+```
+
+## **3단계: Linux 배포판 설치 및 설정**
+
+### **1. Linux 배포판 설치**
+
+Microsoft Store에서 원하는 Linux 배포판(예: **Ubuntu 22.04 LTS**)을 검색하여 설치합니다. Store에서 설치가 원활하지 않을 경우, [이 링크](https://learn.microsoft.com/ko-kr/windows/wsl/install-manual#downloading-distributions)에서 수동으로 다운로드하여 설치할 수 있습니다.
+
+### **2. 사용자 계정 설정**
+
+Linux 배포판을 처음 실행하면, 터미널에 사용자 이름과 비밀번호를 설정하라는 메시지가 표시됩니다. 원하는 이름과 비밀번호를 설정합니다.
+
+## **4단계: 최종 확인 및 버전 변경**
+
+PowerShell에서 아래 명령어를 입력하여 설치된 Linux 배포판의 상태와 버전을 확인합니다.
+
+```powershell
+wsl -l -v
+```
+
+![img](/assets/img/setup-wsl2/3.jpg)
+
+`VERSION` 항목이 **2**로 표시되는지 확인하세요. 만약 `1`로 표시된다면, 아래 명령어를 통해 2로 변경할 수 있습니다.
+
+```powershell
+# {distro-name} 부분에 실제 배포판 이름(예: Ubuntu)을 입력하세요.
+wsl --set-version {distro-name} 2
+```
+
+## **5단계: 개발 환경 연동 및 프로젝트 설정**
+
+이제 설치된 WSL2 환경을 실제 코드 에디터와 연결하고 프로젝트를 설정합니다.
+
+### **1. 코드 에디터(IDE) 확장 프로그램 설치**
+
+![img](/assets/img/setup-wsl2/4.jpg)
+
+VS Code, Cursor 등 사용 중인 코드 에디터에서 권장되는 **WSL 확장 프로그램**을 설치합니다. 보통 에디터를 처음 실행하면 WSL이 감지되어, 확장 프로그램 설치를 권장하는 알림이 표시됩니다.
+
+### **2. 프로젝트 파일을 Linux 파일 시스템에 배치하기**
+
+WSL2의 성능을 최대한 활용하려면, 프로젝트 파일을 Windows가 아닌 **Linux 파일 시스템 내에 위치**시키는 것이 매우 중요합니다.
+
+  * **파일 탐색기에서 접근**: Windows 파일 탐색기 주소창에 `\\wsl$`를 입력하면 설치된 Linux 배포판의 파일 시스템에 접근할 수 있습니다.
+  * **권장 위치**: 일반적으로 사용자 홈 디렉터리인 `\\wsl$\Ubuntu\home\{username}\` 내부에 프로젝트 폴더를 생성하고 파일을 관리합니다.
+  * **Git 프로젝트일 경우**: `git clone` 명령어를 WSL 터미널에서 직접 실행하여 프로젝트를 가져오는 것을 권장합니다.
+
+### **3. WSL2 환경에서 코드 에디터 실행하기**
+
+WSL 터미널을 열고, 프로젝트 폴더로 이동한 뒤 아래 명령어를 입력하세요.
+
+```bash
+# VS Code를 사용하는 경우
+code .
+
+# Cursor를 사용하는 경우
+cursor .
+```
+
+위 명령어를 실행하면, 코드 에디터가 자동으로 WSL2 환경에 연결된 상태로 실행됩니다.
+
+## **완료\!**
+
+![img](/assets/img/setup-wsl2/10.jpg)
+
+코드 에디터 좌측 하단에 `WSL: Ubuntu`와 같이 현재 연결된 Linux 배포판 이름이 표시된다면, 모든 설정이 성공적으로 완료된 것입니다. 이제 터미널, 파일 탐색, 디버깅 등 모든 작업을 Windows에서 직접 Linux 환경을 통해 수행할 수 있습니다.

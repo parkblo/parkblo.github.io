@@ -55,3 +55,9 @@ export function getPaginatedPosts(page: number, limit: number) {
     },
   };
 }
+
+export function getAllCategories(): string[] {
+  const posts = getAllPosts();
+  const categories = new Set(posts.map((post) => post.category));
+  return ["All", ...Array.from(categories)];
+}
