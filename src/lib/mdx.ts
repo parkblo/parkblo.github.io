@@ -36,3 +36,22 @@ export function getAllPosts(): PostMetadata[] {
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
   return posts;
 }
+
+export function getPaginatedPosts(page: number, limit: number) {
+  const allPosts = getAllPosts();
+  const totalPosts = allPosts.length;
+  const totalPages = Math.ceil(totalPosts / limit);
+  const offset = (page - 1) * limit;
+  const posts = allPosts.slice(offset, offset + limit);
+
+  return {
+    posts,
+    metadata: {
+      totalPosts,
+      totalPages,
+      currentPage: page,
+      hasNextPage: page < totalPages,
+      hasPrevPage: page > 1,
+    },
+  };
+}

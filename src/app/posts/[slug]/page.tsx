@@ -11,8 +11,7 @@ import TOC from "@/components/TOC";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import Comments from "@/components/Comments";
-import Reactions from "@/components/Reactions";
+import Giscus from "@/components/Giscus";
 
 export async function generateMetadata({
   params,
@@ -127,10 +126,8 @@ export default async function PostPage({
             />
           </div>
 
-          <footer className="mt-20 pt-8 border-t border-gray-900">
-            <Reactions postSlug={slug} />
-            <Comments />
-          </footer>
+          <hr className="my-12 border-gray-800" />
+          <Giscus />
         </article>
       </div>
     </>

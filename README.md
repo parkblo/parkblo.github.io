@@ -21,12 +21,7 @@ npm install
 
 ### 2. Environment Variables
 
-Create a `.env.local` file with the following:
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
+No environment variables are required for the base setup.
 
 ### 3. Local Development
 
@@ -53,32 +48,25 @@ icon: "pix-code" # From pixelarticons
 
 This project is optimized for **Vercel**. Simply connect your GitHub repository and it will deploy automatically.
 
-## 🗄️ Database Setup (Supabase)
+## 💬 Comment System (Giscus)
 
-To enable persistent reactions, created a table in your Supabase project:
+We use [Giscus](https://giscus.app) for comments. It uses GitHub Discussions to store comments.
 
-1. **Create Table**:
-   - name: `reactions`
-   - columns:
-     - `id`: uuid (primary key)
-     - `post_slug`: text
-     - `type`: text (e.g., love, zap, rocket)
-     - `count`: int8 (default 0)
-     - `created_at`: timestamptz
-
-2. **Enable RLS**:
-   - Ensure the `anon` role has permissions to `SELECT`, `INSERT`, and `UPDATE` on the `reactions` table.
-
-## 💬 Comment System (Utterances)
-
-Utterances uses GitHub Issues to store comments.
+### Setup Instructions
 
 1. **Public Repo**: Your blog repository MUST be **public**.
-2. **Install App**: Install the [utterances app](https://github.com/apps/utterances) on your repository.
-3. **Configure**: Update `src/components/Comments.tsx` with your repo string:
+2. **Enable Discussions**: Enable the "Discussions" feature in your GitHub repository settings.
+3. **Install App**: Install the [Giscus app](https://github.com/apps/giscus) on your repository.
+4. **Get Config**: Go to [giscus.app](https://giscus.app) and enter your repository details. It will generate the configuration values.
+5. **Update Code**: Update `src/components/Giscus.tsx` with your values:
    ```tsx
    repo = "username/repo-name";
+   repoId = "YOUR_REPO_ID";
+   category = "Comments"; // or your chosen category
+   categoryId = "YOUR_CATEGORY_ID";
    ```
+
+> **Note**: Since Giscus configuration is public by design, it's safe to commit these values to your repository.
 
 ## 🌏 Alignment & Polish
 

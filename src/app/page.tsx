@@ -16,13 +16,27 @@ const CATEGORIES = ["All", "Development", "Design", "Thoughts"];
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{ category?: string }>;
+  searchParams: Promise<{ category?: string; page?: string }>;
 }) {
-  const { category = "All" } = await searchParams;
-  const posts = getAllPosts();
+  const { category = "All", page = "1" } = await searchParams;
+  const currentPage = parseInt(page, 10) || 1;
+  const POSTS_PER_PAGE = 5;
 
+  const allPosts = getAllPosts();
   const filteredPosts =
-    category === "All" ? posts : posts.filter((p) => p.category === category);
+    category === "All"
+      ? allPosts
+      : allPosts.filter((p) => p.category === category);
+
+  const totalPosts = filteredPosts.length;
+  const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+
+  const paginatedPosts = filteredPosts.slice(
+    (currentPage - 1) * POSTS_PER_PAGE,
+    currentPage * POSTS_PER_PAGE,
+  );
+
+  const categoryQuery = category !== "All" ? `&category=${category}` : "";
 
   return (
     <>
@@ -30,7 +44,7 @@ export default async function Home({
       <div className="flex flex-col md:flex-row gap-12">
         <div className="flex-1">
           <div className="flex flex-col gap-10">
-            {filteredPosts.map((post) => (
+            {paginatedPosts.map((post) => (
               <Link
                 href={`/posts/${post.slug}`}
                 key={post.slug}
@@ -59,26 +73,43 @@ export default async function Home({
               </Link>
             ))}
 
-            {filteredPosts.length === 0 && (
+            {paginatedPosts.length === 0 && (
               <p className="text-gray-500 italic">
                 No posts found in this category.
               </p>
             )}
 
             {/* Pagination */}
-            <nav className="pt-12 flex gap-4 border-t border-gray-900">
-              <button
-                disabled
-                className="text-xs font-bold text-gray-700 cursor-not-allowed"
+            <nav className="pt-12 flex gap-4 border-t border-gray-900 justify-between items-center">
+              <Link
+                href={`/?page=${currentPage - 1}${categoryQuery}`}
+                aria-disabled={currentPage <= 1}
+                tabIndex={currentPage <= 1 ? -1 : undefined}
+                className={`text-xs font-bold ${
+                  currentPage <= 1
+                    ? "text-zinc-700 cursor-not-allowed pointer-events-none"
+                    : "text-gray-400 hover:text-white"
+                }`}
               >
                 &lt; PREVIOUS
-              </button>
-              <button
-                disabled
-                className="text-xs font-bold text-gray-700 cursor-not-allowed"
+              </Link>
+
+              <span className="text-[10px] text-gray-600 font-mono">
+                {totalPages > 0 ? `PAGE ${currentPage} OF ${totalPages}` : ""}
+              </span>
+
+              <Link
+                href={`/?page=${currentPage + 1}${categoryQuery}`}
+                aria-disabled={currentPage >= totalPages}
+                tabIndex={currentPage >= totalPages ? -1 : undefined}
+                className={`text-xs font-bold ${
+                  currentPage >= totalPages
+                    ? "text-gray-700 cursor-not-allowed pointer-events-none"
+                    : "text-gray-400 hover:text-white"
+                }`}
               >
                 NEXT &gt;
-              </button>
+              </Link>
             </nav>
           </div>
         </div>
