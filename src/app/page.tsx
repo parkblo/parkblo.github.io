@@ -1,8 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import { getAllPosts } from "@/lib/mdx";
+
+export const metadata: Metadata = {
+  title: "홈",
+  description:
+    "프론트엔드 개발, 웹 기술, 그리고 개발자의 생각을 기록하는 블로그입니다.",
+};
 
 const CATEGORIES = ["All", "Development", "Design", "Thoughts"];
 
