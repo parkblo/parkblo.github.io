@@ -3,7 +3,8 @@ import Link from "next/link";
 import { Suspense } from "react";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
-import { getAllPosts } from "@/lib/mdx";
+import Pagination from "@/components/Pagination";
+import { getAllPosts, getAllCategories } from "@/lib/mdx";
 
 export const metadata: Metadata = {
   title: "홈",
@@ -11,15 +12,17 @@ export const metadata: Metadata = {
     "프론트엔드 개발, 웹 기술, 그리고 개발자의 생각을 기록하는 블로그입니다.",
 };
 
-const CATEGORIES = ["All", "Development", "Design", "Thoughts"];
-
 export default async function Home({
   searchParams,
 }: {
   searchParams: Promise<{ category?: string; page?: string }>;
 }) {
   const { category = "All", page = "1" } = await searchParams;
-  const currentPage = parseInt(page, 10) || 1;
+  /* 
+     Ensure currentPage is at least 1. 
+     parseInt might return NaN, so we default to 1.
+  */
+  const currentPage = Math.max(1, parseInt(page, 10) || 1);
   const POSTS_PER_PAGE = 5;
 
   const allPosts = getAllPosts();
@@ -35,8 +38,6 @@ export default async function Home({
     (currentPage - 1) * POSTS_PER_PAGE,
     currentPage * POSTS_PER_PAGE,
   );
-
-  const categoryQuery = category !== "All" ? `&category=${category}` : "";
 
   return (
     <>
@@ -80,42 +81,16 @@ export default async function Home({
             )}
 
             {/* Pagination */}
-            <nav className="pt-12 flex gap-4 border-t border-gray-900 justify-between items-center">
-              <Link
-                href={`/?page=${currentPage - 1}${categoryQuery}`}
-                aria-disabled={currentPage <= 1}
-                tabIndex={currentPage <= 1 ? -1 : undefined}
-                className={`text-xs font-bold ${
-                  currentPage <= 1
-                    ? "text-zinc-700 cursor-not-allowed pointer-events-none"
-                    : "text-gray-400 hover:text-white"
-                }`}
-              >
-                &lt; PREVIOUS
-              </Link>
-
-              <span className="text-[10px] text-gray-600 font-mono">
-                {totalPages > 0 ? `PAGE ${currentPage} OF ${totalPages}` : ""}
-              </span>
-
-              <Link
-                href={`/?page=${currentPage + 1}${categoryQuery}`}
-                aria-disabled={currentPage >= totalPages}
-                tabIndex={currentPage >= totalPages ? -1 : undefined}
-                className={`text-xs font-bold ${
-                  currentPage >= totalPages
-                    ? "text-gray-700 cursor-not-allowed pointer-events-none"
-                    : "text-gray-400 hover:text-white"
-                }`}
-              >
-                NEXT &gt;
-              </Link>
-            </nav>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              category={category}
+            />
           </div>
         </div>
 
         <Suspense fallback={<div className="w-48" />}>
-          <Sidebar categories={CATEGORIES} />
+          <Sidebar categories={getAllCategories()} />
         </Suspense>
       </div>
     </>
