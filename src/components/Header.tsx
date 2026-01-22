@@ -17,7 +17,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="pt-12 pb-16 flex items-start gap-4">
+    <header className="pt-1 pb-4 md:pt-8 md:pb-12 flex items-start gap-4">
       <h1 className="text-xl font-bold tracking-tight text-accent italic">
         parkblo
       </h1>

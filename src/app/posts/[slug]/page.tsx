@@ -63,7 +63,7 @@ export default async function PostPage({
     <div className="relative flex justify-center">
       <TOC content={content} />
 
-      <article className="py-12 w-full max-w-[640px] mx-auto">
+      <article className="py-4 md:py-12 w-full max-w-[640px] mx-auto">
         <Link
           href="/"
           className="text-[10px] font-bold text-gray-500 hover:text-white mb-8 inline-block tracking-widest"
@@ -71,7 +71,7 @@ export default async function PostPage({
           &lt; BACK TO HOME
         </Link>
 
-        <header className="mb-12 text-center md:text-left">
+        <header className="mb-6 md:mb-12 text-center md:text-left">
           <div className="flex items-center justify-center md:justify-start gap-3 text-[10px] text-gray-500 uppercase tracking-[0.2em] mb-4">
             <i className={meta.icon} />
             <span>{meta.category}</span>
