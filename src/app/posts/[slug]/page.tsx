@@ -91,7 +91,7 @@ export default async function PostPage({
         <article className="py-4 md:py-12 w-full max-w-[640px] mx-auto">
           <Link
             href="/"
-            className="text-[10px] font-bold text-gray-500 hover:text-white mb-8 inline-block tracking-widest"
+            className="text-[10px] font-bold text-gray-500 hover:text-accent mb-8 inline-block tracking-widest transition-colors"
           >
             &lt; BACK TO HOME
           </Link>
@@ -103,20 +103,28 @@ export default async function PostPage({
               <span className="w-1 h-1 bg-gray-800 rounded-full" />
               <time>{meta.date}</time>
             </div>
-            <h1 className="text-3xl font-bold text-white mb-4 leading-tight">
+            <h1 className="text-3xl font-bold text-foreground mb-4 leading-tight">
               {meta.title}
             </h1>
             <p className="text-gray-400 text-lg italic">{meta.description}</p>
           </header>
 
-          <div className="prose prose-invert max-w-none">
+          <div className="prose dark:prose-invert max-w-none">
             <MDXRemote
               source={content}
               components={MDXComponents}
               options={{
                 mdxOptions: {
                   rehypePlugins: [
-                    [rehypePrettyCode, { theme: "github-dark" }],
+                    [
+                      rehypePrettyCode,
+                      {
+                        theme: {
+                          dark: "github-dark",
+                          light: "github-light",
+                        },
+                      },
+                    ],
                     rehypeKatex,
                     rehypeSlug,
                   ],
