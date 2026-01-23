@@ -4,6 +4,8 @@ const BLOG_URL = "https://parkblo.github.io";
 const BLOG_TITLE = "parkblo";
 const BLOG_SUBTITLE = "웹 위주의 개발 기록과 회고를 남기는 블로그입니다.";
 
+export const dynamic = "force-static";
+
 export async function GET() {
   const posts = getAllPosts();
 
