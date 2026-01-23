@@ -1,8 +1,5 @@
-"use client";
-
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useTheme } from "next-themes";
 import ThemeToggle from "@/components/ThemeToggle";
 import { Github } from "lucide-react";
 
@@ -12,7 +9,6 @@ interface SidebarProps {
 
 export default function Sidebar({ categories }: SidebarProps) {
   const searchParams = useSearchParams();
-  const { theme } = useTheme();
   const selectedCategory = searchParams.get("category") || "All";
 
   return (
@@ -50,21 +46,11 @@ export default function Sidebar({ categories }: SidebarProps) {
                   text-left px-3 py-2 text-sm transition-all duration-200 rounded-sm
                   ${
                     isActive
-                      ? "bg-primary text-primary-foreground font-bold dark:text-black"
+                      ? "bg-primary text-primary-foreground font-bold"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted"
                   }
                   relative group
                 `}
-                style={
-                  isActive
-                    ? {
-                        color:
-                          theme === "dark" || theme === "system"
-                            ? "black"
-                            : "white",
-                      }
-                    : undefined
-                }
               >
                 {cat}
               </Link>
