@@ -1,6 +1,6 @@
 import { getAllPosts } from "@/lib/mdx";
 
-const BLOG_URL = "https://parkblo.github.io";
+const BLOG_URL = "https://brad.kr";
 const BLOG_TITLE = "parkblo";
 const BLOG_SUBTITLE = "웹 위주의 개발 기록과 회고를 남기는 블로그입니다.";
 

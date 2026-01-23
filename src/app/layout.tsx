@@ -4,19 +4,19 @@ import ServiceWorkerUnregister from "@/components/ServiceWorkerUnregister";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://parkblo.github.io"),
+  metadataBase: new URL("https://brad.kr"),
   title: {
     default: "parkblo - 개발 블로그",
     template: "%s | parkblo",
   },
   description: "웹 위주의 개발 기록과 회고를 남기는 블로그입니다.",
   keywords: ["개발", "프론트엔드", "웹개발", "블로그", "parkblo"],
-  authors: [{ name: "Park Byeongju", url: "https://parkblo.github.io" }],
+  authors: [{ name: "Park Byeongju", url: "https://brad.kr" }],
   creator: "Park Byeongju",
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: "https://parkblo.github.io",
+    url: "https://brad.kr",
     siteName: "parkblo",
     title: "parkblo - 개발 블로그",
     description: "웹 위주의 개발 기록과 회고를 남기는 블로그입니다.",
