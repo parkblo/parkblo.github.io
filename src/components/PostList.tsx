@@ -51,7 +51,7 @@ export default function PostList({ allPosts }: PostListProps) {
             />
             <div className="flex-1">
               <div className="flex items-baseline justify-between mb-1">
-                <h3 className="text-base font-bold group-hover:text-accent">
+                <h3 className="text-base font-bold text-muted-foreground group-hover:text-primary transition-colors duration-200">
                   {post.title}
                 </h3>
                 <time className="text-[10px] text-gray-600 font-mono">
