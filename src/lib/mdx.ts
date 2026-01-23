@@ -4,7 +4,7 @@ import matter from "gray-matter";
 
 const POSTS_PATH = path.join(process.cwd(), "_posts");
 
-export interface PostMetadata {
+export interface Post {
   title: string;
   description: string;
   category: string;
@@ -24,12 +24,12 @@ export function getPostBySlug(slug: string) {
   const { data, content } = matter(fileContents);
 
   return {
-    meta: { ...data, slug: realSlug } as PostMetadata,
+    meta: { ...data, slug: realSlug } as Post,
     content,
   };
 }
 
-export function getAllPosts(): PostMetadata[] {
+export function getAllPosts(): Post[] {
   const slugs = getPostSlugs();
   const posts = slugs
     .map((slug) => getPostBySlug(slug).meta)
