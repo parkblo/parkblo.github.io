@@ -18,12 +18,12 @@ export default function Comments() {
     <div className="mt-10">
       <Giscus
         id="comments"
-        repo="parkblo/new-blog"
-        repoId="R_kgDONqylgA"
-        category="General"
-        categoryId="DIC_kwDONqylgM4CmA_l"
+        repo="parkblo/parkblo.github.io"
+        repoId="R_kgDOQ8nbXg"
+        category="Announcements"
+        categoryId="DIC_kwDOQ8nbXs4C1UZO"
         mapping="pathname"
-        term="Welcome to @giscus/react component!"
+        strict="0"
         reactionsEnabled="1"
         emitMetadata="0"
         inputPosition="top"
