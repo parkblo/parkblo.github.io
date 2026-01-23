@@ -48,7 +48,7 @@ export default function Sidebar({ categories }: SidebarProps) {
                   text-left px-3 py-2 text-sm transition-all duration-200 rounded-sm
                   ${
                     isActive
-                      ? "bg-primary text-primary-foreground font-bold"
+                      ? "bg-accent text-accent-foreground font-bold"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted"
                   }
                   relative group
