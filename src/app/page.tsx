@@ -7,8 +7,7 @@ import { getAllPosts, getAllCategories } from "@/lib/mdx";
 
 export const metadata: Metadata = {
   title: "parkblo",
-  description:
-    "프론트엔드 개발, 웹 기술, 그리고 개발자의 생각을 기록하는 블로그입니다.",
+  description: "웹 위주의 개발 기록과 회고를 남기는 블로그입니다.",
 };
 
 export default function Home() {
