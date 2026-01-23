@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ThemeProvider from "@/components/ThemeProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -42,9 +43,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased bg-background text-foreground font-galmuri flex flex-col items-center">
-        <main className="w-full max-w-[840px] px-6 min-h-screen pt-2 md:pt-10">
-          {children}
-        </main>
+        <ThemeProvider>
+          <main className="w-full max-w-[840px] px-6 min-h-screen pt-2 md:pt-10">
+            {children}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );

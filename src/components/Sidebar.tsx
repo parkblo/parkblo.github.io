@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useTheme } from "next-themes";
+import ThemeToggle from "@/components/ThemeToggle";
+import { Github } from "lucide-react";
 
 interface SidebarProps {
   categories: string[];
@@ -9,11 +12,28 @@ interface SidebarProps {
 
 export default function Sidebar({ categories }: SidebarProps) {
   const searchParams = useSearchParams();
+  const { theme } = useTheme();
   const selectedCategory = searchParams.get("category") || "All";
 
   return (
     <aside className="w-full md:w-48 shrink-0">
       <div className="sticky top-12">
+        <div className="mb-10 flex items-center gap-3 px-2">
+          {/* GitHub Icon */}
+          <a
+            href="https://github.com/parkblo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 text-accent hover:opacity-70 transition-opacity"
+            aria-label="GitHub"
+          >
+            <Github className="w-5 h-5" />
+          </a>
+
+          {/* Theme Toggle */}
+          <ThemeToggle />
+        </div>
+
         <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-6 px-2">
           Categories
         </h2>
@@ -30,16 +50,23 @@ export default function Sidebar({ categories }: SidebarProps) {
                   text-left px-3 py-2 text-sm transition-all duration-200 rounded-sm
                   ${
                     isActive
-                      ? "bg-white text-background font-bold"
-                      : "text-gray-400 hover:text-white hover:bg-gray-900"
+                      ? "bg-primary text-primary-foreground font-bold dark:text-black"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
                   }
                   relative group
                 `}
+                style={
+                  isActive
+                    ? {
+                        color:
+                          theme === "dark" || theme === "system"
+                            ? "black"
+                            : "white",
+                      }
+                    : undefined
+                }
               >
                 {cat}
-                {isActive && (
-                  <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-4 bg-accent" />
-                )}
               </Link>
             );
           })}

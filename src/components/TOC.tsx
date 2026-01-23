@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 interface Heading {
   id: string;
@@ -80,6 +81,9 @@ export default function TOC({ content }: { content: string }) {
 
   return (
     <nav className="hidden xl:block fixed left-10 top-20 w-48 font-galmuri">
+      <div className="mb-6">
+        <ThemeToggle />
+      </div>
       <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-600 mb-6">
         On This Page
       </h2>
@@ -94,7 +98,7 @@ export default function TOC({ content }: { content: string }) {
               href={`#${h.id}`}
               className={`
                 text-[11px] block transition-colors duration-300
-                ${activeId === h.id ? "text-white" : "text-gray-600 hover:text-gray-400"}
+                ${activeId === h.id ? "text-accent font-bold" : "text-gray-500 hover:text-gray-400"}
               `}
               onClick={(e) => {
                 e.preventDefault();
