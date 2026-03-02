@@ -84,7 +84,7 @@ export default function TOC({ content }: { content: string }) {
       <div className="mb-6">
         <ThemeToggle />
       </div>
-      <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-600 mb-6">
+      <h2 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-6">
         On This Page
       </h2>
       <ul className="flex flex-col gap-3">
@@ -98,7 +98,7 @@ export default function TOC({ content }: { content: string }) {
               href={`#${h.id}`}
               className={`
                 text-[11px] block transition-colors duration-300
-                ${activeId === h.id ? "text-accent font-bold" : "text-gray-500 hover:text-gray-400"}
+                ${activeId === h.id ? "text-foreground font-bold" : "text-muted-foreground hover:text-foreground"}
               `}
               onClick={(e) => {
                 e.preventDefault();

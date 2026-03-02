@@ -22,7 +22,7 @@ export default function Sidebar({ categories }: SidebarProps) {
             href="https://github.com/parkblo"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2 text-accent hover:opacity-70 transition-opacity"
+            className="p-2 text-muted-foreground hover:text-foreground transition-colors"
             aria-label="GitHub"
           >
             <Github className="w-5 h-5" />
@@ -32,7 +32,7 @@ export default function Sidebar({ categories }: SidebarProps) {
           <ThemeToggle />
         </div>
 
-        <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-6 px-2">
+        <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-6 px-2">
           Categories
         </h2>
         <nav className="flex flex-col gap-1">

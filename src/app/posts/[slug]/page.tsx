@@ -91,22 +91,24 @@ export default async function PostPage({
         <article className="py-4 md:py-12 w-full max-w-[640px] mx-auto">
           <Link
             href="/"
-            className="text-[10px] font-bold text-gray-500 hover:text-accent mb-8 inline-block tracking-widest transition-colors"
+            className="text-[10px] font-bold text-muted-foreground hover:text-foreground mb-8 inline-block tracking-widest transition-colors"
           >
             &lt; BACK TO HOME
           </Link>
 
           <header className="mb-6 md:mb-12 text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start gap-3 text-[10px] text-gray-500 uppercase tracking-[0.2em] mb-4">
+            <div className="flex items-center justify-center md:justify-start gap-3 text-[10px] text-muted-foreground uppercase tracking-[0.2em] mb-4">
               <i className={meta.icon} />
               <span>{meta.category}</span>
-              <span className="w-1 h-1 bg-gray-800 rounded-full" />
+              <span className="w-1 h-1 bg-border rounded-full" />
               <time>{meta.date}</time>
             </div>
             <h1 className="text-3xl font-bold text-foreground mb-4 leading-tight">
               {meta.title}
             </h1>
-            <p className="text-gray-400 text-lg italic">{meta.description}</p>
+            <p className="text-muted-foreground text-lg italic">
+              {meta.description}
+            </p>
           </header>
 
           <div className="prose dark:prose-invert max-w-none">
@@ -134,7 +136,7 @@ export default async function PostPage({
             />
           </div>
 
-          <hr className="my-12 border-gray-800" />
+          <hr className="my-12 border-border" />
           <Giscus />
         </article>
       </div>

@@ -54,15 +54,15 @@ export default function PostList({ allPosts }: PostListProps) {
                 <h3 className="text-base font-bold text-muted-foreground group-hover:text-primary transition-colors duration-200">
                   {post.title}
                 </h3>
-                <time className="text-[10px] text-gray-600 font-mono">
+                <time className="text-[10px] text-muted-foreground font-mono">
                   {post.date}
                 </time>
               </div>
-              <p className="text-sm text-gray-400 mb-2 line-clamp-2">
+              <p className="text-sm text-muted-foreground mb-2 line-clamp-2">
                 {post.description}
               </p>
-              <div className="text-[10px] text-gray-500 uppercase tracking-widest flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-gray-700 block" />{" "}
+              <div className="text-[10px] text-muted-foreground uppercase tracking-widest flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-border block" />{" "}
                 {post.category}
               </div>
             </div>
@@ -70,7 +70,7 @@ export default function PostList({ allPosts }: PostListProps) {
         ))}
 
         {paginatedPosts.length === 0 && (
-          <p className="text-gray-500 italic">
+          <p className="text-muted-foreground italic">
             No posts found in this category.
           </p>
         )}

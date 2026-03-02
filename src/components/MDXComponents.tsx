@@ -7,9 +7,9 @@ const PixelBox = ({
   children: React.ReactNode;
   title?: string;
 }) => (
-  <div className="my-8 bg-gray-900 border-2 border-white p-4 relative pt-6">
+  <div className="my-8 bg-card border-2 border-border p-4 relative pt-6">
     {title && (
-      <div className="absolute -top-3 left-4 bg-white text-black px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest">
+      <div className="absolute -top-3 left-4 bg-accent text-accent-foreground px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest">
         {title}
       </div>
     )}
@@ -18,12 +18,12 @@ const PixelBox = ({
 );
 
 const ALERT_STYLES: Record<string, string> = {
-  NOTE: "bg-blue-900/20 border-blue-800 text-blue-200",
-  TIP: "bg-green-900/20 border-green-800 text-green-200",
-  IMPORTANT: "bg-purple-900/20 border-purple-800 text-purple-200",
-  WARNING: "bg-yellow-900/20 border-yellow-800 text-yellow-200",
-  CAUTION: "bg-red-900/20 border-red-800 text-red-200",
-  DEFAULT: "bg-gray-800/50 border-gray-700 text-gray-300",
+  NOTE: "bg-muted/70 border-border text-foreground",
+  TIP: "bg-secondary/80 border-border text-foreground",
+  IMPORTANT: "bg-accent/80 border-accent text-foreground",
+  WARNING: "bg-destructive/10 border-destructive/40 text-foreground",
+  CAUTION: "bg-destructive/20 border-destructive/50 text-foreground",
+  DEFAULT: "bg-muted/60 border-border text-muted-foreground",
 };
 
 const Callout = ({
@@ -47,35 +47,38 @@ const Callout = ({
 
 export const MDXComponents = {
   h1: (props: ComponentPropsWithoutRef<"h1">) => (
-    <h1 className="text-2xl font-bold mt-10 mb-8 text-gray-200" {...props} />
+    <h1 className="text-2xl font-bold mt-10 mb-8 text-foreground" {...props} />
   ),
   h2: (props: ComponentPropsWithoutRef<"h2">) => (
     <h2
-      className="text-xl font-bold mt-10 mb-8 pb-2 border-b border-gray-700 text-gray-200"
+      className="text-xl font-bold mt-10 mb-8 pb-2 border-b border-border text-foreground"
       {...props}
     />
   ),
   h3: (props: ComponentPropsWithoutRef<"h3">) => (
-    <h3 className="text-lg font-bold mt-8 mb-8 text-gray-200" {...props} />
+    <h3 className="text-lg font-bold mt-8 mb-8 text-foreground" {...props} />
   ),
   h4: (props: ComponentPropsWithoutRef<"h4">) => (
-    <h4 className="text-base font-bold mt-8 mb-8 text-gray-200" {...props} />
+    <h4 className="text-base font-bold mt-8 mb-8 text-foreground" {...props} />
   ),
   h5: (props: ComponentPropsWithoutRef<"h5">) => (
-    <h5 className="text-sm font-bold mt-8 mb-8 text-gray-200" {...props} />
+    <h5 className="text-sm font-bold mt-8 mb-8 text-foreground" {...props} />
   ),
   h6: (props: ComponentPropsWithoutRef<"h6">) => (
-    <h6 className="text-xs font-bold mt-8 mb-8 text-gray-200" {...props} />
+    <h6 className="text-xs font-bold mt-8 mb-8 text-foreground" {...props} />
   ),
   p: (props: ComponentPropsWithoutRef<"p">) => (
-    <p className="leading-7 mb-8 text-gray-400" {...props} />
+    <p className="leading-7 mb-8 text-muted-foreground" {...props} />
   ),
   ul: (props: ComponentPropsWithoutRef<"ul">) => (
-    <ul className="list-disc list-inside mb-8 text-gray-400 pl-4" {...props} />
+    <ul
+      className="list-disc list-inside mb-8 text-muted-foreground pl-4"
+      {...props}
+    />
   ),
   ol: (props: ComponentPropsWithoutRef<"ol">) => (
     <ol
-      className="list-decimal list-inside mb-8 text-gray-400 pl-4"
+      className="list-decimal list-inside mb-8 text-muted-foreground pl-4"
       {...props}
     />
   ),
@@ -83,25 +86,28 @@ export const MDXComponents = {
     <li className="mb-2" {...props} />
   ),
   hr: (props: ComponentPropsWithoutRef<"hr">) => (
-    <hr className="my-12 border-gray-800" {...props} />
+    <hr className="my-12 border-border" {...props} />
   ),
   table: (props: ComponentPropsWithoutRef<"table">) => (
     <div className="overflow-x-auto mb-8">
-      <table className="w-full text-left text-sm text-gray-400" {...props} />
+      <table
+        className="w-full text-left text-sm text-muted-foreground"
+        {...props}
+      />
     </div>
   ),
   th: (props: ComponentPropsWithoutRef<"th">) => (
     <th
-      className="border-b border-gray-700 pb-2 font-bold text-gray-200 uppercase tracking-wider"
+      className="border-b border-border pb-2 font-bold text-foreground uppercase tracking-wider"
       {...props}
     />
   ),
   td: (props: ComponentPropsWithoutRef<"td">) => (
-    <td className="py-4 border-b border-gray-800" {...props} />
+    <td className="py-4 border-b border-border" {...props} />
   ),
   pre: (props: ComponentPropsWithoutRef<"pre">) => (
     <pre
-      className="mb-8 overflow-x-auto rounded-lg border border-gray-800 bg-gray-950 p-4"
+      className="mb-8 overflow-x-auto rounded-lg border border-border bg-card p-4"
       {...props}
     />
   ),
@@ -139,7 +145,7 @@ export const MDXComponents = {
 
     return (
       <blockquote
-        className="border-l-2 border-gray-700 pl-4 italic text-gray-500 my-6"
+        className="border-l-2 border-border pl-4 italic text-muted-foreground my-6"
         {...props}
       />
     );
