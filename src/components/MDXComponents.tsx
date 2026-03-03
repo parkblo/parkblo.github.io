@@ -70,6 +70,18 @@ export const MDXComponents = {
   p: (props: ComponentPropsWithoutRef<"p">) => (
     <p className="leading-7 mb-8 text-muted-foreground" {...props} />
   ),
+  a: ({ href, ...props }: ComponentPropsWithoutRef<"a">) => {
+    const isHashLink = typeof href === "string" && href.startsWith("#");
+
+    return (
+      <a
+        href={href}
+        target={isHashLink ? undefined : "_blank"}
+        rel={isHashLink ? undefined : "noopener noreferrer"}
+        {...props}
+      />
+    );
+  },
   ul: (props: ComponentPropsWithoutRef<"ul">) => (
     <ul
       className="list-disc list-inside mb-8 text-muted-foreground pl-4"
