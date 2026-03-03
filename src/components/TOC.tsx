@@ -15,69 +15,66 @@ export default function TOC({ content }: { content: string }) {
   const [typedHeadings, setTypedHeadings] = useState<number>(0);
 
   useEffect(() => {
-    // Extract headings (H2, H3) from markdown content
-    const headingRegex = /^##+\s+(.*)$/gm;
-    const matches = Array.from(content.matchAll(headingRegex));
-    const idCounts: { [key: string]: number } = {};
+    let interval: ReturnType<typeof setInterval> | null = null;
+    let observer: IntersectionObserver | null = null;
 
-    const extracted = matches.map((match) => {
-      const text = match[1];
-      const level = match[0].split(" ")[0].length;
-
-      // Support English, numbers, spaces, hyphens, and Korean characters
-      let id = text
-        .toLowerCase()
-        .replace(/[^\w\s-\uAC00-\uD7A3]/g, "")
-        .trim()
-        .replace(/\s+/g, "-");
-
-      // Fallback for empty IDs (e.g. special chars only)
-      if (!id) id = "heading";
-
-      // Handle duplicate IDs
-      if (idCounts[id]) {
-        idCounts[id]++;
-        id = `${id}-${idCounts[id]}`;
-      } else {
-        idCounts[id] = 1;
+    const frame = requestAnimationFrame(() => {
+      const articleContent = document.querySelector("article .prose");
+      if (!articleContent) {
+        setHeadings([]);
+        setTypedHeadings(0);
+        return;
       }
 
-      return { id, text, level };
-    });
-    setHeadings(extracted);
+      const headingElements = Array.from(
+        articleContent.querySelectorAll<HTMLHeadingElement>(
+          "h1, h2, h3, h4, h5, h6",
+        ),
+      ).filter((el) => el.id && el.textContent?.trim());
 
-    // Typing animation for TOC items
-    let i = 0;
-    const interval = setInterval(() => {
-      setTypedHeadings((prev) => prev + 1);
-      i++;
-      if (i >= extracted.length) clearInterval(interval);
-    }, 100);
+      const extracted: Heading[] = headingElements.map((el) => ({
+        id: el.id,
+        text: el.textContent?.trim() ?? "",
+        level: Number(el.tagName.slice(1)),
+      }));
 
-    // Intersection Observer for scroll sync
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-20% 0px -70% 0px" },
-    );
+      setHeadings(extracted);
+      setTypedHeadings(0);
 
-    extracted.forEach((h) => {
-      const el = document.getElementById(h.id);
-      if (el) observer.observe(el);
+      // Typing animation for TOC items
+      let i = 0;
+      interval = setInterval(() => {
+        setTypedHeadings((prev) => prev + 1);
+        i++;
+        if (i >= extracted.length && interval) {
+          clearInterval(interval);
+        }
+      }, 100);
+
+      // Intersection Observer for scroll sync
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActiveId(entry.target.id);
+            }
+          });
+        },
+        { rootMargin: "-20% 0px -70% 0px" },
+      );
+
+      headingElements.forEach((el) => observer?.observe(el));
     });
 
     return () => {
-      clearInterval(interval);
-      observer.disconnect();
+      cancelAnimationFrame(frame);
+      if (interval) clearInterval(interval);
+      observer?.disconnect();
     };
   }, [content]);
 
   if (headings.length === 0) return null;
+  const baseLevel = Math.min(...headings.map((h) => h.level));
 
   return (
     <nav className="hidden xl:block fixed left-10 top-20 w-48 font-galmuri">
@@ -87,11 +84,11 @@ export default function TOC({ content }: { content: string }) {
       <h2 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-6">
         On This Page
       </h2>
-      <ul className="flex flex-col gap-3">
+      <ul className="flex flex-col gap-3 max-h-[calc(100vh-9rem)] overflow-y-auto pr-2">
         {headings.slice(0, typedHeadings).map((h) => (
           <li
             key={h.id}
-            style={{ paddingLeft: `${(h.level - 2) * 12}px` }}
+            style={{ paddingLeft: `${(h.level - baseLevel) * 12}px` }}
             className="transition-all duration-300"
           >
             <a
