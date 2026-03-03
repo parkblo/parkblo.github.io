@@ -234,6 +234,40 @@ a {
   margin-bottom: 1rem;
 }
 
+/* Increase breathing room when a heading starts a new section after body content */
+.prose p + h1,
+.prose p + h2,
+.prose p + h3,
+.prose p + h4,
+.prose p + h5,
+.prose p + h6,
+.prose ul + h1,
+.prose ul + h2,
+.prose ul + h3,
+.prose ul + h4,
+.prose ul + h5,
+.prose ul + h6,
+.prose ol + h1,
+.prose ol + h2,
+.prose ol + h3,
+.prose ol + h4,
+.prose ol + h5,
+.prose ol + h6,
+.prose blockquote + h1,
+.prose blockquote + h2,
+.prose blockquote + h3,
+.prose blockquote + h4,
+.prose blockquote + h5,
+.prose blockquote + h6,
+.prose pre + h1,
+.prose pre + h2,
+.prose pre + h3,
+.prose pre + h4,
+.prose pre + h5,
+.prose pre + h6 {
+  margin-top: 3.5rem;
+}
+
 .prose ul,
 .prose ol {
   margin-bottom: 1rem;
