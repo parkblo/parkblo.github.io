@@ -12,6 +12,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import Giscus from "@/components/Giscus";
+import SequentialPostTitle from "@/components/SequentialPostTitle";
 
 export async function generateMetadata({
   params,
@@ -103,8 +104,11 @@ export default async function PostPage({
               <span className="w-1 h-1 bg-border rounded-full" />
               <time>{meta.date}</time>
             </div>
-            <h1 className="text-3xl font-bold text-foreground mb-4 leading-tight">
-              {meta.title}
+            <h1
+              className="text-3xl font-bold text-foreground mb-4 leading-tight"
+              aria-label={meta.title}
+            >
+              <SequentialPostTitle key={slug} title={meta.title} />
             </h1>
             <p className="text-muted-foreground text-lg italic">
               {meta.description}

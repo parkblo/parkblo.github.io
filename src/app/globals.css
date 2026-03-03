@@ -285,3 +285,88 @@ a {
 .prose a {
   @apply text-muted-foreground hover:text-foreground underline underline-offset-4 decoration-muted-foreground/30 hover:decoration-foreground/40 transition-colors;
 }
+
+.post-title-sequential {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: inherit;
+  white-space: pre-wrap;
+}
+
+.post-title-line {
+  position: relative;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  line-height: inherit;
+  white-space: pre;
+}
+
+.post-title-base,
+.post-title-overlay {
+  display: block;
+  padding: 0.04em 0.16em;
+}
+
+.post-title-base {
+  color: var(--foreground);
+}
+
+.post-title-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  white-space: pre-wrap;
+  background-color: #000000;
+  color: #ffffff;
+  clip-path: inset(0 100% 0 0);
+}
+
+.dark .post-title-overlay {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.post-title-sequential.is-active .post-title-line .post-title-overlay {
+  animation: title-linear-reveal 320ms linear forwards;
+  animation-delay: calc(var(--title-line-index) * 320ms);
+}
+
+@keyframes title-linear-reveal {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .post-title-sequential.is-active .post-title-line .post-title-overlay {
+    animation: none;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media (min-width: 768px) {
+  .post-title-sequential {
+    align-items: flex-start;
+  }
+
+  .post-title-line {
+    margin-inline: 0;
+  }
+}
+
+.post-title-measuring {
+  display: inline;
+}
+
+.post-title-measure {
+  display: inline;
+  white-space: pre-wrap;
+}
+
+.post-title-measure-char {
+  display: inline;
+}
