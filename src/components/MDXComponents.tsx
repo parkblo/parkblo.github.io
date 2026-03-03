@@ -68,7 +68,7 @@ export const MDXComponents = {
     <h6 className="text-xs font-bold mt-8 mb-8 text-foreground" {...props} />
   ),
   p: (props: ComponentPropsWithoutRef<"p">) => (
-    <p className="leading-7 mb-8 text-muted-foreground" {...props} />
+    <p className="leading-7 mb-8 text-[14.7px] text-muted-foreground" {...props} />
   ),
   a: ({ href, ...props }: ComponentPropsWithoutRef<"a">) => {
     const isHashLink = typeof href === "string" && href.startsWith("#");
@@ -95,7 +95,7 @@ export const MDXComponents = {
     />
   ),
   li: (props: ComponentPropsWithoutRef<"li">) => (
-    <li className="mb-3 leading-7" {...props} />
+    <li className="mb-3 leading-7 text-[14.7px]" {...props} />
   ),
   hr: (props: ComponentPropsWithoutRef<"hr">) => (
     <hr className="my-12 border-border" {...props} />

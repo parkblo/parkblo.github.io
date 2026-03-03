@@ -8,6 +8,9 @@ import { getAllPosts, getAllCategories } from "@/lib/mdx";
 export const metadata: Metadata = {
   title: "parkblo",
   description: "웹 위주의 개발 기록과 회고를 남기는 블로그입니다.",
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function Home() {
@@ -16,6 +19,7 @@ export default function Home() {
   return (
     <>
       <Header />
+      <h1 className="sr-only">parkblo 개발 블로그</h1>
       <div className="flex flex-col md:flex-row gap-3 md:gap-12">
         <div className="order-2 md:order-1 flex-1">
           <Suspense fallback={<div>Loading...</div>}>

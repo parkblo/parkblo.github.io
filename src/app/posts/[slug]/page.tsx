@@ -22,14 +22,28 @@ export async function generateMetadata({
   const { slug } = await params;
   try {
     const { meta } = getPostBySlug(slug);
+    const postUrl = `/posts/${slug}`;
+    const socialImage = "/opengraph-image.png";
+
     return {
       title: meta.title,
       description: meta.description,
+      alternates: {
+        canonical: postUrl,
+      },
       openGraph: {
+        url: postUrl,
         title: meta.title,
         description: meta.description,
         type: "article",
         publishedTime: meta.date,
+        images: [socialImage],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: meta.title,
+        description: meta.description,
+        images: [socialImage],
       },
     };
   } catch {
@@ -68,7 +82,7 @@ export default async function PostPage({
     author: {
       "@type": "Person",
       name: "Park Byeongju",
-      url: "https://parkblo.dev",
+      url: "https://brad.kr",
     },
     publisher: {
       "@type": "Person",
@@ -76,7 +90,7 @@ export default async function PostPage({
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://parkblo.dev/posts/${slug}`,
+      "@id": `https://brad.kr/posts/${slug}`,
     },
   };
 

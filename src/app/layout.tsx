@@ -20,12 +20,14 @@ export const metadata: Metadata = {
     siteName: "parkblo",
     title: "parkblo - 개발 블로그",
     description: "웹 위주의 개발 기록과 회고를 남기는 블로그입니다.",
+    images: ["/opengraph-image.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "parkblo - 개발 블로그",
     description: "웹 위주의 개발 기록과 회고를 남기는 블로그입니다.",
     creator: "@parkblo",
+    images: ["/opengraph-image.png"],
   },
   robots: {
     index: true,
@@ -42,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="ko" suppressHydrationWarning>
       <body
         suppressHydrationWarning
         className="antialiased bg-background text-foreground font-galmuri flex flex-col items-center"
