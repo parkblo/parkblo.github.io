@@ -83,7 +83,7 @@ export const MDXComponents = {
     />
   ),
   li: (props: ComponentPropsWithoutRef<"li">) => (
-    <li className="mb-2" {...props} />
+    <li className="mb-3 leading-7" {...props} />
   ),
   hr: (props: ComponentPropsWithoutRef<"hr">) => (
     <hr className="my-12 border-border" {...props} />

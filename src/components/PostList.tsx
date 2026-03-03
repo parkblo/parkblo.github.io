@@ -41,20 +41,20 @@ export default function PostList({ allPosts }: PostListProps) {
           <Link
             href={`/posts/${post.slug}`}
             key={post.slug}
-            className="group cursor-pointer flex gap-5 items-start"
+            className="group cursor-pointer flex gap-5 items-start rounded-sm px-2 py-1 -mx-2 -my-1 hover:bg-muted transition-colors duration-200"
           >
             <i
               className={
                 post.icon +
-                " text-2xl text-muted-foreground group-hover:text-primary transition-colors duration-200"
+                " text-2xl text-foreground/90"
               }
             />
             <div className="flex-1">
               <div className="flex items-baseline justify-between mb-1">
-                <h3 className="text-base font-bold text-muted-foreground group-hover:text-primary transition-colors duration-200">
+                <h3 className="text-base font-normal text-foreground/90">
                   {post.title}
                 </h3>
-                <time className="text-[10px] text-muted-foreground font-mono">
+                <time className="inline-block w-24 text-right text-[10px] text-muted-foreground font-mono">
                   {post.date}
                 </time>
               </div>

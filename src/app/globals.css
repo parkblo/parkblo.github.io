@@ -48,6 +48,7 @@
     --chart-3: var(--mauve-10);
     --chart-4: var(--mauve-11);
     --chart-5: var(--mauve-12);
+    --link-hover-orange: #c2410c;
     --radius: 0.5rem;
   }
   .dark {
@@ -87,6 +88,7 @@
     --chart-3: var(--mauve-10);
     --chart-4: var(--mauve-11);
     --chart-5: var(--mauve-12);
+    --link-hover-orange: #fb923c;
   }
 }
 
@@ -282,8 +284,49 @@ a {
   margin-bottom: 1.5rem;
 }
 
+/* Inline code badge style (exclude fenced code blocks) */
+.prose :not(pre) > code {
+  @apply inline rounded-md border border-border bg-muted px-1.5 py-0.5 text-[0.9em] leading-none text-foreground;
+  position: relative;
+  top: -1.5px;
+}
+
 .prose a {
-  @apply text-muted-foreground hover:text-foreground underline underline-offset-4 decoration-muted-foreground/30 hover:decoration-foreground/40 transition-colors;
+  @apply text-foreground/90 font-normal underline underline-offset-4;
+  text-decoration-style: dotted;
+  transition: none;
+}
+
+.prose a:hover {
+  color: var(--link-hover-orange);
+}
+
+.post-page-back-link {
+  transition: none;
+}
+
+.post-page-back-link:hover {
+  color: var(--link-hover-orange);
+}
+
+.hover-bold-smooth {
+  text-shadow: 0 0 0 currentColor;
+  transition:
+    color 200ms ease,
+    background-color 200ms ease,
+    text-shadow 200ms ease;
+}
+
+.hover-bold-smooth:hover {
+  text-shadow:
+    0.025em 0 currentColor,
+    -0.025em 0 currentColor;
+}
+
+.group:hover .group-hover-bold-smooth {
+  text-shadow:
+    0.025em 0 currentColor,
+    -0.025em 0 currentColor;
 }
 
 .post-title-sequential {

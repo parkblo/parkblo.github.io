@@ -92,7 +92,7 @@ export default async function PostPage({
         <article className="py-4 md:py-12 w-full max-w-[640px] mx-auto">
           <Link
             href="/"
-            className="text-[10px] font-bold text-muted-foreground hover:text-foreground mb-8 inline-block tracking-widest transition-colors"
+            className="post-page-back-link text-[10px] font-normal text-muted-foreground mb-8 inline-block tracking-widest"
           >
             &lt; BACK TO HOME
           </Link>
@@ -105,12 +105,12 @@ export default async function PostPage({
               <time>{meta.date}</time>
             </div>
             <h1
-              className="text-3xl font-bold text-foreground mb-4 leading-tight"
+              className="text-3xl font-bold text-foreground mb-4 leading-tight break-normal"
               aria-label={meta.title}
             >
               <SequentialPostTitle key={slug} title={meta.title} />
             </h1>
-            <p className="text-muted-foreground text-lg italic">
+            <p className="text-muted-foreground text-lg italic break-normal">
               {meta.description}
             </p>
           </header>

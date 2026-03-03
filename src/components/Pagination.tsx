@@ -21,7 +21,7 @@ export default function Pagination({
         href={`/?page=${currentPage - 1}${categoryQuery}`}
         aria-disabled={isFirstPage}
         tabIndex={isFirstPage ? -1 : undefined}
-        className={`text-xs font-bold transition-all ${
+        className={`text-xs font-normal hover-bold-smooth ${
           isFirstPage
             ? "text-muted-foreground opacity-50 cursor-not-allowed pointer-events-none"
             : "text-muted-foreground hover:text-foreground"
@@ -38,7 +38,7 @@ export default function Pagination({
         href={`/?page=${currentPage + 1}${categoryQuery}`}
         aria-disabled={isLastPage}
         tabIndex={isLastPage ? -1 : undefined}
-        className={`text-xs font-bold transition-all ${
+        className={`text-xs font-normal hover-bold-smooth ${
           isLastPage
             ? "text-muted-foreground opacity-50 cursor-not-allowed pointer-events-none"
             : "text-muted-foreground hover:text-foreground"

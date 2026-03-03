@@ -16,16 +16,18 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="flex flex-col md:flex-row gap-12">
-        <div className="flex-1">
+      <div className="flex flex-col md:flex-row gap-3 md:gap-12">
+        <div className="order-2 md:order-1 flex-1">
           <Suspense fallback={<div>Loading...</div>}>
             <PostList allPosts={allPosts} />
           </Suspense>
         </div>
 
-        <Suspense fallback={<div className="w-48" />}>
-          <Sidebar categories={getAllCategories()} />
-        </Suspense>
+        <div className="order-1 md:order-2">
+          <Suspense fallback={<div className="w-48" />}>
+            <Sidebar categories={getAllCategories()} />
+          </Suspense>
+        </div>
       </div>
     </>
   );
