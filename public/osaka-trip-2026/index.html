@@ -1,292 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#18322d">
-<meta name="description" content="오사카·우지 2박 3일 인터랙티브 여행 수첩. 시간표, 대안 코스, 지도, 예산, 체크리스트.">
-<meta property="og:title" content="OSAKA AFTER HOURS — 2026 여행 수첩">
-<meta property="og:description" content="고요한 낮과 요란한 밤 사이, 오사카 2박 3일.">
-<title>OSAKA AFTER HOURS · 2026 Travel Journal</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fafaf7">
+<meta name="description" content="10월 16–18일, 오사카와 교토. 타임라인 옆에서 동선을 보고, 마음에 드는 후보를 골라 만드는 세 사람의 주말.">
+<meta property="og:title" content="Osaka, then Kyoto. — 16–18 OCT 2026">
+<meta property="og:description" content="정원에 머물고, 밤은 오사카. 느슨하게 정해 둔 세 사람의 여행.">
+<title>Osaka, then Kyoto. — 우리의 여행 수첩</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-<style>
-
-:root{--paper:#f9f8f4;--ink:#252a27;--secondary:#71766f;--hair:#d6d9d2;--red:#c14e39;--cream:#eeeee7;--sans:"DM Sans","Noto Sans KR",sans-serif;--serif:"DM Serif Display",Georgia,serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.75;-webkit-font-smoothing:antialiased}button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--red);outline-offset:3px}::selection{background:#f0c8b5}.container{width:min(1050px,calc(100% - 88px));margin-inline:auto}
-.topbar,.marquee,.hero-art,.mobile-nav,.footer{display:none}
-.hero{border-bottom:1px solid var(--ink)}.hero-wrap{min-height:0;display:block}.hero-copy{padding:85px 0 59px}.eyebrow{display:flex;align-items:center;justify-content:space-between;color:var(--secondary);font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:700}.eyebrow .line{display:none}.hero h1{font-family:var(--serif);font-size:clamp(112px,18vw,240px);font-weight:400;letter-spacing:-.075em;line-height:.96;margin:22px 0 20px}.hero h1 em{font-style:normal;color:var(--red)}.hero-desc{font-size:16px;font-weight:500;line-height:1.85;letter-spacing:-.035em;max-width:480px;margin:0 0 34px}.hero-pills{display:flex;gap:26px;flex-wrap:wrap;align-items:center}.pill{font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--secondary)}.intro-row{display:flex;justify-content:space-between;align-items:flex-end;gap:20px}.share{border:1px solid var(--ink);background:none;padding:9px 17px;min-width:108px;color:var(--ink);font-weight:700;font-size:11px;white-space:nowrap;transition:background .2s,color .2s}.share:hover{background:var(--ink);color:var(--paper)}
-.section{padding-top:111px;scroll-margin-top:30px}.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:25px;margin-bottom:35px}.kicker{font-size:10px;letter-spacing:.21em;color:var(--red);font-weight:800;margin-bottom:12px;text-transform:uppercase}h2{font-family:var(--serif);font-size:clamp(45px,6vw,76px);font-weight:400;line-height:1.02;letter-spacing:-.035em;margin:0}.section-sub{color:var(--secondary);font-size:12px;line-height:1.9;max-width:530px;margin:16px 0 0}
-.day-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--hair);margin:42px 0 44px}
-.daycard{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:5px;min-height:137px;position:relative;border:none;border-right:1px solid var(--hair);background:transparent;text-align:left;color:var(--secondary);padding:23px 28px;transition:color .15s,background .15s}
-.daycard:first-child{padding-left:0}.daycard:last-child{border-right:0}.daycard:hover{color:var(--ink);background:#ecece66b}.daycard.active{color:var(--ink)}
-.daycard.active:after{content:"";height:3px;position:absolute;bottom:-1px;left:0;right:0;background:var(--red)}
-.daycard .dnum{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--red)}.daycard .dtitle{font-family:var(--serif);font-size:36px;line-height:1.15}.daycard .dmeta{font-size:11px;line-height:1.6;max-width:180px}.daycard .arrow{display:none}
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:59px;align-items:start}.timeline-panel{min-width:0}
-.day-title{display:flex;justify-content:space-between;align-items:baseline;gap:25px;margin-bottom:18px}.day-title h3{font-family:var(--serif);font-size:37px;line-height:1.1;font-weight:400;letter-spacing:-.035em;margin:0}.day-title p{color:var(--secondary);font-size:9px;letter-spacing:.12em;font-weight:700;text-align:right}
-.mode-switch{display:flex;gap:0;border:1px solid var(--hair);margin:20px 0}.mode-switch button{flex:1;border:0;border-right:1px solid var(--hair);background:transparent;color:var(--secondary);padding:12px 6px;font-size:11px;font-weight:700}.mode-switch button:last-child{border-right:0}.mode-switch button.active{color:var(--paper);background:var(--ink)}.mode-switch button:hover:not(.active){background:var(--cream)}
-.notice{padding:14px 0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);font-size:11px;line-height:1.85;color:var(--secondary);margin:21px 0 25px}.notice strong{color:var(--ink)}
-.filterrow{display:flex;gap:17px;flex-wrap:wrap;margin:24px 0 17px}.filter{padding:1px 0 4px;color:var(--secondary);border:0;border-bottom:1px solid transparent;background:transparent;font-size:10px;font-weight:700}.filter.active{color:var(--red);border-bottom-color:var(--red)}
-.timeline{margin-top:20px}.event{display:grid;grid-template-columns:80px minmax(0,1fr);gap:20px;border-top:1px solid var(--hair);padding:22px 0 24px;align-items:start}.event:last-child{border-bottom:1px solid var(--hair)}.event.done{opacity:.57}.eventtime{font-family:var(--serif);font-size:26px;line-height:1.2;letter-spacing:-.04em;color:var(--ink)}.stopcard{min-width:0}
-.stophead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.stophead h4{font-size:18px;letter-spacing:-.045em;font-weight:700;line-height:1.4;margin:6px 0 0}.tag{font-size:10px;color:var(--red);font-weight:800;letter-spacing:.04em}.tag.walk{color:#607a64}.tag.transport{color:#6f7e87}.tag.food{color:#a67944}
-.checkbtn{width:27px;height:27px;min-width:27px;border:1px solid #c3cac1;border-radius:50%;background:transparent;color:transparent;font-size:15px;line-height:1;display:grid;place-items:center}.checkbtn.checked{color:var(--paper);background:var(--ink);border-color:var(--ink)}
-.desc{margin:9px 0 14px;color:var(--secondary);font-size:12px;line-height:1.85;word-break:keep-all}.meta{font-size:11px;color:var(--secondary)}.actionrow{display:flex;flex-wrap:wrap;gap:14px;align-items:center}.actionrow a,.actionrow button{background:none;border:none;padding:0;font-size:10px;color:var(--ink);font-weight:700;text-decoration:underline;text-decoration-color:#b2b7af;text-underline-offset:4px}.actionrow a:hover,.actionrow button:hover{color:var(--red)}.actionrow .cost{margin-left:auto;color:var(--red);font-size:10px}.altbox{display:none;color:#5a615c;background:var(--cream);padding:14px;margin:16px 0 0;font-size:11px;line-height:1.8}.altbox.open{display:block}
-.rail{position:sticky;top:32px;border-top:1px solid var(--ink)}.rail-card{border-bottom:1px solid var(--hair);padding:24px 0}.rail-kicker{font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--red)}.rail h4{font-family:var(--serif);font-weight:400;line-height:1.19;font-size:25px;letter-spacing:-.025em;margin:16px 0}.rail p{font-size:11px;color:var(--secondary);line-height:1.85;margin:8px 0}.progressbar{height:2px;background:var(--hair);width:100%;margin:22px 0 7px}.progressbar span{display:block;background:var(--red);height:100%;transition:width .2s}.rail-stat{font-family:var(--serif);font-size:30px}.rail-stat small{font-family:var(--sans);font-size:11px;color:var(--secondary)}.raillink{display:inline-block;margin-top:13px;font-size:11px;text-decoration:underline;text-underline-offset:3px}
-.info-list{list-style:none;margin:13px 0 0;padding:0}.info-list li{display:flex;flex-direction:column;gap:1px;border-bottom:1px solid var(--hair);padding:12px 0;font-size:11px;color:var(--secondary)}.info-list li:last-child{border-bottom:0}.info-list b{color:var(--ink);font-weight:700}
-.map-frame{border-top:1px solid var(--ink);padding-top:15px}.map-bottom{display:flex;justify-content:space-between;gap:16px;align-items:center;border-top:1px solid var(--hair);padding:15px 0 0}.map-bottom p{color:var(--secondary);font-size:11px;margin:0}.map-bottom a{font-weight:700;font-size:11px;color:var(--red);white-space:nowrap;text-decoration:underline;text-underline-offset:3px}
-#mapCanvas{height:auto!important;min-height:0;position:relative}.map-topline{display:flex;justify-content:space-between;font-size:10px;font-weight:700;letter-spacing:.13em;color:var(--secondary);margin:6px 0 13px}.map-topline b{color:var(--ink);font-weight:700}.map-visual{display:block;width:100%;height:auto;max-height:400px;aspect-ratio:920/390;background:#eeeee9;border:1px solid #e4e5dc;overflow:visible}.map-point{cursor:pointer}.map-point circle{fill:var(--ink);transition:fill .2s,stroke .2s}.map-point text{font-size:11px;font-family:var(--sans);font-weight:800;fill:#fff;pointer-events:none}.map-point:hover circle{fill:var(--red)}.map-path{fill:none;stroke:#9ba89d;stroke-width:2;stroke-dasharray:4 8;stroke-linecap:round}.map-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 26px;padding:26px 0 22px}.map-place{display:flex;align-items:baseline;gap:11px;font-size:11px;padding:8px 0;border-bottom:1px solid var(--hair);min-width:0}.map-place:hover{color:var(--red)}.map-place .map-index{color:var(--red);font-size:10px;font-weight:800;min-width:18px}.map-place .map-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}.map-place .map-arrow{margin-left:auto;color:#87938b}
-.columns{display:grid;grid-template-columns:1fr 1fr;gap:48px;border-top:1px solid var(--ink);padding-top:18px}.budget-box,.prep-box{min-width:0}.budget-total{font-family:var(--serif);font-size:clamp(50px,7vw,84px);font-weight:400;line-height:1.1;letter-spacing:-.045em;margin:28px 0}.budget-total small{font-size:18px}.budget-row{display:grid;grid-template-columns:1fr 126px;gap:18px;align-items:center;padding:11px 0;border-bottom:1px solid var(--hair);font-size:12px}.budget-row span{font-weight:600}.budget-row input{border:0;border-bottom:1px solid var(--hair);text-align:right;color:var(--ink);background:transparent;padding:6px 0;width:100%;border-radius:0}.budget-row input:focus{outline:none;border-color:var(--red)}
-.prep-entry{display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--hair);font-size:12px;line-height:1.75;cursor:pointer}.prep-entry input{flex-shrink:0;margin:5px 0 0;width:17px;height:17px;accent-color:var(--ink)}.prep-entry b{font-weight:700}.prep-entry small{display:block;font-size:10px;color:var(--secondary);margin-top:3px}.bottomnotes{border-top:1px solid var(--hair);padding:20px 0 0;margin:34px 0 0}.bottomnotes h4{font-family:var(--serif);font-weight:400;letter-spacing:-.025em;font-size:27px;margin:0 0 8px}.bottomnotes p{font-size:12px;color:var(--secondary);line-height:1.9;margin:0}
-.signoff{border-top:1px solid var(--ink);margin-top:105px;padding:21px 0 47px;display:flex;justify-content:space-between;gap:20px;color:var(--secondary);font-size:10px}.signoff a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}.toast{position:fixed;z-index:100;bottom:28px;left:50%;transform:translate(-50%,15px);background:var(--ink);color:#fff;border-radius:3px;font-size:12px;padding:12px 17px;opacity:0;pointer-events:none;transition:.2s;white-space:nowrap}.toast.show{opacity:1;transform:translate(-50%,0)}
-@media(max-width:850px){.container{width:calc(100% - 54px)}.layout{grid-template-columns:minmax(0,1fr) 175px;gap:30px}.daycard{padding-inline:15px}.daycard:first-child{padding-left:0}.hero h1{font-size:clamp(95px,19vw,160px)}.columns{gap:28px}}
-@media(max-width:620px){.container{width:calc(100% - 34px)}.hero-copy{padding:60px 0 43px}.hero h1{font-size:clamp(82px,20vw,135px);margin:23px 0 26px}.hero-desc{font-size:13px;margin:0 0 24px}.hero-pills{gap:10px 20px}.pill{font-size:9px}.intro-row{align-items:flex-start}.share{font-size:10px;padding:8px 12px;min-width:0}
-.section{padding-top:77px}.section-head{margin-bottom:18px}h2{font-size:50px}.section-sub{font-size:11px}.day-grid{margin:28px 0 30px}.daycard{min-height:110px;padding:17px 12px 16px}.daycard .dnum{font-size:8px;letter-spacing:.04em}.daycard .dtitle{font-size:28px}.daycard .dmeta{display:none}
-.layout{display:flex;flex-direction:column}.timeline-panel{width:100%}.rail{position:static;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:22px;order:2;border-top:1px solid var(--hair);margin-top:5px}.rail-card{padding-top:21px;border-bottom:0}.rail h4{font-size:22px}.rail-card.white{border-left:1px solid var(--hair);padding-left:20px}.rail-stat{font-size:24px}
-.day-title{align-items:flex-end}.day-title h3{font-size:32px}.day-title p{font-size:8px;max-width:110px}.filterrow{gap:15px}.event{grid-template-columns:58px minmax(0,1fr);gap:15px;padding:21px 0}.eventtime{font-size:20px}.stophead h4{font-size:16px}.desc{font-size:11px}.tag{font-size:9px}.actionrow{gap:13px}.actionrow a,.actionrow button,.actionrow .cost{font-size:10px}
-.map-visual{aspect-ratio:1.4;max-height:320px}.map-list{grid-template-columns:1fr 1fr;column-gap:15px;padding:19px 0}.map-place{font-size:10px}.map-bottom{align-items:flex-start}.map-bottom p{font-size:10px}.map-bottom a{font-size:10px;white-space:normal}
-.columns{grid-template-columns:1fr;gap:40px}.budget-total{font-size:62px;margin:18px 0}.bottomnotes{margin-top:27px}.signoff{margin-top:75px;padding-bottom:40px}
-}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
-@media print{.share,.filterrow,.actionrow,.checkbtn,.mode-switch,.map-frame{display:none!important}.section{padding-top:25px}.event{break-inside:avoid}}
-
-
-/* Flexible editorial itinerary blocks */
-.eventtime{font-size:21px;overflow-wrap:anywhere}
-.block-stops{list-style:none;margin:13px 0 16px;padding:0;border-top:1px solid #e0e2d9}
-.block-stops li{border-bottom:1px solid #e0e2d9}
-.block-stops a{padding:10px 2px;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:7px;align-items:center}
-.block-stops b{font-size:11px;font-weight:700;color:#303a32;letter-spacing:-.025em}
-.block-stops span{font-size:10px;color:#899087;line-height:1.7;grid-column:1}
-.block-stops strong{grid-column:2;grid-row:1/3;font-weight:600;color:#a16853}
-.block-stops a:hover b{color:var(--red)}
-.map-list{grid-template-columns:repeat(2,minmax(0,1fr))}
-@media(max-width:620px){.eventtime{font-size:16px;letter-spacing:-.04em}.map-list{grid-template-columns:1fr 1fr}.block-stops b{font-size:11px}.block-stops span{font-size:10px}}
-
-</style>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Noto+Sans+KR:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/leaflet.css">
+<link rel="stylesheet" href="./style.css">
+<script defer src="./assets/leaflet.js"></script>
+<script defer src="./data.js"></script>
+<script defer src="./app.js"></script>
 </head>
 <body>
-<main id="top">
-<section class="hero"><div class="container hero-wrap"><div class="hero-copy">
- <div class="eyebrow"><span>PERSONAL TRAVEL NOTE / JAPAN, 2026</span><span>16 — 18 OCT</span></div>
- <h1>Osaka<span style="color:var(--red)">.</span></h1>
- <div class="intro-row"><div>
-  <p class="hero-desc">고요한 낮, 눈부신 밤.<br>취향대로 고르고 머무르는 세 사람의 오사카.</p>
-  <div class="hero-pills"><span class="pill">02 NIGHTS / 03 DAYS</span><span class="pill">OSAKA — UJI — KYOTO</span></div>
- </div><button class="share" id="shareBtn" type="button">공유 ↗</button></div>
-</div></div></section>
-<section id="schedule" class="section container">
- <div class="section-head"><div><div class="kicker">01 / THE PLAN</div><h2>Days, as they unfold.</h2><p class="section-sub">큰 흐름만 정하고, 머무는 시간은 자유롭게. 상태는 현재 브라우저에 저장돼.</p></div></div>
- <div class="day-grid" id="dayGrid" role="tablist" aria-label="여행 날짜 선택"></div>
- <div class="layout">
-  <div class="timeline-panel">
-   <div class="day-title"><h3 id="currentTitle">Friday in Osaka.</h3><p id="currentSubtitle"></p></div>
-   <div id="modeArea"></div><div id="dayNotice"></div>
-   <div class="filterrow" id="filterRow" aria-label="일정 카테고리 필터"></div>
-   <div class="timeline" id="timeline"></div>
-  </div>
-  <aside class="rail">
-   <div class="rail-card"><div class="rail-kicker">YOUR TRAVEL PULSE</div><h4>Just keep going.</h4><div class="progressbar"><span id="progressFill" style="width:0%"></span></div><div class="rail-stat" id="progressText">0 <small>/ 0 stops</small></div><p>체크는 기록일 뿐, 일정은 언제든 달라져도 돼.</p><a href="#map-section" class="raillink">오늘의 지도 보기 ↗</a></div>
-   <div class="rail-card white"><div class="rail-kicker">DON'T MISS</div><ul id="priorityList" class="info-list"></ul></div>
-  </aside>
- </div>
-</section>
-<section id="map-section" class="section container">
- <div class="section-head"><div><div class="kicker">02 / ROUTE NOTES</div><h2>Along the way.</h2><p class="section-sub">외부 지도 타일 없이 동작하는 위치 개략도. 장소가 확정된 블록만 표시해. 미정인 산책 코스는 지도에 나오지 않아. 핀을 누르면 구글 지도로 이동해.</p></div></div>
- <div class="map-frame"><div id="mapCanvas" aria-live="polite"></div><div class="map-bottom"><p>위치는 대략적인 상대 좌표 · 선은 이동 순서이며 실제 도로나 교통 경로가 아님.</p><a id="routeLink" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps">첫 장소 실제 지도 ↗</a></div></div>
-</section>
-<section id="budget" class="section container">
- <div class="section-head"><div><div class="kicker">03 / YEN AND YEN</div><h2>A little math.</h2><p class="section-sub">현지에서 예상하는 지출을 직접 수정해봐. 금액은 엔화 기준, 환율 적용 전이야.</p></div></div>
- <div class="columns">
-  <div class="budget-box"><div class="kicker">ESTIMATED SPENDING</div><div class="budget-total" id="budgetTotal">¥ 0</div><p class="section-sub">항공권·숙박 제외 / 계획 금액은 실제 결제 금액이 아님</p><div class="progressbar"><span id="budgetFill" style="width:0%"></span></div><p class="section-sub" id="budgetNote"></p></div>
-  <div class="budget-box"><div class="kicker">EDIT YOUR ESTIMATE / JPY</div><div id="budgetRows"></div></div>
- </div>
-</section>
-<section id="preparation" class="section container">
- <div class="section-head"><div><div class="kicker">04 / BEFORE YOU GO</div><h2>Before you go.</h2><p class="section-sub">예약 확정과 방문 예정은 다르니까, 직접 확인한 것만 체크하자.</p></div></div>
- <div class="columns">
-  <div class="prep-box"><div class="kicker">CONFIRM BEFORE DEPARTURE</div><div id="prepList"></div></div>
-  <div class="prep-box">
-   <div class="kicker">PLAN B / REAL LIFE HAPPENS</div>
-   <div class="bottomnotes" style="margin:14px 0 0"><h4>When things change.</h4><p>금요일 지연 → 쇼핑 한 곳 생략 · 토요일 불꽃 인파가 심함 → 후시미 산책과 신사이바시로 전환 · 일요일 촉박함 → 음반점 한 곳만 방문하고 공항 먼저.</p></div>
-   <ul class="info-list">
-    <li><b>항공</b><span>10/16 간사이 T2 13:00 도착 / 10/18 T2 19:30 출발</span></li>
-    <li><b>입국</b><span>간사이 T2 ↔ 간사이공항역: 무료 셔틀 이용</span></li>
-    <li><b>기내</b><span>피치 기본 기내 반입: 소지품 포함 2개·합계 7kg</span></li>
-    <li><b>날씨</b><span>10월 중순 낮엔 따뜻하지만 밤엔 얇은 겉옷 권장</span></li>
-    <li><b>원칙</b><span>식당·공연·무료 관람 입장은 실시간 보장 아님</span></li>
-   </ul>
-  </div>
- </div>
- <div class="bottomnotes"><h4>A note to future me.</h4><p>좋은 풍경 앞에서 시계를 자꾸 보지 말 것. 여행의 핵심은 예정된 장소 수가 아니라, 예상치 못한 순간에 얼마나 오래 머물렀는지다.</p></div>
-</section>
+<a href="#itinerary" class="skip-link">일정으로 바로 가기</a>
+<header class="masthead"><a class="wordmark" href="./" aria-label="여행 수첩 처음으로"><span class="brand-icon" aria-hidden="true">↗</span> THE WEEKEND <span class="brand-small">旅の記録</span></a><div class="mast-right"><span class="tiny">OUR FIELD NOTES / Nº 001</span><button id="share" class="text-button" type="button">링크 복사 <span aria-hidden="true">↗</span></button></div></header>
+<main>
+<section class="intro" aria-labelledby="trip-title"><div class="intro-caption"><span>JAPAN / AUTUMN 2026</span><span>조금 느슨하게, 더 오래 기억하게.</span></div><div class="intro-main"><h1 id="trip-title">Osaka, <span>then Kyoto.</span></h1><div class="trip-dates">16—18 <span>Oct 2026</span></div></div><div class="intro-foot"><p>정원에 머물고, 밤은 오사카.</p><span>병주 · 건이 · 은총이 <span class="divider">/</span> 2박 3일</span></div></section>
+<nav class="day-nav" aria-label="여행 날짜"><button type="button" data-day="fri"><span class="day-num">01</span><span class="nav-label">10.16 <small>FRI</small></span><span class="nav-city">오사카에 모이는 날</span><span class="nav-arrow" aria-hidden="true">↗</span></button><button type="button" data-day="sat" class="active" aria-current="date"><span class="day-num">02</span><span class="nav-label">10.17 <small>SAT</small></span><span class="nav-city">교토의 낮, 오사카의 밤</span><span class="nav-arrow" aria-hidden="true">↗</span></button><button type="button" data-day="sun"><span class="day-num">03</span><span class="nav-label">10.18 <small>SUN</small></span><span class="nav-city">셋에서 둘, 그리고 집으로</span><span class="nav-arrow" aria-hidden="true">↗</span></button></nav>
+<div class="workspace" id="workspace">
+<section class="itinerary" id="itinerary" aria-labelledby="day-title"><div class="section-heading"><div><p id="day-eyebrow" class="eyebrow"></p><h2 id="day-title"></h2></div><span id="day-counter" class="section-index"></span></div><p class="day-description" id="day-description"></p><div class="day-note" id="day-note"></div><div class="timeline-tools"><span>TIME / PLACE</span><div><button type="button" id="expand-all" class="text-button">모두 펼치기 +</button><span id="done-count"></span></div></div><div id="timeline"></div><div class="day-end"><span>END OF THE DAY</span><span id="end-caption"></span><span aria-hidden="true">↙</span></div><section class="travel-memo" aria-labelledby="memo-title"><div class="memo-title"><span class="eyebrow">A FEW THINGS TO REMEMBER</span><h3 id="memo-title">떠나기 전에.</h3></div><div id="memo-list"></div><p class="save-note">선택한 후보와 체크는 이 브라우저에 저장돼요.</p></section></section>
+<aside class="map-panel" id="map-panel" aria-labelledby="map-title"><div class="map-head"><div><span class="eyebrow">FOLLOW THE DAY</span><h2 id="map-title">지도로 이어 보기 <span aria-hidden="true">↗</span></h2></div><button type="button" id="fit-map" class="icon-button" aria-label="지도에서 전체 장소 보기">⤢</button></div><div class="map-scope" role="group" aria-label="지도 표시 지역" id="map-scope"></div><div class="map-stage"><div id="map" aria-label="여행 장소와 이동 순서 지도"></div><div class="map-fallback" id="map-fallback" hidden><p>지도를 불러오지 못했어요.</p><span>아래 장소 목록에서 Google Maps를 열 수 있어요.</span><button type="button" class="text-button" id="retry-map">지도 다시 불러오기 ↻</button></div><div class="map-overlay"><span><i class="dot solid"></i> 일정</span><span><i class="dot hollow"></i> 후보</span><span id="pin-count"></span></div></div><div class="map-summary" id="map-summary"></div><div class="map-selection" id="map-selection" aria-live="polite"></div><div class="route-list" id="route-list"></div><p class="map-disclaimer">점선은 방문 순서를 잇는 개략선이에요.<br>실제 도보·대중교통 경로는 길찾기에서 확인해요.</p><a class="route-action" id="route-action" target="_blank" rel="noopener noreferrer">Google Maps에서 동선 보기 <span>↗</span></a></aside>
+</div>
 </main>
-<div class="container signoff"><span>OSAKA / 2026 · PERSONAL FIELD NOTES</span><span>실제 영업시간·행사·예약은 현장에서 재확인</span></div>
+<footer><span>THE WEEKEND / OSAKA & KYOTO</span><button type="button" id="sources-toggle" class="text-button" aria-expanded="false" aria-controls="sources">정보·사진 출처 ↗</button><span>16—18 OCT, 2026</span><div id="sources" hidden><p>일정은 여행 대화와 기존 수첩을 바탕으로 정리했습니다. 운영시간·가격은 일반 안내이며 임시휴무·품절·예약 가능 여부는 방문 전에 확인하세요. 항공편은 대화에 기록된 계획 시간입니다.</p><p><a href="https://kyoto-shisendo.net/" target="_blank" rel="noopener noreferrer">시센도 공식 안내·사진</a> · <a href="https://www.enkouji.jp/" target="_blank" rel="noopener noreferrer">엔코지 공식 안내</a> · <a href="https://kyotomag.com/spots/enkouji/photos/" target="_blank" rel="noopener noreferrer">엔코지 사진: KYOTO MAG</a> · <a href="https://www.grill-ninjin.com/" target="_blank" rel="noopener noreferrer">그릴 닌진 안내·사진</a> · <a href="https://www.ichijouji-nakatani.com/" target="_blank" rel="noopener noreferrer">나카타니 안내·사진</a> · <a href="https://www.keibunsha-store.com/" target="_blank" rel="noopener noreferrer">케이분샤 안내·사진</a> · <a href="https://travelwithamnet.com/blog/explore-osaka/" target="_blank" rel="noopener noreferrer">오사카 사진: Travel with Amnet</a></p><p>지도: © OpenStreetMap contributors. 지도 핀은 공개 장소 좌표입니다. 위치를 확인하지 못한 후보는 장소 검색 링크로 연결됩니다.</p></div></footer>
+<nav class="mobile-view" aria-label="화면 보기"><button type="button" data-view="schedule" class="active" aria-pressed="true">☷ <span>일정</span></button><button type="button" data-view="both" aria-pressed="false">◫ <span>일정 + 지도</span></button><button type="button" data-view="map" aria-pressed="false">⌖ <span>지도</span></button></nav>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
-<script>
-(function(){
- "use strict";
- var saved={};try{saved=JSON.parse(localStorage.getItem("osaka.afterhours.v2")||"{}")||{}}catch(e){}
- var state={day:saved.day||"fri",mode:saved.mode||"b",filter:"전체",done:saved.done||{},prep:saved.prep||{},budget:saved.budget||{}};
- var dayInfo={
-  fri:{num:"DAY 01 / 16 OCT",name:"Friday",desc:"쇼핑, 메이드카페, 네온과 야키니쿠",title:"Friday in Osaka.",subtitle:"10.16 FRI · ARRIVAL / CITY LIFE"},
-  sat:{num:"DAY 02 / 17 OCT",name:"Saturday",desc:"낮 산책은 함께 정할 공석, 밤은 취향껏",title:"Saturday, two moods.",subtitle:"10.17 SAT · WALK TBD / OSAKA"},
-  sun:{num:"DAY 03 / 18 OCT",name:"Sunday",desc:"셋이 함께한 뒤 둘만 남는 오후",title:"Slow Sunday.",subtitle:"10.18 SUN · THREE → TWO / DEPARTURES"}
- };
- var data={
- fri:[
-  {id:"f-eun",t:"11:30",n:"은총이 먼저 간사이공항 도착",jp:"EUNCHONG / SOLO ARRIVAL",c:"이동",d:"병주·건이보다 약 1시간 30분 먼저 도착. 입국 후 공항에서 일행을 기다리기로 함. 도착 터미널과 만날 장소는 아직 미확정.",loc:"Kansai International Airport",xy:null},
-  {id:"f-air",t:"13:00",n:"병주·건이 간사이공항 도착",jp:"BYEONGJU + GEONI",c:"이동",d:"두 사람의 항공편은 동일. 도착 이후 입국심사·수하물 수령을 거쳐 은총이와 연락.",loc:"Kansai International Airport Terminal 2",xy:null,site:"https://www.kansai-airport.or.jp/"},
-  {id:"f-meet",t:"14:00 ±",n:"공항에서 세 사람 합류",jp:"THE THREE OF US",c:"경험",d:"합류 시간은 예상치야. 실제 만남은 병주·건이의 입국심사가 끝나고 터미널 이동이 가능해진 뒤. 장소는 전날 협의.",loc:"Kansai International Airport",xy:null,alt:"항공편이 지연되면 은총이는 공항에서 카페·라운지 등 대기. 모두 만난 뒤 난바로 이동."},
-  {id:"f-namba",t:"14:15–16:00",n:"난바로 이동 · 체크인",jp:"KIX → NAMBA",c:"이동",d:"간사이공항역 → 난카이 난바역 → 닛폰바시 인근 숙소. 입국이 지연되면 오후 쇼핑 시간을 줄이기.",loc:"Nankai Namba Station Osaka",xy:[34.6630,135.5011]},
-  {id:"f-shopping",t:"16:10–17:45",n:"난바 쇼핑",jp:"Namba Shopping / Flexible Block",c:"쇼핑",d:"한 구역에 모인 생활용품 매장을 느긋하게 둘러보는 시간. 마음에 드는 곳이 있으면 오래 머물고, 일정이 늦으면 한 곳만.",loc:"Standard Products Namba Parks Osaka",xy:[34.6586,135.5016],
-   sub:[["Standard Products · 난바 파크스 1F","시작점 / 11:00–21:00","Standard Products なんばパークス"],["무인양품 · 난바 CITY 남관 2F","앞 매장에서 도보 약 5–8분·약 400–600m / 11:00–21:00","無印良品 なんばCITY"],["DAISO · THREEPPY","스탠다드 프로덕트와 같은 쇼핑 구역","ダイソー なんばパークス"]],
-   alt:"17:45를 넘기면 메이드카페 방문에 영향이 있어. 매장 두 곳을 모두 보는 것은 선택 사항."},
-  {id:"f-maid",t:"18:00–19:00",n:"메이드카페 체험",jp:"MAIDREAMIN / 3 PEOPLE",c:"경험",d:"1순위: 메이드리밍 난바점 PARTY MAKER 할로윈 HYPER. 18:00 오프닝, 18:30 쇼타임. 공식 공지는 행사 당일 혼잡을 예상하고 있어 3명 입장 가능 여부는 예약·문의 필요. 1시간 음료 포함 ¥2,500부터.",loc:"めいどりーみん なんば店",xy:[34.6597,135.5045],cost:2500,site:"https://www.maidreamin.com/event/detail.html?id=20596",
-   sub:[["메이드리밍 난바점 · 80석","행사장 / 18:00 시작","めいどりーみん なんば店"],["앳홈카페 오사카 본점 · 총 약 90명 규모","난바점에서 도보 약 10–15분 / 3개 카페 층·공연형","あっとほぉーむカフェ 大阪本店"],["카페 e-maid · 60석","난바점에서 도보 약 2–5분 / 요리·홍차 중심, 차분한 분위기","カフェe-maid 大阪難波"],["메이드리밍 오타로드점 · 실내 27석","앳홈카페 주변 / 작은 매장의 추가 선택지","めいどりーみん 大阪 日本橋オタロード店"]],
-   alt:"만석이면 ① 앳홈카페 오사카 본점(3개 층 약 90명·패스트패스 제도 확인), ② e-maid(60석·차분한 레스토랑형). e-maid는 행사일 예약 불가 규정이 있으니 당일 문의. 오타로드점은 약 31석으로 규모가 작아 차선. 20시 야키니쿠 이동시간 확보."},
-  {id:"f-yakiniku",t:"19:00–21:30",n:"미나미센바 이동 · 야키니쿠",jp:"MINAMISEMBA / DINNER",c:"먹거리",d:"20:00 중모츠야 미나미센바점 저녁을 목표로 메이드카페에서 19시 전후 출발. 실제 예약 확정 필요. 저녁 예상 ¥6,000–8,000.",loc:"中も津屋 南船場店",xy:[34.6781,135.5048],cost:7000,site:"https://tabelog.com/osaka/A2701/A270106/27143685/",alt:"이동에 약 20–35분을 넉넉히 두고, 메이드카페 입장 지연 시 식사 시간을 우선."},
-  {id:"f-night",t:"22:00 이후",n:"도톤보리 야경 · 심야 쇼핑",jp:"DOTONBORI AFTER DARK",c:"산책",d:"글리코상 앞에서 사진을 찍고 주변을 걸은 뒤 필요하면 돈키호테. 늦거나 지치면 쇼핑을 생략해도 됨.",loc:"Dotonbori Glico Sign",xy:[34.6688,135.5014],
-   sub:[["글리코상 · 에비스바시","야경 시작점","Dotonbori Glico Sign"],["돈키호테 도톤보리점","글리코상에서 도보 약 2–4분·약 150–250m","ドン・キホーテ 道頓堀店"],["소에몬초 골목","에비스바시 인근 도보 5–10분권","宗右衛門町 大阪"]],
-   alt:"일요일까지 짐이 많아지는 게 부담스럽다면 돈키호테 쇼핑은 최소화. 항공사 기내 반입 7kg 주의."}
- ],
- satCommon:[],
- satA:[
-  {id:"sa-day",t:"08:30–12:30",n:"오전 산책 · 후보 유지",jp:"SLOW MORNING / NOT YET FINAL",c:"미정",d:"불꽃축제를 보러 가기 전 오전 산책 지역은 아직 확정하지 않았어. 기존 우지 안은 후보로만 보관하고, 취향에 맞춰 함께 결정하자.",loc:"",xy:null,alt:"우지·교토·나라 중 어느 곳도 아직 확정하지 않음. 불꽃축제를 보려면 오후 이동 시간을 우선 고려."},
-  {id:"sa-move",t:"12:30–15:00",n:"요도가와 행사 구역으로 이동",jp:"TO YODOGAWA",c:"이동",d:"출발 지역을 결정한 뒤 이동 수단도 정하자. 무료 관람 계획이면 15시 전후 행사 구역 도착 목표.",loc:"十三駅 大阪",xy:[34.7203,135.4826],alt:"토요일 행사가 지나치게 혼잡하거나 무료 구역 입장이 어렵다면 B안으로 전환."},
-  {id:"sa-event",t:"15:00–20:00",n:"요도가와 불꽃축제",jp:"38TH YODOGAWA FIREWORKS",c:"경험",d:"19:00–20:00 불꽃놀이. 오후에는 관람 가능한 구역에서 기다려야 할 수 있어. 북쪽 강변 접근 동선과 진입 제한은 반드시 당일 공식 안내 확인.",loc:"なにわ淀川花火大会",xy:[34.7138,135.4813],site:"https://www.yodohanabi.com/",alt:"장소·무료 관람 가능 여부 미확정. 안전하게 들어갈 수 없는 경우 주변 무단 진입 금지."},
-  {id:"sa-return",t:"20:00 이후",n:"신사이바시 귀환 · 시메파르페",jp:"AFTER THE FIREWORKS",c:"먹거리",d:"귀가 인파를 고려해 천천히 이동. 늦게 도착하더라도 파르페는 가능한 경우에만 방문.",loc:"パフェテリア パル 心斎橋",xy:[34.6734,135.5028],cost:2500,alt:"행사장 혼잡으로 지치면 파르페를 생략하고 숙소 복귀."}
- ],
- satB:[
-  {id:"sb-blank",t:"오전–오후",n:"산책 코스 — 함께 정할 자리",jp:"UNPLANNED / YOUR CHOICE",c:"미정",d:"교토·나라·우지 등 어디를 갈지 아직 정하지 않았어. 산책과 점심을 포함해 이 블록은 비워둘게. 마음에 드는 장소를 문답으로 골라 채울 예정.",loc:"",xy:null,alt:"도시, 산책 시간, 점심, 복귀 시각 모두 미정. 현재 지도에는 이 블록의 핀이 표시되지 않음."},
-  {id:"sb-return",t:"저녁 무렵",n:"오사카 복귀 · 자유 저녁",jp:"RETURN / FLEXIBLE",c:"이동",d:"낮 산책 코스가 정해지면 귀환 시간도 함께 결정할게. 늦어지면 저녁 및 밤 일정은 줄일 수 있어.",loc:"なんば駅 大阪",xy:[34.6637,135.5019]},
-  {id:"sb-night",t:"19:00–21:45",n:"난바–아메리카무라 밤놀이",jp:"PACHINKO / ARCADE / LIVE",c:"경험",d:"빠칭코, 오락실, 라이브하우스 중 끌리는 걸 고르는 자유 블록. 다 도는 필수 코스가 아니야.",loc:"マルハン なんば新館",xy:[34.6660,135.5048],
-   sub:[["빠칭코 또는 오락실 · 난바","시작점 / 빠칭코는 이용 금액 상한 설정","マルハン なんば新館"],["아메리카무라 밤거리","난바에서 도보 약 15–20분·약 1~1.5km","アメリカ村 大阪"],["라이브하우스","공연 시간·입장 상황에 따라 택일","Shinsaibashi AtlantiQs Osaka"]],
-   alt:"낮 일정에 따라 시작 시간을 자유롭게 변경. 라이브 선택 시 공연 시작 시각을 먼저 확인."},
-  {id:"sb-parfait",t:"22:00 전후",n:"시메파르페",jp:"LATE NIGHT PARFAIT",c:"먹거리",d:"신사이바시 야간 파르페 전문점에서 하루 마무리. 1인 약 ¥2,000–3,000, 현장 대기 가능.",loc:"パフェテリア パル 心斎橋",xy:[34.6734,135.5028],cost:2500}
- ],
- sun:[
-  {id:"u-checkout",t:"10:00",n:"체크아웃 · 짐 정리",jp:"THREE PEOPLE",c:"이동",d:"공동 마지막 오전을 시작하기 전에 짐 보관 방법 정하기. 숙소 위치 등 개인 정보는 공개하지 않음.",loc:"Nipponbashi Osaka",xy:[34.6599,135.5041]},
-  {id:"u-morning",t:"10:10–11:35",n:"난바·닛폰바시 오전 자유 탐방",jp:"CHOOSE ONE / 3 PEOPLE",c:"쇼핑",d:"세 사람이 함께하는 마지막 자유 블록. 게임이 끌리면 레트로게임·취미 상점, 조금 다른 재미를 원하면 주방용품·일본 식기 거리. 두 테마 중 하나를 중심으로.",loc:"スーパーポテト オタロード店",xy:[34.6597,135.5058],
-   sub:[["게임 테마 — 슈퍼 포테토","일요일 10:00 오픈 / 레트로게임 전문","スーパーポテト オタロード店"],["게임 테마 — 스루가야 일본바시 본관","위 매장에서 도보 약 3–7분 / 여러 층의 취미·중고 굿즈","駿河屋 大阪日本橋本館"],["다른 테마 — 센니치마에 도구야스지","오타로드에서 도보 약 8–12분 / 일본 식기·조리도구·가짜 음식 모형 등","千日前道具屋筋商店街"]],
-   alt:"주의: 스루가야 '오타로드 아웃렛 오미야게관'은 10/13–18 리뉴얼 휴무. 여기 적은 '일본바시 본관'과는 다른 매장이야. 게임탐정단은 12:00 오픈이라 이 오전 블록에는 넣지 않음."},
-  {id:"u-farewell",t:"11:40–12:25",n:"공동 식사 · 은총이와 작별",jp:"ALL THREE → SPLIT",c:"먹거리",d:"난바에서 짧게 식사하고 은총이를 먼저 공항으로 보냄. 빠른 출발이 필요하면 식사는 간단히.",loc:"なんば駅 大阪",xy:[34.6630,135.5011],cost:1500,
-   alt:"은총이는 16:00 국제선 출발 예정. 12:15–12:30 전후 난바역 출발을 권장하지만 항공사·터미널·수하물 규정이 확인되면 조정."},
-  {id:"u-eun-air",t:"12:15–12:30",n:"은총이 먼저 공항 이동",jp:"EUNCHONG / SOLO DEPARTURE",c:"이동",d:"은총이 16:00 귀국편. 공항까지 열차·터미널 이동 및 수속 시간을 넉넉하게 확보해야 해. 병주·건이는 오사카에 남음.",loc:"Nankai Namba Station Osaka",xy:null},
-  {id:"u-two",t:"12:45–14:45",n:"병주·건이 취향 탐방",jp:"PICK A DIRECTION / 2 PEOPLE",c:"경험",d:"음반점 투어를 고정하지 않고, 음악·사진·전시 중 그날의 취향에 맞는 한 방향을 선택. 다른 곳을 더 보고 싶으면 자유롭게 바꿔도 돼.",loc:"南堀江 大阪",xy:[34.6715,135.4923],
-   sub:[["음악 — TIME BOMB RECORDS","미나미호리에 / 12:00 오픈","TIME BOMB RECORDS 南堀江"],["음악 — FLAKE RECORDS","TIME BOMB에서 도보 약 1–3분","FLAKE RECORDS 南堀江"],["사진 — FUKUGAN GALLERY","아메리카무라 / 13:00 오픈 · 무료 사진전(10/16–11/2)","FUKUGAN GALLERY 大阪"],["사진 — 갤러리 솔라리스","미나미센바 / 12:00 오픈 · 홍콩 건축 사진전 10/18 마지막 날","ギャラリー ソラリス 南船場"]],
-   alt:"선택 A: 호리에 음반점 2곳을 느긋하게. 선택 B: FUKUGAN 사진전과 아메리카무라 구경. 선택 C: 솔라리스의 홍콩 주거 건축 사진전. TIME BOMB과 솔라리스를 모두 들르는 건 시간상 무리일 수 있으니 한 방향을 택해."},
-  {id:"u-final",t:"14:45–15:30",n:"남은 쇼핑 · 짐 찾기 · 난바역",jp:"WRAP UP",c:"쇼핑",d:"한 장소를 더 도는 대신 돌아올 길을 여유롭게 확보하자. 수하물 무게 확인.",loc:"Nankai Namba Station Osaka",xy:[34.6630,135.5011]},
-  {id:"u-airport",t:"15:30–16:00",n:"병주·건이 공항으로 이동",jp:"BYEONGJU + GEONI",c:"이동",d:"난카이 전철과 공항역에서 T2 셔틀 이동. 제2터미널에 17:00–17:30 도착 목표.",loc:"関西空港 第2ターミナル",xy:null,site:"https://www.kansai-airport.or.jp/"},
-  {id:"u-flight-eun",t:"16:00",n:"은총이 한국행 비행기 출발",jp:"EUNCHONG / FLIGHT",c:"이동",d:"은총이의 귀국 항공편이 먼저 출발. 항공사·터미널은 별도 확인 필요.",loc:"関西国際空港",xy:null},
-  {id:"u-flight",t:"19:30",n:"병주·건이 한국행 비행기 출발",jp:"BYEONGJU + GEONI / FLIGHT",c:"이동",d:"두 사람은 같은 항공편으로 귀국. 간사이공항 T2 출발.",loc:"関西国際空港 第2ターミナル",xy:null}
- ]};
- var priorities={
-  fri:[["합류","은총이 11:30 / 병주·건이 13:00 공항 도착"],["메이드카페","18시 HYPER 행사 공식 혼잡 예상 · 3명 입장 확인"],["야키니쿠","20:00 중모츠야 예약 여부 확인"]],
-  sat:[["낮 산책","B안은 문답으로 채울 공석, 아직 행선지 미정"],["밤의 선택","B안 자유 야간 활동 · A안 불꽃축제"],["디저트","파르페 대기·영업 여부 확인"]],
-  sun:[["은총이","16:00 귀국편 · 12:15–12:30 난바 출발 목표"],["병주·건이","19:30 귀국편 · 15:30–16:00 난바 출발"],["매장","게임은 10시부터 / 음반·사진전은 정오 이후"]]
- };
- var cats=["전체","이동","미정","산책","쇼핑","먹거리","경험"];
- var prepItems=[
-  ["flight","귀국 항공편 출발 시간 재확인","탑승권과 수하물 규정을 확인"],
-  ["yakiniku","중모츠야 미나미센바 예약","예약 확정 전에 확정으로 표시하지 않기"],
-  ["maid","메이드리밍 10/16 이벤트 확인","입장 방식·잔여 자리·쇼타임"],
-  ["firework","10/17 불꽃축제 관람 방식 결정","A안 불꽃축제 or B안 밤놀이 · 낮 산책은 공석"],
-  ["pass","여권·카드·엔화 현금","여권 원본과 해외 결제 수단"],
-  ["sim","통신 로밍/eSIM 준비","현지 지도와 예약 확인에 필요"],
-  ["luggage","수하물 7kg·보조배터리 확인","피치항공 규정과 보조배터리 반입"],
-  ["return","일요일 3명 귀국편 분기·공항 이동 확인","은총이 16:00 / 병주·건이 19:30 · 터미널 확인"]
- ];
- var budgetDefault=[["transport","교통비",5000],["maid","메이드카페",2500],["yakiniku","야키니쿠",7000],["food","기타 식비·간식",6500],["parfait","시메파르페",2500],["play","오락·입장료",2000],["shopping","쇼핑",15000],["buffer","예비비",3500]];
- var toastTimer=0;
- function persist(){try{localStorage.setItem("osaka.afterhours.v2",JSON.stringify({day:state.day,mode:state.mode,done:state.done,prep:state.prep,budget:state.budget}))}catch(e){}}
- function entries(){return state.day==="sat"?data.satCommon.concat(state.mode==="a"?data.satA:data.satB):data[state.day]}
- function mapUrl(loc){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(loc)}
- function formatYen(n){return "¥"+Number(n||0).toLocaleString("ja-JP")}
- function toast(s){var el=document.getElementById("toast");el.textContent=s;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove("show")},2300)}
- function esc(s){return String(s||"").replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
- function updateDay(){
-  document.getElementById("dayGrid").innerHTML=Object.keys(dayInfo).map(function(key){var x=dayInfo[key];return '<button class="daycard '+(state.day===key?'active':'')+'" type="button" data-day="'+key+'" role="tab" aria-selected="'+(state.day===key)+'"><div class="dnum">'+x.num+'</div><div class="dtitle">'+x.name+'</div><div class="dmeta">'+x.desc+'</div><div class="arrow">↗</div></button>'}).join("");
-  document.getElementById("currentTitle").textContent=dayInfo[state.day].title;
-  document.getElementById("currentSubtitle").textContent=dayInfo[state.day].subtitle;
-  document.getElementById("modeArea").innerHTML=state.day==="sat"?'<div class="mode-switch" role="group" aria-label="토요일 코스 선택"><button type="button" data-mode="a" class="'+(state.mode==="a"?"active":"")+'">✦ A · 불꽃축제</button><button type="button" data-mode="b" class="'+(state.mode==="b"?"active":"")+'">◒ B · 자유로운 밤</button></div>':"";
-  var notice=state.day==="sat"?(state.mode==="a"?"<strong>A안 · 불꽃축제.</strong> 오전 산책지는 미정. 15시 전후 요도가와 행사 지역 도착을 목표로 낮 동선을 정해야 해.":"<strong>B안 · 낮 산책 공석.</strong> 교토·나라·우지 어느 지역도 확정하지 않았어. 낮 계획은 함께 고를 예정이고 밤의 자유 활동만 남겨뒀어."):(state.day==="fri"?"<strong>3명 합류.</strong> 은총이 11:30 / 병주·건이 13:00 착륙. 입국 후 만나고, 18시 HYPER는 공식 혼잡 예상 · 20시 야키니쿠는 예약 확인 필요.":"<strong>귀국편 분기.</strong> 은총이 16:00, 병주·건이는 19:30 출발. 오전 세 명이 함께, 정오부터 각자 귀국 동선에 맞춰 움직여.");
-  document.getElementById("dayNotice").innerHTML='<div class="notice">'+notice+'</div>';
-  document.getElementById("filterRow").innerHTML=cats.map(function(cat){return '<button type="button" class="filter '+(state.filter===cat?'active':'')+'" data-filter="'+cat+'">'+cat+'</button>'}).join("");
-  document.getElementById("priorityList").innerHTML=priorities[state.day].map(function(p){return "<li><b>"+p[0]+"</b><span>"+p[1]+"</span></li>"}).join("");
-  updateTimeline();updateMap();
- }
- function updateTimeline(){
-  var all=entries(),items=all.filter(function(s){return state.filter==="전체"||s.c===state.filter});
-  document.getElementById("timeline").innerHTML=items.map(function(s){
-   var checked=!!state.done[s.id],hasLink=!!s.loc,sub=(s.sub||[]).map(function(x){
-    return '<li><a href="'+mapUrl(x[2])+'" target="_blank" rel="noopener noreferrer"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span><strong aria-hidden="true">↗</strong></a></li>'
-   }).join("");
-   return '<div class="event '+(checked?'done':'')+'"><div class="eventtime">'+esc(s.t)+'</div><div class="stopcard"><div class="stophead"><div><span class="tag '+(s.c==="이동"?"transport":s.c==="산책"?"walk":s.c==="먹거리"?"food":"")+'">'+esc(s.c)+' · '+esc(s.jp)+'</span><h4>'+esc(s.n)+'</h4></div><button class="checkbtn '+(checked?'checked':'')+'" type="button" data-done="'+s.id+'" aria-label="'+esc(s.n)+' 방문 완료 표시" aria-pressed="'+checked+'">✓</button></div><p class="desc">'+esc(s.d)+'</p>'+(sub?'<ul class="block-stops">'+sub+'</ul>':'')+'<div class="actionrow">'+(hasLink?'<a href="'+mapUrl(s.loc)+'" target="_blank" rel="noopener noreferrer">↗ 대표 장소 지도</a>':'')+(s.site?'<a href="'+esc(s.site)+'" target="_blank" rel="noopener noreferrer">↗ 공식·예약 정보</a>':'')+(s.alt?'<button type="button" data-alt="'+s.id+'" aria-expanded="false">+ 대안·주의사항</button>':'')+(s.cost?'<span class="cost">'+formatYen(s.cost)+' 예상</span>':'')+'</div>'+(s.alt?'<div class="altbox" id="alt-'+s.id+'">'+esc(s.alt)+'</div>':'')+'</div></div>';
-  }).join("")||'<div class="notice">해당 카테고리의 일정이 없어. 다른 필터를 선택해줘.</div>';
-  var count=all.filter(function(s){return !!state.done[s.id]}).length;document.getElementById("progressFill").style.width=(count/all.length*100)+"%";
-  document.getElementById("progressText").innerHTML=count+' <small>/ '+all.length+' blocks</small>';
- }
- function updateMap(){
- var all=entries(),omit={"f-air":true,"u-airport":true,"u-flight":true};
- var stops=all.filter(function(s){return s.xy&&!omit[s.id]});
- var root=document.getElementById("mapCanvas");
- if(!stops.length){root.innerHTML='<p>해당 날짜의 표시할 장소가 없어.</p>';return}
- var lats=stops.map(function(s){return s.xy[0]});
- var lons=stops.map(function(s){return s.xy[1]});
- var loLat=Math.min.apply(null,lats),hiLat=Math.max.apply(null,lats);
- var loLon=Math.min.apply(null,lons),hiLon=Math.max.apply(null,lons);
- var latSpan=Math.max(.009,hiLat-loLat),lonSpan=Math.max(.013,hiLon-loLon);
- var padLat=Math.max(0,(latSpan-(hiLat-loLat))/2),padLon=Math.max(0,(lonSpan-(hiLon-loLon))/2);
- loLat-=padLat;loLon-=padLon;
- var pins=[];
- stops.forEach(function(s,i){
-   var x=105+(s.xy[1]-loLon)/lonSpan*710;
-   var y=65+(hiLat+padLat-s.xy[0])/latSpan*255;
-   x=Math.max(60,Math.min(845,x));y=Math.max(39,Math.min(350,y));
-   for(var attempt=0;attempt<9;attempt++){
-     if(!pins.some(function(p){return Math.hypot(p.x-x,p.y-y)<32}))break;
-     var angle=(i*2.4+attempt*1.8),rad=24+attempt*6;
-     x=Math.max(50,Math.min(858,x+Math.cos(angle)*rad));
-     y=Math.max(36,Math.min(355,y+Math.sin(angle)*rad));
-   }
-   pins.push({s:s,x:x,y:y,index:i+1});
- });
- var grid='';
- for(var xx=90;xx<=830;xx+=74){grid+='<line x1="'+xx+'" y1="0" x2="'+xx+'" y2="390" stroke="#d8dbd5" opacity=".47"/>'}
- for(var yy=39;yy<=352;yy+=63){grid+='<line x1="0" y1="'+yy+'" x2="920" y2="'+yy+'" stroke="#d8dbd5" opacity=".47"/>'}
- var curve='<path d="M 0 300 C 180 230, 175 370, 330 310 S 570 160, 920 260" fill="none" stroke="#d9dedb" stroke-width="23" opacity=".6"/>';
- var path=pins.map(function(p,i){return (i?"L ":"M ")+p.x.toFixed(1)+" "+p.y.toFixed(1)}).join(" ");
- var dots=pins.map(function(p){return '<a class="map-point" href="'+mapUrl(p.s.loc)+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc(p.s.n)+' 구글 지도 열기"><title>'+esc(p.s.n)+'</title><circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="16"/><text x="'+p.x.toFixed(1)+'" y="'+(p.y+4).toFixed(1)+'" text-anchor="middle">'+p.index+'</text></a>'}).join("");
- var linkList=stops.map(function(s,i){return '<a class="map-place" href="'+mapUrl(s.loc)+'" target="_blank" rel="noopener noreferrer"><span class="map-index">'+String(i+1).padStart(2,"0")+'</span><span class="map-name">'+esc(s.n)+'</span><span class="map-arrow">↗</span></a>'}).join("");
- root.innerHTML='<div class="map-topline"><span>'+({fri:"THREE ARRIVALS / OSAKA",sat:state.mode==="a"?"WALK TBD — YODOGAWA":"WALK TBD — OSAKA EVENING",sun:"THREE → TWO / OSAKA"}[state.day])+'</span><b>'+pins.length+' PLACES</b></div><svg class="map-visual" viewBox="0 0 920 390" role="img" aria-label="이동 순서에 따라 번호가 표시된 장소 개략도. 핀을 선택하면 구글 지도 열기">'+grid+curve+'<path class="map-path" d="'+path+'"/>'+dots+'<text x="25" y="37" font-family="Georgia,serif" font-size="19" fill="#949b93">N ↑</text><text x="25" y="370" font-family="Arial,sans-serif" font-size="10" letter-spacing="1.7" fill="#9ba59c">ROUTE INDEX / NOT STREET MAP</text></svg><div class="map-list">'+linkList+'</div>';
- document.getElementById("routeLink").href=mapUrl(stops[0].loc);
-}
- function drawBudget(){
-  document.getElementById("budgetRows").innerHTML=budgetDefault.map(function(x){var v=state.budget[x[0]]!==undefined?state.budget[x[0]]:x[2];return '<label class="budget-row"><span>'+x[1]+'</span><input data-budget="'+x[0]+'" type="number" min="0" max="9999999" step="100" inputmode="numeric" value="'+v+'" aria-label="'+x[1]+' 예산 엔화"></label>'}).join("");
-  calcBudget();
- }
- function calcBudget(){
-  var total=budgetDefault.reduce(function(a,x){return a+Number(state.budget[x[0]]!==undefined?state.budget[x[0]]:x[2])},0);
-  document.getElementById("budgetTotal").textContent=formatYen(total);
-  document.getElementById("budgetFill").style.width=Math.min(100,total/50000*100)+"%";
-  document.getElementById("budgetNote").textContent="¥50,000 참고선 기준 "+Math.round(total/50000*100)+"% · 실제 지출 기록이 아닌 계획 예산";
- }
- function drawPrep(){
-  document.getElementById("prepList").innerHTML=prepItems.map(function(x){return '<label class="prep-entry"><input type="checkbox" data-prep="'+x[0]+'" '+(state.prep[x[0]]?"checked":"")+'><span><b>'+x[1]+'</b><small>'+x[2]+'</small></span></label>'}).join("");
- }
- document.addEventListener("click",function(e){
-  var day=e.target.closest("[data-day]");if(day){state.day=day.getAttribute("data-day");state.filter="전체";persist();updateDay();return}
-  var mode=e.target.closest("[data-mode]");if(mode){state.mode=mode.getAttribute("data-mode");state.filter="전체";persist();updateDay();toast(state.mode==="a"?"불꽃축제 A안으로 변경":"여유로운 B안으로 변경");return}
-  var filter=e.target.closest("[data-filter]");if(filter){state.filter=filter.getAttribute("data-filter");updateDay();return}
-  var done=e.target.closest("[data-done]");if(done){var id=done.getAttribute("data-done");state.done[id]=!state.done[id];persist();updateTimeline();return}
-  var alt=e.target.closest("[data-alt]");if(alt){var id=alt.getAttribute("data-alt"),el=document.getElementById("alt-"+id);if(el){el.classList.toggle("open");alt.textContent=el.classList.contains("open")?"− 대안 접기":"+ 대안 보기";alt.setAttribute("aria-expanded",el.classList.contains("open"))}return}
- });
- document.addEventListener("input",function(e){if(e.target.matches("[data-budget]")){var id=e.target.getAttribute("data-budget");state.budget[id]=Math.max(0,Number(e.target.value)||0);persist();calcBudget()}});
- document.addEventListener("change",function(e){if(e.target.matches("[data-prep]")){state.prep[e.target.getAttribute("data-prep")]=e.target.checked;persist()}});
- document.getElementById("shareBtn").addEventListener("click",function(){if(navigator.share){navigator.share({title:document.title,text:"오사카 여행 수첩",url:location.href}).catch(function(){})}else if(navigator.clipboard){navigator.clipboard.writeText(location.href).then(function(){toast("링크를 복사했어!")},function(){toast("주소창에서 링크를 복사해줘")})}else{toast("주소창에서 링크를 복사해줘")}});
- updateDay();drawBudget();drawPrep();
-})();
-</script>
-</body>
-</html>
+<noscript><p>타임라인과 지도를 보려면 JavaScript를 켜 주세요. <a href="https://www.google.com/maps/search/?api=1&query=Shisendo+Kyoto">시센도 지도 열기</a></p></noscript>
+</body></html>
