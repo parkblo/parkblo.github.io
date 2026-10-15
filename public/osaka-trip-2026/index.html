@@ -50,6 +50,19 @@
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
 @media print{.share,.filterrow,.actionrow,.checkbtn,.mode-switch,.map-frame{display:none!important}.section{padding-top:25px}.event{break-inside:avoid}}
 
+
+/* Flexible editorial itinerary blocks */
+.eventtime{font-size:21px;overflow-wrap:anywhere}
+.block-stops{list-style:none;margin:13px 0 16px;padding:0;border-top:1px solid #e0e2d9}
+.block-stops li{border-bottom:1px solid #e0e2d9}
+.block-stops a{padding:10px 2px;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:7px;align-items:center}
+.block-stops b{font-size:11px;font-weight:700;color:#303a32;letter-spacing:-.025em}
+.block-stops span{font-size:10px;color:#899087;line-height:1.7;grid-column:1}
+.block-stops strong{grid-column:2;grid-row:1/3;font-weight:600;color:#a16853}
+.block-stops a:hover b{color:var(--red)}
+.map-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:620px){.eventtime{font-size:16px;letter-spacing:-.04em}.map-list{grid-template-columns:1fr 1fr}.block-stops b{font-size:11px}.block-stops span{font-size:10px}}
+
 </style>
 </head>
 <body>
@@ -58,12 +71,12 @@
  <div class="eyebrow"><span>PERSONAL TRAVEL NOTE / JAPAN, 2026</span><span>16 — 18 OCT</span></div>
  <h1>Osaka<span style="color:var(--red)">.</span></h1>
  <div class="intro-row"><div>
-  <p class="hero-desc">고요한 낮, 눈부신 밤.<br>우지의 강바람부터 도톤보리의 네온까지.</p>
+  <p class="hero-desc">고요한 낮, 눈부신 밤.<br>취향대로 고르고 머무르는 세 사람의 오사카.</p>
   <div class="hero-pills"><span class="pill">02 NIGHTS / 03 DAYS</span><span class="pill">OSAKA — UJI — KYOTO</span></div>
  </div><button class="share" id="shareBtn" type="button">공유 ↗</button></div>
 </div></div></section>
 <section id="schedule" class="section container">
- <div class="section-head"><div><div class="kicker">01 / THE PLAN</div><h2>Days, as they unfold.</h2><p class="section-sub">그날의 흐름을 펼쳐보고, 필요하면 바꾸고. 선택은 이 브라우저에만 저장돼.</p></div></div>
+ <div class="section-head"><div><div class="kicker">01 / THE PLAN</div><h2>Days, as they unfold.</h2><p class="section-sub">큰 흐름만 정하고, 머무는 시간은 자유롭게. 상태는 현재 브라우저에 저장돼.</p></div></div>
  <div class="day-grid" id="dayGrid" role="tablist" aria-label="여행 날짜 선택"></div>
  <div class="layout">
   <div class="timeline-panel">
@@ -79,7 +92,7 @@
  </div>
 </section>
 <section id="map-section" class="section container">
- <div class="section-head"><div><div class="kicker">02 / ROUTE NOTES</div><h2>Along the way.</h2><p class="section-sub">외부 지도 타일 없이 동작하는 위치 개략도. 핀이나 장소 이름을 누르면 실제 구글 지도에서 위치를 볼 수 있어.</p></div></div>
+ <div class="section-head"><div><div class="kicker">02 / ROUTE NOTES</div><h2>Along the way.</h2><p class="section-sub">외부 지도 타일 없이 동작하는 위치 개략도. 장소가 확정된 블록만 표시해. 미정인 산책 코스는 지도에 나오지 않아. 핀을 누르면 구글 지도로 이동해.</p></div></div>
  <div class="map-frame"><div id="mapCanvas" aria-live="polite"></div><div class="map-bottom"><p>위치는 대략적인 상대 좌표 · 선은 이동 순서이며 실제 도로나 교통 경로가 아님.</p><a id="routeLink" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps">첫 장소 실제 지도 ↗</a></div></div>
 </section>
 <section id="budget" class="section container">
@@ -113,76 +126,80 @@
 <script>
 (function(){
  "use strict";
- var saved={};try{saved=JSON.parse(localStorage.getItem("osaka.afterhours.v1")||"{}")||{}}catch(e){}
+ var saved={};try{saved=JSON.parse(localStorage.getItem("osaka.afterhours.v2")||"{}")||{}}catch(e){}
  var state={day:saved.day||"fri",mode:saved.mode||"b",filter:"전체",done:saved.done||{},prep:saved.prep||{},budget:saved.budget||{}};
  var dayInfo={
   fri:{num:"DAY 01 / 16 OCT",name:"Friday",desc:"쇼핑, 메이드카페, 네온과 야키니쿠",title:"Friday in Osaka.",subtitle:"10.16 FRI · ARRIVAL / CITY LIFE"},
-  sat:{num:"DAY 02 / 17 OCT",name:"Saturday",desc:"우지의 고요함에서 오사카의 밤까지",title:"Saturday, two moods.",subtitle:"10.17 SAT · UJI / OSAKA"},
-  sun:{num:"DAY 03 / 18 OCT",name:"Sunday",desc:"음반점과 레트로게임, 가벼운 작별",title:"Slow Sunday.",subtitle:"10.18 SUN · MUSIC / DEPARTURE"}
+  sat:{num:"DAY 02 / 17 OCT",name:"Saturday",desc:"낮 산책은 함께 정할 공석, 밤은 취향껏",title:"Saturday, two moods.",subtitle:"10.17 SAT · WALK TBD / OSAKA"},
+  sun:{num:"DAY 03 / 18 OCT",name:"Sunday",desc:"셋이 함께한 뒤 둘만 남는 오후",title:"Slow Sunday.",subtitle:"10.18 SUN · THREE → TWO / DEPARTURES"}
  };
  var data={
  fri:[
-  {id:"f-air",t:"13:00",n:"간사이공항 도착",jp:"関西国際空港 第2ターミナル",c:"이동",d:"T2 도착 → 무료 셔틀로 간사이공항역 → 난카이 전철로 난바. 입국심사 시간에 따라 유동적.",loc:"Kansai International Airport Terminal 2",xy:[34.4304,135.2305],alt:"공항 절차가 길어지면 오후 쇼핑을 1곳 생략하고 예약 시간부터 지켜.",site:"https://www.kansai-airport.or.jp/"},
-  {id:"f-hotel",t:"16:00",n:"닛폰바시 인근 숙소 체크인",jp:"日本橋エリア",c:"이동",d:"가방을 두고 가볍게 출발. 정확한 숙소 주소는 공개 페이지에서 제외했어.",loc:"Nipponbashi Osaka",xy:[34.6599,135.5041]},
-  {id:"f-standard",t:"16:15",n:"Standard Products",jp:"なんばパークス店",c:"쇼핑",d:"생활용품·그릇·향·일본 한정 잡화를 중심으로. 난바 파크스 1층, 통상 11:00–21:00.",loc:"Standard Products なんばパークス",xy:[34.6586,135.5016],alt:"시간 부족하면 다음 MUJI만 보거나 일요일 오후로 넘겨."},
-  {id:"f-muji",t:"16:55",n:"무인양품 난바 CITY",jp:"無印良品 なんばCITY",c:"쇼핑",d:"남관 2층. 의류, 식품, 문구와 생활용품 구경. 통상 11:00–21:00.",loc:"無印良品 なんばCITY",xy:[34.6614,135.5017],alt:"스탠다드 프로덕트에서 오래 머물렀다면 여기서 구매만 빠르게."},
-  {id:"f-maid",t:"18:00",n:"메이드리밍 할로윈 HYPER",jp:"めいどりーみん なんば店",c:"경험",d:"10/16 PARTY MAKER 특별 이벤트. 18:00 오프닝·18:30 쇼타임 공지. 1시간 음료 포함 패키지 ¥2,500부터. 행사 운영/대기 재확인.",loc:"めいどりーみん なんば店",xy:[34.6597,135.5045],cost:2500,site:"https://www.maidreamin.com/event/detail.html?id=20596",alt:"행사 만석이면 일요일 오전 일반 영업 시간의 메이드카페로 변경."},
-  {id:"f-transfer",t:"19:00",n:"미나미센바로 이동",jp:"南船場へ",c:"이동",d:"지하철 또는 도보 이동. 저녁 예약은 20시 목표이며 사전에 빈자리 확인.",loc:"南船場 大阪",xy:[34.6774,135.5052]},
-  {id:"f-yakiniku",t:"20:00",n:"중모츠야 야키니쿠",jp:"中も津屋 南船場店",c:"먹거리",d:"이번 여행의 금요일 저녁 하이라이트. 예상 ¥6,000–8,000. 예약 확정 전이며 다른 지점과 혼동 주의.",loc:"中も津屋 南船場店",xy:[34.6781,135.5048],cost:7000,site:"https://tabelog.com/osaka/A2701/A270106/27143685/",alt:"예약 불가 시 신사이바시 일대 다른 야키니쿠로 대체. 저녁 시간을 19:30으로 조정할 수도 있어."},
-  {id:"f-glico",t:"22:00",n:"도톤보리 글리코상",jp:"道頓堀 グリコサイン",c:"산책",d:"에비스바시에서 야경 촬영. 도톤보리 강변과 소에몬초를 가볍게 돌아보자.",loc:"Dotonbori Glico Sign",xy:[34.6688,135.5014],alt:"인파가 너무 많으면 강가 다른 쪽에서 네온 사진만 남기기."},
-  {id:"f-donki",t:"22:35",n:"돈키호테 도톤보리",jp:"ドン・キホーテ 道頓堀店",c:"쇼핑",d:"심야 쇼핑. 대형 쇼핑백은 마지막에! 피치 기내 반입 7kg 제한을 기억하자.",loc:"ドン・キホーテ 道頓堀店",xy:[34.6704,135.5023],alt:"졸리거나 지치면 즉시 숙소 복귀. 일요일에 남은 쇼핑 가능."}
+  {id:"f-eun",t:"11:30",n:"은총이 먼저 간사이공항 도착",jp:"EUNCHONG / SOLO ARRIVAL",c:"이동",d:"병주·건이보다 약 1시간 30분 먼저 도착. 입국 후 공항에서 일행을 기다리기로 함. 도착 터미널과 만날 장소는 아직 미확정.",loc:"Kansai International Airport",xy:null},
+  {id:"f-air",t:"13:00",n:"병주·건이 간사이공항 도착",jp:"BYEONGJU + GEONI",c:"이동",d:"두 사람의 항공편은 동일. 도착 이후 입국심사·수하물 수령을 거쳐 은총이와 연락.",loc:"Kansai International Airport Terminal 2",xy:null,site:"https://www.kansai-airport.or.jp/"},
+  {id:"f-meet",t:"14:00 ±",n:"공항에서 세 사람 합류",jp:"THE THREE OF US",c:"경험",d:"합류 시간은 예상치야. 실제 만남은 병주·건이의 입국심사가 끝나고 터미널 이동이 가능해진 뒤. 장소는 전날 협의.",loc:"Kansai International Airport",xy:null,alt:"항공편이 지연되면 은총이는 공항에서 카페·라운지 등 대기. 모두 만난 뒤 난바로 이동."},
+  {id:"f-namba",t:"14:15–16:00",n:"난바로 이동 · 체크인",jp:"KIX → NAMBA",c:"이동",d:"간사이공항역 → 난카이 난바역 → 닛폰바시 인근 숙소. 입국이 지연되면 오후 쇼핑 시간을 줄이기.",loc:"Nankai Namba Station Osaka",xy:[34.6630,135.5011]},
+  {id:"f-shopping",t:"16:10–17:45",n:"난바 쇼핑",jp:"Namba Shopping / Flexible Block",c:"쇼핑",d:"한 구역에 모인 생활용품 매장을 느긋하게 둘러보는 시간. 마음에 드는 곳이 있으면 오래 머물고, 일정이 늦으면 한 곳만.",loc:"Standard Products Namba Parks Osaka",xy:[34.6586,135.5016],
+   sub:[["Standard Products · 난바 파크스 1F","시작점 / 11:00–21:00","Standard Products なんばパークス"],["무인양품 · 난바 CITY 남관 2F","앞 매장에서 도보 약 5–8분·약 400–600m / 11:00–21:00","無印良品 なんばCITY"],["DAISO · THREEPPY","스탠다드 프로덕트와 같은 쇼핑 구역","ダイソー なんばパークス"]],
+   alt:"17:45를 넘기면 메이드카페 방문에 영향이 있어. 매장 두 곳을 모두 보는 것은 선택 사항."},
+  {id:"f-maid",t:"18:00–19:00",n:"메이드카페 체험",jp:"MAIDREAMIN / 3 PEOPLE",c:"경험",d:"1순위: 메이드리밍 난바점 PARTY MAKER 할로윈 HYPER. 18:00 오프닝, 18:30 쇼타임. 공식 공지는 행사 당일 혼잡을 예상하고 있어 3명 입장 가능 여부는 예약·문의 필요. 1시간 음료 포함 ¥2,500부터.",loc:"めいどりーみん なんば店",xy:[34.6597,135.5045],cost:2500,site:"https://www.maidreamin.com/event/detail.html?id=20596",
+   sub:[["메이드리밍 난바점 · 80석","행사장 / 18:00 시작","めいどりーみん なんば店"],["앳홈카페 오사카 본점 · 총 약 90명 규모","난바점에서 도보 약 10–15분 / 3개 카페 층","あっとほぉーむカフェ 大阪本店"],["메이드리밍 오타로드점 · 실내 27석","앳홈카페 주변 / 규모는 작지만 같은 브랜드","めいどりーみん 大阪 日本橋オタロード店"]],
+   alt:"만석이면 앳홈카페 오사카 본점이 규모 조건에 가장 잘 맞는 대안. 별도의 대기·패스트패스 정책 확인. 메이드리밍 오타로드점은 실내 27석+테라스 4석이라 2순위. 20:00 야키니쿠 이동시간은 확보."},
+  {id:"f-yakiniku",t:"19:00–21:30",n:"미나미센바 이동 · 야키니쿠",jp:"MINAMISEMBA / DINNER",c:"먹거리",d:"20:00 중모츠야 미나미센바점 저녁을 목표로 메이드카페에서 19시 전후 출발. 실제 예약 확정 필요. 저녁 예상 ¥6,000–8,000.",loc:"中も津屋 南船場店",xy:[34.6781,135.5048],cost:7000,site:"https://tabelog.com/osaka/A2701/A270106/27143685/",alt:"이동에 약 20–35분을 넉넉히 두고, 메이드카페 입장 지연 시 식사 시간을 우선."},
+  {id:"f-night",t:"22:00 이후",n:"도톤보리 야경 · 심야 쇼핑",jp:"DOTONBORI AFTER DARK",c:"산책",d:"글리코상 앞에서 사진을 찍고 주변을 걸은 뒤 필요하면 돈키호테. 늦거나 지치면 쇼핑을 생략해도 됨.",loc:"Dotonbori Glico Sign",xy:[34.6688,135.5014],
+   sub:[["글리코상 · 에비스바시","야경 시작점","Dotonbori Glico Sign"],["돈키호테 도톤보리점","글리코상에서 도보 약 2–4분·약 150–250m","ドン・キホーテ 道頓堀店"],["소에몬초 골목","에비스바시 인근 도보 5–10분권","宗右衛門町 大阪"]],
+   alt:"일요일까지 짐이 많아지는 게 부담스럽다면 돈키호테 쇼핑은 최소화. 항공사 기내 반입 7kg 주의."}
  ],
- satCommon:[
-  {id:"s-go",t:"08:00",n:"오사카에서 우지로",jp:"大阪 → 宇治",c:"이동",d:"요도야바시 → 게이한 본선 → 주쇼지마 환승 → 우지선. 약 70–90분을 넉넉하게.",loc:"京阪 宇治駅",xy:[34.8948,135.8063]},
-  {id:"s-uji",t:"09:30",n:"우지바시와 뵤도인",jp:"宇治橋・平等院",c:"산책",d:"강가에서 풍경을 보고, 뵤도인 연못과 봉황당 산책. 아침 빛이 예쁠 시간이야.",loc:"平等院 京都府宇治市",xy:[34.8895,135.8078],alt:"사람이 많으면 뵤도인 내부 관람을 줄이고 바로 강 동쪽으로."},
-  {id:"s-kosho",t:"10:45",n:"아사기리바시 → 고쇼지",jp:"朝霧橋 → 興聖寺",c:"산책",d:"이번 여행의 핵심 풍경. 강을 건너 조용한 고토자카 참배길을 천천히 걷기.",loc:"興聖寺 京都 宇治",xy:[34.8892,135.8142],alt:"조용한 시간을 더 느끼고 싶다면 주변 신사를 생략하고 이곳에서 오래 머물러."},
-  {id:"s-lunch",t:"11:45",n:"슈바쿠 100% 메밀 소바",jp:"しゅばく",c:"먹거리",d:"직접 제분한 메밀의 수타 소바. 토요일 점심 대기 가능성 큼, 예약 불가 안내. ¥1,000–2,000 예상.",loc:"しゅばく 京都 宇治",xy:[34.8942,135.8087],cost:1500,alt:"대기 30분 이상이면 우지역 주변 다른 소바집이나 식당으로 교체."}
- ],
+ satCommon:[],
  satA:[
-  {id:"sa-leave",t:"12:45",n:"우지에서 오사카 복귀",jp:"宇治 → 十三",c:"이동",d:"요도가와 불꽃 무료 관람은 대기 시간이 길어져. 15시 전후 행사 지역 도착을 목표로 우지를 일찍 떠나자.",loc:"十三駅 大阪",xy:[34.7203,135.4826]},
-  {id:"sa-wait",t:"15:00",n:"요도가와 관람 가능 구역 확보",jp:"なにわ淀川花火大会",c:"경험",d:"무료 구역은 인기·혼잡도에 따라 진입 제한 가능. 주최 측 안내된 구역·출입동선 필수 확인. 남쪽 일부 강변 관람 금지.",loc:"十三駅 大阪",xy:[34.7203,135.4826],site:"https://www.yodohanabi.com/",alt:"무료 구역에 안전하게 들어갈 수 없다면 B안으로 전환. 행사 구역 바깥 무단 진입은 금지."},
-  {id:"sa-fire",t:"19:00",n:"나니와 요도가와 불꽃축제",jp:"第38回 なにわ淀川花火大会",c:"경험",d:"10/17 19:00–20:00 공식 개최 안내. 멋진 이벤트지만 약 4시간 대기와 귀가 인파도 여행의 일부.",loc:"なにわ淀川花火大会",xy:[34.7138,135.4813],site:"https://www.yodohanabi.com/",alt:"유료 좌석 확보 또는 무료 구역 안전한 입장 계획이 없으면 B안이 더 편안해."},
-  {id:"sa-return",t:"20:00",n:"혼잡 피해 신사이바시 복귀",jp:"十三 → 心斎橋",c:"이동",d:"교통통제와 귀가 인파가 심해 곧바로 전철에 타기 어렵기도 해. 이동 예상시간은 유동적.",loc:"心斎橋 大阪",xy:[34.6745,135.5017]},
-  {id:"sa-parfait",t:"22:00+",n:"밤의 마무리, 시메파르페",jp:"夜パフェ専門店 パフェテリア パル",c:"먹거리",d:"여유가 남으면 신사이바시에서 달콤하게 마무리. 토요일 늦은 밤 현장 대기 가능. ¥2,000–3,000 예상.",loc:"パフェテリア パル 心斎橋",xy:[34.6734,135.5028],cost:2500,alt:"너무 늦으면 근처 디저트 가게나 편의점 디저트로 마무리."}
+  {id:"sa-day",t:"08:30–12:30",n:"오전 산책 · 후보 유지",jp:"SLOW MORNING / NOT YET FINAL",c:"미정",d:"불꽃축제를 보러 가기 전 오전 산책 지역은 아직 확정하지 않았어. 기존 우지 안은 후보로만 보관하고, 취향에 맞춰 함께 결정하자.",loc:"",xy:null,alt:"우지·교토·나라 중 어느 곳도 아직 확정하지 않음. 불꽃축제를 보려면 오후 이동 시간을 우선 고려."},
+  {id:"sa-move",t:"12:30–15:00",n:"요도가와 행사 구역으로 이동",jp:"TO YODOGAWA",c:"이동",d:"출발 지역을 결정한 뒤 이동 수단도 정하자. 무료 관람 계획이면 15시 전후 행사 구역 도착 목표.",loc:"十三駅 大阪",xy:[34.7203,135.4826],alt:"토요일 행사가 지나치게 혼잡하거나 무료 구역 입장이 어렵다면 B안으로 전환."},
+  {id:"sa-event",t:"15:00–20:00",n:"요도가와 불꽃축제",jp:"38TH YODOGAWA FIREWORKS",c:"경험",d:"19:00–20:00 불꽃놀이. 오후에는 관람 가능한 구역에서 기다려야 할 수 있어. 북쪽 강변 접근 동선과 진입 제한은 반드시 당일 공식 안내 확인.",loc:"なにわ淀川花火大会",xy:[34.7138,135.4813],site:"https://www.yodohanabi.com/",alt:"장소·무료 관람 가능 여부 미확정. 안전하게 들어갈 수 없는 경우 주변 무단 진입 금지."},
+  {id:"sa-return",t:"20:00 이후",n:"신사이바시 귀환 · 시메파르페",jp:"AFTER THE FIREWORKS",c:"먹거리",d:"귀가 인파를 고려해 천천히 이동. 늦게 도착하더라도 파르페는 가능한 경우에만 방문.",loc:"パフェテリア パル 心斎橋",xy:[34.6734,135.5028],cost:2500,alt:"행사장 혼잡으로 지치면 파르페를 생략하고 숙소 복귀."}
  ],
  satB:[
-  {id:"sb-fushimi",t:"13:30",n:"후시미로 이동",jp:"宇治 → 中書島",c:"이동",d:"게이한 우지선으로 주쇼지마역 이동. 우지에서 오사카로 가는 길목이라 효율적.",loc:"中書島駅 京都",xy:[34.9268,135.7590]},
-  {id:"sb-walk",t:"14:15",n:"후시미 운하와 양조장 거리",jp:"伏見・酒蔵の町",c:"산책",d:"지코쿠부네 운하와 월계관 옛 양조장, 료마도리. 옛 목조 건물과 물가를 천천히 감상.",loc:"月桂冠大倉記念館 京都",xy:[34.9300,135.7611],alt:"교토다운 분위기를 더 원하면 후시미에서 1시간 더 걷고 빠칭코를 생략."},
-  {id:"sb-back",t:"16:30",n:"오사카로 돌아오기",jp:"伏見 → 大阪",c:"이동",d:"이른 저녁에 난바 도착을 목표로. 숙소에 잠깐 들러 쉬어도 좋아.",loc:"なんば駅 大阪",xy:[34.6637,135.5019]},
-  {id:"sb-dinner",t:"18:30",n:"난바에서 자유롭게 저녁",jp:"なんばグルメ",c:"먹거리",d:"금요일 야키니쿠와 겹치지 않는 가벼운 음식 선택. 오코노미야키·우동 등 당일 기분 따라.",loc:"なんば 大阪",xy:[34.6638,135.5018],cost:2000},
-  {id:"sb-pachi",t:"19:30",n:"빠칭코 체험",jp:"マルハン なんば新館",c:"경험",d:"처음이라면 저액 빠칭코 기종을 30~40분만. 사용 한도를 먼저 정해두고 가볍게 경험하기.",loc:"マルハン なんば新館",xy:[34.6660,135.5048],cost:1000,alt:"도박보다는 게임이 끌리면 오락실로 변경. 또는 신사이바시 라이브하우스로."},
-  {id:"sb-america",t:"20:30",n:"아메리카무라 밤거리",jp:"アメリカ村",c:"산책",d:"음악가게, 네온, 빈티지 스트리트의 분위기를 즐겨. 인디 라이브가 있으면 즉흥적으로 들어가도 좋아.",loc:"アメリカ村 大阪",xy:[34.6736,135.4977],alt:"10/17 신사이바시 AtlantiQs의 'DIVE to BLUE vol.48' 라이브: 19:00 시작 공지. 음악 취향·입장 가능 여부 확인 후 빠칭코 대신."},
-  {id:"sb-parfait",t:"22:00",n:"시메파르페",jp:"夜パフェ専門店 パフェテリア パル",c:"먹거리",d:"일본식 밤 파르페를 천천히 즐기자. 늦은 시간 대기 가능성 있고 1인 약 ¥2,000–3,000.",loc:"パフェテリア パル 心斎橋",xy:[34.6734,135.5028],cost:2500}
+  {id:"sb-blank",t:"오전–오후",n:"산책 코스 — 함께 정할 자리",jp:"UNPLANNED / YOUR CHOICE",c:"미정",d:"교토·나라·우지 등 어디를 갈지 아직 정하지 않았어. 산책과 점심을 포함해 이 블록은 비워둘게. 마음에 드는 장소를 문답으로 골라 채울 예정.",loc:"",xy:null,alt:"도시, 산책 시간, 점심, 복귀 시각 모두 미정. 현재 지도에는 이 블록의 핀이 표시되지 않음."},
+  {id:"sb-return",t:"저녁 무렵",n:"오사카 복귀 · 자유 저녁",jp:"RETURN / FLEXIBLE",c:"이동",d:"낮 산책 코스가 정해지면 귀환 시간도 함께 결정할게. 늦어지면 저녁 및 밤 일정은 줄일 수 있어.",loc:"なんば駅 大阪",xy:[34.6637,135.5019]},
+  {id:"sb-night",t:"19:00–21:45",n:"난바–아메리카무라 밤놀이",jp:"PACHINKO / ARCADE / LIVE",c:"경험",d:"빠칭코, 오락실, 라이브하우스 중 끌리는 걸 고르는 자유 블록. 다 도는 필수 코스가 아니야.",loc:"マルハン なんば新館",xy:[34.6660,135.5048],
+   sub:[["빠칭코 또는 오락실 · 난바","시작점 / 빠칭코는 이용 금액 상한 설정","マルハン なんば新館"],["아메리카무라 밤거리","난바에서 도보 약 15–20분·약 1~1.5km","アメリカ村 大阪"],["라이브하우스","공연 시간·입장 상황에 따라 택일","Shinsaibashi AtlantiQs Osaka"]],
+   alt:"낮 일정에 따라 시작 시간을 자유롭게 변경. 라이브 선택 시 공연 시작 시각을 먼저 확인."},
+  {id:"sb-parfait",t:"22:00 전후",n:"시메파르페",jp:"LATE NIGHT PARFAIT",c:"먹거리",d:"신사이바시 야간 파르페 전문점에서 하루 마무리. 1인 약 ¥2,000–3,000, 현장 대기 가능.",loc:"パフェテリア パル 心斎橋",xy:[34.6734,135.5028],cost:2500}
  ],
  sun:[
-  {id:"u-checkout",t:"10:00",n:"체크아웃 & 짐 정리",jp:"日本橋",c:"이동",d:"숙소 체크아웃. 짐 보관 가능 여부는 숙소에 확인. 무거우면 난바역 코인로커 고려.",loc:"日本橋駅 大阪",xy:[34.6661,135.5062]},
-  {id:"u-potato",t:"10:15",n:"슈퍼 포테토 오타로드",jp:"スーパーポテト オタロード店",c:"쇼핑",d:"레트로 게임기와 타이틀, 오래된 게임 굿즈 구경. 오픈 시간은 출발 전 재확인.",loc:"スーパーポテト オタロード店",xy:[34.6597,135.5058],alt:"매장이 아직 열지 않았다면 인근 닛폰바시 상점가를 둘러보고 돌아오기."},
-  {id:"u-yasaka",t:"11:00",n:"난바 야사카 신사",jp:"難波八阪神社",c:"산책",d:"거대한 사자 얼굴 무대가 있는 신사. 마지막 날 부담 없이 잠깐 들르기 좋은 사진 장소.",loc:"難波八阪神社",xy:[34.6620,135.4959],alt:"쇼핑 시간이 필요하면 이 장소 생략."},
-  {id:"u-records",t:"12:00",n:"미나미호리에 음반점 투어",jp:"TIME BOMB / FLAKE RECORDS",c:"쇼핑",d:"가까이 있는 두 레코드 가게에서 록·인디 신보·희귀 음반 탐색. TIME BOMB / FLAKE 통상 정오 오픈.",loc:"FLAKE RECORDS 大阪 南堀江",xy:[34.6715,135.4923],alt:"시간이 부족하면 한 곳만 선택. 좋아하는 음반이 없다면 호리에의 카페·잡화점으로."},
-  {id:"u-lunch",t:"13:00",n:"마지막 점심 & 호리에 산책",jp:"南堀江",c:"먹거리",d:"예상치 못한 좋은 가게를 발견하면 들어가도 되는 자유 시간. 점심 이후 남은 쇼핑 마무리.",loc:"南堀江 大阪",xy:[34.6718,135.4919],cost:1800},
-  {id:"u-luggage",t:"14:45",n:"짐 찾기 & 난바역으로",jp:"なんば駅",c:"이동",d:"기내 반입 무게와 소지품 확인. 쇼핑은 이 시점에 종료하고 이동에 집중.",loc:"南海 なんば駅",xy:[34.6630,135.5011]},
-  {id:"u-airport",t:"15:30",n:"난카이 전철로 공항 이동",jp:"南海なんば → 関西空港",c:"이동",d:"역까지 이동, 열차 대기, T2 무료 셔틀을 고려. T2에 17:00–17:30까지 도착하는 일정으로.",loc:"関西空港 第2ターミナル",xy:[34.4304,135.2305],site:"https://www.kansai-airport.or.jp/"},
-  {id:"u-flight",t:"19:30",n:"일본에서 돌아오는 비행기",jp:"KIX T2 → ICN",c:"이동",d:"귀국편 19:30 출발 기준. 실제 탑승권 시간·항공사 체크인 마감·게이트 재확인.",loc:"関西国際空港 第2ターミナル",xy:[34.4304,135.2305]}
+  {id:"u-checkout",t:"10:00",n:"체크아웃 · 짐 정리",jp:"THREE PEOPLE",c:"이동",d:"공동 마지막 오전을 시작하기 전에 짐 보관 방법 정하기. 숙소 위치 등 개인 정보는 공개하지 않음.",loc:"Nipponbashi Osaka",xy:[34.6599,135.5041]},
+  {id:"u-morning",t:"10:10–11:35",n:"난바·닛폰바시 오전 자유 탐방",jp:"CHOOSE ONE / 3 PEOPLE",c:"쇼핑",d:"세 사람이 함께하는 마지막 자유 블록. 게임이 끌리면 레트로게임·취미 상점, 조금 다른 재미를 원하면 주방용품·일본 식기 거리. 두 테마 중 하나를 중심으로.",loc:"スーパーポテト オタロード店",xy:[34.6597,135.5058],
+   sub:[["게임 테마 — 슈퍼 포테토","일요일 10:00 오픈 / 레트로게임 전문","スーパーポテト オタロード店"],["게임 테마 — 스루가야 일본바시 본관","위 매장에서 도보 약 3–7분 / 여러 층의 취미·중고 굿즈","駿河屋 大阪日本橋本館"],["다른 테마 — 센니치마에 도구야스지","오타로드에서 도보 약 8–12분 / 일본 식기·조리도구·가짜 음식 모형 등","千日前道具屋筋商店街"]],
+   alt:"주의: 스루가야 '오타로드 아웃렛 오미야게관'은 10/13–18 리뉴얼 휴무. 여기 적은 '일본바시 본관'과는 다른 매장이야. 게임탐정단은 12:00 오픈이라 이 오전 블록에는 넣지 않음."},
+  {id:"u-farewell",t:"11:40–12:25",n:"공동 식사 · 은총이와 작별",jp:"ALL THREE → SPLIT",c:"먹거리",d:"난바에서 짧게 식사하고 은총이를 먼저 공항으로 보냄. 빠른 출발이 필요하면 식사는 간단히.",loc:"なんば駅 大阪",xy:[34.6630,135.5011],cost:1500,
+   alt:"은총이는 16:00 국제선 출발 예정. 12:15–12:30 전후 난바역 출발을 권장하지만 항공사·터미널·수하물 규정이 확인되면 조정."},
+  {id:"u-eun-air",t:"12:15–12:30",n:"은총이 먼저 공항 이동",jp:"EUNCHONG / SOLO DEPARTURE",c:"이동",d:"은총이 16:00 귀국편. 공항까지 열차·터미널 이동 및 수속 시간을 넉넉하게 확보해야 해. 병주·건이는 오사카에 남음.",loc:"Nankai Namba Station Osaka",xy:null},
+  {id:"u-two",t:"12:45–14:45",n:"병주·건이 취향 탐방",jp:"PICK A DIRECTION / 2 PEOPLE",c:"경험",d:"음반점 투어를 고정하지 않고, 음악·사진·전시 중 그날의 취향에 맞는 한 방향을 선택. 다른 곳을 더 보고 싶으면 자유롭게 바꿔도 돼.",loc:"南堀江 大阪",xy:[34.6715,135.4923],
+   sub:[["음악 — TIME BOMB RECORDS","미나미호리에 / 12:00 오픈","TIME BOMB RECORDS 南堀江"],["음악 — FLAKE RECORDS","TIME BOMB에서 도보 약 1–3분","FLAKE RECORDS 南堀江"],["사진 — FUKUGAN GALLERY","아메리카무라 / 13:00 오픈 · 무료 사진전(10/16–11/2)","FUKUGAN GALLERY 大阪"],["사진 — 갤러리 솔라리스","미나미센바 / 12:00 오픈 · 홍콩 건축 사진전 10/18 마지막 날","ギャラリー ソラリス 南船場"]],
+   alt:"선택 A: 호리에 음반점 2곳을 느긋하게. 선택 B: FUKUGAN 사진전과 아메리카무라 구경. 선택 C: 솔라리스의 홍콩 주거 건축 사진전. TIME BOMB과 솔라리스를 모두 들르는 건 시간상 무리일 수 있으니 한 방향을 택해."},
+  {id:"u-final",t:"14:45–15:30",n:"남은 쇼핑 · 짐 찾기 · 난바역",jp:"WRAP UP",c:"쇼핑",d:"한 장소를 더 도는 대신 돌아올 길을 여유롭게 확보하자. 수하물 무게 확인.",loc:"Nankai Namba Station Osaka",xy:[34.6630,135.5011]},
+  {id:"u-airport",t:"15:30–16:00",n:"병주·건이 공항으로 이동",jp:"BYEONGJU + GEONI",c:"이동",d:"난카이 전철과 공항역에서 T2 셔틀 이동. 제2터미널에 17:00–17:30 도착 목표.",loc:"関西空港 第2ターミナル",xy:null,site:"https://www.kansai-airport.or.jp/"},
+  {id:"u-flight-eun",t:"16:00",n:"은총이 한국행 비행기 출발",jp:"EUNCHONG / FLIGHT",c:"이동",d:"은총이의 귀국 항공편이 먼저 출발. 항공사·터미널은 별도 확인 필요.",loc:"関西国際空港",xy:null},
+  {id:"u-flight",t:"19:30",n:"병주·건이 한국행 비행기 출발",jp:"BYEONGJU + GEONI / FLIGHT",c:"이동",d:"두 사람은 같은 항공편으로 귀국. 간사이공항 T2 출발.",loc:"関西国際空港 第2ターミナル",xy:null}
  ]};
  var priorities={
-  fri:[["메이드카페","10/16 18:00 특별 이벤트 — 대기·운영 확인"],["야키니쿠","20:00 예약은 아직 확정되지 않았어"],["쇼핑","기내 반입 7kg 한도"]],
-  sat:[["불꽃축제","A안이면 15:00 도착 목표 · 혼잡 주의"],["우지 산책","고쇼지에서 시간을 아끼지 않기"],["디저트","시메파르페 영업·대기 재확인"]],
-  sun:[["공항","19:30 비행 · 17:00–17:30 T2 도착 목표"],["음반점","정오 오픈 · 시간이 부족하면 한 곳만"],["수하물","짐·여권·배터리 재확인"]]
+  fri:[["합류","은총이 11:30 / 병주·건이 13:00 공항 도착"],["메이드카페","18시 HYPER 행사 공식 혼잡 예상 · 3명 입장 확인"],["야키니쿠","20:00 중모츠야 예약 여부 확인"]],
+  sat:[["낮 산책","B안은 문답으로 채울 공석, 아직 행선지 미정"],["밤의 선택","B안 자유 야간 활동 · A안 불꽃축제"],["디저트","파르페 대기·영업 여부 확인"]],
+  sun:[["은총이","16:00 귀국편 · 12:15–12:30 난바 출발 목표"],["병주·건이","19:30 귀국편 · 15:30–16:00 난바 출발"],["매장","게임은 10시부터 / 음반·사진전은 정오 이후"]]
  };
- var cats=["전체","이동","산책","쇼핑","먹거리","경험"];
+ var cats=["전체","이동","미정","산책","쇼핑","먹거리","경험"];
  var prepItems=[
   ["flight","귀국 항공편 출발 시간 재확인","탑승권과 수하물 규정을 확인"],
   ["yakiniku","중모츠야 미나미센바 예약","예약 확정 전에 확정으로 표시하지 않기"],
   ["maid","메이드리밍 10/16 이벤트 확인","입장 방식·잔여 자리·쇼타임"],
-  ["firework","10/17 불꽃축제 관람 방식 결정","A안 무료 구역 or B안 선택"],
+  ["firework","10/17 불꽃축제 관람 방식 결정","A안 불꽃축제 or B안 밤놀이 · 낮 산책은 공석"],
   ["pass","여권·카드·엔화 현금","여권 원본과 해외 결제 수단"],
   ["sim","통신 로밍/eSIM 준비","현지 지도와 예약 확인에 필요"],
   ["luggage","수하물 7kg·보조배터리 확인","피치항공 규정과 보조배터리 반입"],
-  ["return","일요일 난바 → 공항 이동 시간 확인","제2터미널 무료 셔틀 여유 포함"]
+  ["return","일요일 3명 귀국편 분기·공항 이동 확인","은총이 16:00 / 병주·건이 19:30 · 터미널 확인"]
  ];
  var budgetDefault=[["transport","교통비",5000],["maid","메이드카페",2500],["yakiniku","야키니쿠",7000],["food","기타 식비·간식",6500],["parfait","시메파르페",2500],["play","오락·입장료",2000],["shopping","쇼핑",15000],["buffer","예비비",3500]];
  var toastTimer=0;
- function persist(){try{localStorage.setItem("osaka.afterhours.v1",JSON.stringify({day:state.day,mode:state.mode,done:state.done,prep:state.prep,budget:state.budget}))}catch(e){}}
+ function persist(){try{localStorage.setItem("osaka.afterhours.v2",JSON.stringify({day:state.day,mode:state.mode,done:state.done,prep:state.prep,budget:state.budget}))}catch(e){}}
  function entries(){return state.day==="sat"?data.satCommon.concat(state.mode==="a"?data.satA:data.satB):data[state.day]}
  function mapUrl(loc){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(loc)}
  function formatYen(n){return "¥"+Number(n||0).toLocaleString("ja-JP")}
@@ -193,7 +210,7 @@
   document.getElementById("currentTitle").textContent=dayInfo[state.day].title;
   document.getElementById("currentSubtitle").textContent=dayInfo[state.day].subtitle;
   document.getElementById("modeArea").innerHTML=state.day==="sat"?'<div class="mode-switch" role="group" aria-label="토요일 코스 선택"><button type="button" data-mode="a" class="'+(state.mode==="a"?"active":"")+'">✦ A · 불꽃축제</button><button type="button" data-mode="b" class="'+(state.mode==="b"?"active":"")+'">◒ B · 자유로운 밤</button></div>':"";
-  var notice=state.day==="sat"?(state.mode==="a"?"<strong>불꽃축제 A안.</strong> 무료 관람은 매우 혼잡하고, 행사장 도착 목표가 15:00이야. 우지 오후 일정은 과감하게 줄여야 해. 강변 출입 가능 구역은 반드시 공식 안내 확인.":"<strong>자유로운 B안.</strong> 우지·후시미에서 느긋하게 걷고, 밤에는 빠칭코/라이브하우스/시메파르페를 취향대로 고르는 구성."):(state.day==="fri"?"<strong>도착일 우선순위.</strong> 입국이 지연되면 쇼핑을 줄여도 괜찮아. 18시 메이드카페 이벤트와 20시 야키니쿠는 사전에 꼭 확인.":"<strong>귀국일 우선순위.</strong> 쇼핑보다 공항 도착 시간을 지키는 게 중요해. 15:30~16:00에는 난바에서 공항으로 출발하자.");
+  var notice=state.day==="sat"?(state.mode==="a"?"<strong>A안 · 불꽃축제.</strong> 오전 산책지는 미정. 15시 전후 요도가와 행사 지역 도착을 목표로 낮 동선을 정해야 해.":"<strong>B안 · 낮 산책 공석.</strong> 교토·나라·우지 어느 지역도 확정하지 않았어. 낮 계획은 함께 고를 예정이고 밤의 자유 활동만 남겨뒀어."):(state.day==="fri"?"<strong>3명 합류.</strong> 은총이 11:30 / 병주·건이 13:00 착륙. 입국 후 만나고, 18시 HYPER는 공식 혼잡 예상 · 20시 야키니쿠는 예약 확인 필요.":"<strong>귀국편 분기.</strong> 은총이 16:00, 병주·건이는 19:30 출발. 오전 세 명이 함께, 정오부터 각자 귀국 동선에 맞춰 움직여.");
   document.getElementById("dayNotice").innerHTML='<div class="notice">'+notice+'</div>';
   document.getElementById("filterRow").innerHTML=cats.map(function(cat){return '<button type="button" class="filter '+(state.filter===cat?'active':'')+'" data-filter="'+cat+'">'+cat+'</button>'}).join("");
   document.getElementById("priorityList").innerHTML=priorities[state.day].map(function(p){return "<li><b>"+p[0]+"</b><span>"+p[1]+"</span></li>"}).join("");
@@ -202,13 +219,15 @@
  function updateTimeline(){
   var all=entries(),items=all.filter(function(s){return state.filter==="전체"||s.c===state.filter});
   document.getElementById("timeline").innerHTML=items.map(function(s){
-   var checked=!!state.done[s.id];return '<div class="event '+(checked?'done':'')+'"><div class="eventtime">'+s.t+'</div><div class="stopcard"><div class="stophead"><div><span class="tag '+(s.c==="이동"?"transport":s.c==="산책"?"walk":s.c==="먹거리"?"food":"")+'">'+s.c+' · '+esc(s.jp)+'</span><h4>'+esc(s.n)+'</h4></div><button class="checkbtn '+(checked?'checked':'')+'" type="button" data-done="'+s.id+'" aria-label="'+esc(s.n)+' 방문 완료 표시" aria-pressed="'+checked+'">'+(checked?'✓':'✓')+'</button></div><p class="desc">'+esc(s.d)+'</p><div class="actionrow"><a href="'+mapUrl(s.loc)+'" target="_blank" rel="noopener noreferrer">↗ 지도 보기</a>'+(s.site?'<a href="'+esc(s.site)+'" target="_blank" rel="noopener noreferrer">↗ 공식·예약 정보</a>':'')+(s.alt?'<button type="button" data-alt="'+s.id+'" aria-expanded="false">+ 대안 보기</button>':'')+(s.cost?'<span class="cost">'+formatYen(s.cost)+' 예상</span>':'')+'</div>'+(s.alt?'<div class="altbox" id="alt-'+s.id+'">'+esc(s.alt)+'</div>':'')+'</div></div>';
+   var checked=!!state.done[s.id],hasLink=!!s.loc,sub=(s.sub||[]).map(function(x){
+    return '<li><a href="'+mapUrl(x[2])+'" target="_blank" rel="noopener noreferrer"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span><strong aria-hidden="true">↗</strong></a></li>'
+   }).join("");
+   return '<div class="event '+(checked?'done':'')+'"><div class="eventtime">'+esc(s.t)+'</div><div class="stopcard"><div class="stophead"><div><span class="tag '+(s.c==="이동"?"transport":s.c==="산책"?"walk":s.c==="먹거리"?"food":"")+'">'+esc(s.c)+' · '+esc(s.jp)+'</span><h4>'+esc(s.n)+'</h4></div><button class="checkbtn '+(checked?'checked':'')+'" type="button" data-done="'+s.id+'" aria-label="'+esc(s.n)+' 방문 완료 표시" aria-pressed="'+checked+'">✓</button></div><p class="desc">'+esc(s.d)+'</p>'+(sub?'<ul class="block-stops">'+sub+'</ul>':'')+'<div class="actionrow">'+(hasLink?'<a href="'+mapUrl(s.loc)+'" target="_blank" rel="noopener noreferrer">↗ 대표 장소 지도</a>':'')+(s.site?'<a href="'+esc(s.site)+'" target="_blank" rel="noopener noreferrer">↗ 공식·예약 정보</a>':'')+(s.alt?'<button type="button" data-alt="'+s.id+'" aria-expanded="false">+ 대안·주의사항</button>':'')+(s.cost?'<span class="cost">'+formatYen(s.cost)+' 예상</span>':'')+'</div>'+(s.alt?'<div class="altbox" id="alt-'+s.id+'">'+esc(s.alt)+'</div>':'')+'</div></div>';
   }).join("")||'<div class="notice">해당 카테고리의 일정이 없어. 다른 필터를 선택해줘.</div>';
   var count=all.filter(function(s){return !!state.done[s.id]}).length;document.getElementById("progressFill").style.width=(count/all.length*100)+"%";
-  document.getElementById("progressText").innerHTML=count+' <small>/ '+all.length+' stops</small>';
+  document.getElementById("progressText").innerHTML=count+' <small>/ '+all.length+' blocks</small>';
  }
- 
-function updateMap(){
+ function updateMap(){
  var all=entries(),omit={"f-air":true,"u-airport":true,"u-flight":true};
  var stops=all.filter(function(s){return s.xy&&!omit[s.id]});
  var root=document.getElementById("mapCanvas");
@@ -240,7 +259,7 @@ function updateMap(){
  var path=pins.map(function(p,i){return (i?"L ":"M ")+p.x.toFixed(1)+" "+p.y.toFixed(1)}).join(" ");
  var dots=pins.map(function(p){return '<a class="map-point" href="'+mapUrl(p.s.loc)+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc(p.s.n)+' 구글 지도 열기"><title>'+esc(p.s.n)+'</title><circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="16"/><text x="'+p.x.toFixed(1)+'" y="'+(p.y+4).toFixed(1)+'" text-anchor="middle">'+p.index+'</text></a>'}).join("");
  var linkList=stops.map(function(s,i){return '<a class="map-place" href="'+mapUrl(s.loc)+'" target="_blank" rel="noopener noreferrer"><span class="map-index">'+String(i+1).padStart(2,"0")+'</span><span class="map-name">'+esc(s.n)+'</span><span class="map-arrow">↗</span></a>'}).join("");
- root.innerHTML='<div class="map-topline"><span>'+({fri:"OSAKA / FRIDAY",sat:state.mode==="a"?"UJI — YODOGAWA / SATURDAY":"UJI — FUSHIMI — OSAKA / SATURDAY",sun:"OSAKA / SUNDAY"}[state.day])+'</span><b>'+pins.length+' PLACES</b></div><svg class="map-visual" viewBox="0 0 920 390" role="img" aria-label="이동 순서에 따라 번호가 표시된 장소 개략도. 핀을 선택하면 구글 지도 열기">'+grid+curve+'<path class="map-path" d="'+path+'"/>'+dots+'<text x="25" y="37" font-family="Georgia,serif" font-size="19" fill="#949b93">N ↑</text><text x="25" y="370" font-family="Arial,sans-serif" font-size="10" letter-spacing="1.7" fill="#9ba59c">ROUTE INDEX / NOT STREET MAP</text></svg><div class="map-list">'+linkList+'</div>';
+ root.innerHTML='<div class="map-topline"><span>'+({fri:"THREE ARRIVALS / OSAKA",sat:state.mode==="a"?"WALK TBD — YODOGAWA":"WALK TBD — OSAKA EVENING",sun:"THREE → TWO / OSAKA"}[state.day])+'</span><b>'+pins.length+' PLACES</b></div><svg class="map-visual" viewBox="0 0 920 390" role="img" aria-label="이동 순서에 따라 번호가 표시된 장소 개략도. 핀을 선택하면 구글 지도 열기">'+grid+curve+'<path class="map-path" d="'+path+'"/>'+dots+'<text x="25" y="37" font-family="Georgia,serif" font-size="19" fill="#949b93">N ↑</text><text x="25" y="370" font-family="Arial,sans-serif" font-size="10" letter-spacing="1.7" fill="#9ba59c">ROUTE INDEX / NOT STREET MAP</text></svg><div class="map-list">'+linkList+'</div>';
  document.getElementById("routeLink").href=mapUrl(stops[0].loc);
 }
  function drawBudget(){
